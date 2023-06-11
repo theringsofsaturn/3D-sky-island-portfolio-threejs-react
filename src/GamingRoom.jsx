@@ -10,7 +10,6 @@ const GamingRoom = () => {
       position={[0, -5, 0]}
       scale={[10, 10, 10]}
       dispose={null}
-      onClick={() => alert('Model clicked!')}
     />
   );
 };
