@@ -33,7 +33,7 @@ const Room = ({ path, position, rotation, scale }) => {
 
   useLayoutEffect(() => {
     // Assuming "ObjectName" is the name of an object in our GLTF model
-    meshRef.current = nodes.ObjectName; // TODO: Find the proper name of the object
+    meshRef.current = nodes.Object_2; // TODO: Find the proper name of the object
   }, [nodes]); // Depend on nodes
 
   const { raycaster, camera, scene, render } = useThree();
@@ -47,7 +47,6 @@ const Room = ({ path, position, rotation, scale }) => {
       } else {
         meshRef.current.material.color.set('white');
       }
-      render(scene, camera);
     }
   });
 
