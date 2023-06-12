@@ -6,7 +6,7 @@ const useGUI = (ref) => {
     const gui = new GUI(); // The GUI class is used to create a GUI object.
 
     // Move the GUI to the bottom right corner of the screen.
-    document.body.appendChild(gui.domElement); 
+    document.body.appendChild(gui.domElement); // The domElement property is used to access the DOM element of the GUI object. The DOM element is then appended to the body of the document.
 
     gui.domElement.style.position = 'fixed';
     gui.domElement.style.right = '0px';

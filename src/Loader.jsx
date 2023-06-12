@@ -1,19 +1,28 @@
-import React from 'react';
+import { Html, useProgress } from '@react-three/drei';
 
-function Loader({ loading }) {
-  return loading ? (
-    <div
-      style={{
-        position: 'fixed',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        color: 'white',
-      }}
-    >
-      Loading...
-    </div>
-  ) : null;
+function Loader() {
+  const { active, progress, errors, item, loaded, total } = useProgress();
+
+  return (
+    active && (
+      <Html center>
+        <div
+          style={{
+            background: 'rgba(0,0,0,0.8)',
+            color: '#FFF',
+            padding: '20px',
+            borderRadius: '5px',
+          }}
+        >
+          <strong>Loading: {item}</strong>
+          <br />
+          <progress id="progress" max={100} value={progress}>
+            {progress}
+          </progress>
+        </div>
+      </Html>
+    )
+  );
 }
 
 export default Loader;
