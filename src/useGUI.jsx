@@ -4,6 +4,13 @@ import GUI from 'lil-gui';
 const useGUI = (ref) => {
   useEffect(() => {
     const gui = new GUI();
+    document.body.appendChild(gui.domElement);
+
+    gui.domElement.style.position = 'fixed';
+    gui.domElement.style.right = '0px';
+    gui.domElement.style.top = 'auto';
+    gui.domElement.style.bottom = '0px';
+
     const folder = gui.addFolder('Transform');
     let control;
 
