@@ -2,12 +2,14 @@ import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './Navbar';
 import Room from './Room';
 import './App.css';
 
 function App() {
   return (
     <Router>
+      <Navbar />
       <Canvas>
         <OrbitControls />
         <ambientLight intensity={0.3} />

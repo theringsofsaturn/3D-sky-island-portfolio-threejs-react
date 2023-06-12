@@ -4,6 +4,7 @@ import useGUI from './useGUI';
 
 const Room = ({ path, position, rotation, scale }) => {
   const gltf = useGLTF(path, true);
+  console.log(gltf.scene);
   const ref = useRef();
   useLayoutEffect(() => {
     ref.current = gltf.scene;
