@@ -2,10 +2,7 @@ import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import OfficeRoom from './OfficeRoom';
-import GamingRoom from './GamingRoom';
-import DesktopRoom from './DesktopRoom';
-import CyberPunkRoom from './CyberPunkRoom';
+import Room from './Room';
 import './App.css';
 
 function App() {
@@ -17,11 +14,50 @@ function App() {
         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
         <pointLight position={[-10, -10, -10]} />
         <Routes>
-          <Route path="/" element={<DesktopRoom />} />
-          <Route path="/office" element={<OfficeRoom />} />
-          <Route path="/gaming" element={<GamingRoom />} />
-          <Route path="/cyberpunk" element={<CyberPunkRoom />} />
-          {/* Add more routes for other rooms */}
+          <Route
+            path="/room1"
+            element={
+              <Room
+                path="src/assets/room1/scene.gltf"
+                position={[0, -2.16, -1]}
+                rotation={[0, 0, 0]}
+                scale={[1, 1, 1]}
+              />
+            }
+          />
+          <Route
+            path="/room2"
+            element={
+              <Room
+                path="src/assets/room2/scene.gltf"
+                position={[0, -2.16, -1]}
+                rotation={[0, 0, 0]}
+                scale={[1, 1, 1]}
+              />
+            }
+          />
+          <Route
+            path="/room3"
+            element={
+              <Room
+                path="src/assets/room3/scene.gltf"
+                position={[0, -2.16, -1]}
+                rotation={[0, 0, 0]}
+                scale={[1, 1, 1]}
+              />
+            }
+          />
+          <Route
+            path="/room4"
+            element={
+              <Room
+                path="src/assets/room4/scene.gltf"
+                position={[0, -2.16, -1]}
+                rotation={[0, 0, 0]}
+                scale={[1, 1, 1]}
+              />
+            }
+          />
         </Routes>
       </Canvas>
     </Router>
