@@ -1,10 +1,17 @@
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import { useGLTF } from '@react-three/drei'; // useGLTF is a hook that loads a glTF model and returns it with all the materials, textures, and animations attached to it.
 import useGUI from './useGUI';
 
 // Will use Room to dynamically render the room based on the path, position, rotation, and scale props passed to it.
-const Room = ({ path, position, rotation, scale }) => {
-  const gltf = useGLTF(path, true); // The boolean true is passed to the useGLTF hook to enable draco compression. Draco is a library that compresses 3D models, which reduces the file size of the 3D model. This is useful when we have a large 3D model, which can take a long time to load. The draco compression reduces the file size of the 3D model, which reduces the loading time of the 3D model.
+const Room = ({ path, position, rotation, scale, setLoading, loading }) => {
+  const gltf = useGLTF(
+    path,
+    true,
+    undefined,
+    undefined,
+    () => setLoading(false),
+    () => setLoading(true)
+  ); // The boolean true is passed to the useGLTF hook to enable draco compression. Draco is a library that compresses 3D models, which reduces the file size of the 3D model. This is useful when we have a large 3D model, which can take a long time to load. The draco compression reduces the file size of the 3D model, which reduces the loading time of the 3D model.
   console.log(gltf.scene);
   const ref = useRef();
   useLayoutEffect(() => {
@@ -14,7 +21,7 @@ const Room = ({ path, position, rotation, scale }) => {
 
   useGUI(ref); // The useGUI hook is used to create the GUI for the glTF model. It takes the ref object as an argument.
 
-  return (
+  return loading ? null : (
     <primitive // The primitive component is used to render a primitive object
       ref={ref} // The ref object is passed to the primitive component
       object={gltf.scene}

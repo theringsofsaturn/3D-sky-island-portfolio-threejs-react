@@ -1,14 +1,18 @@
 import React from 'react';
-import { Html, useProgress } from '@react-three/drei';
 
-function Loader() {
-  const { active, progress, errors } = useProgress();
-  return active ? (
-    <Html center>
-      <span style={{ color: 'white' }}>{`Loading: ${progress.toFixed(
-        2
-      )}%`}</span>
-    </Html>
+function Loader({ loading }) {
+  return loading ? (
+    <div
+      style={{
+        position: 'fixed',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        color: 'white',
+      }}
+    >
+      Loading...
+    </div>
   ) : null;
 }
 
