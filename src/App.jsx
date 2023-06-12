@@ -4,6 +4,7 @@ import { OrbitControls } from '@react-three/drei';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './Navbar';
 import Room from './Room';
+import Loader from './Loader';
 import './App.css';
 
 function App() {
@@ -74,6 +75,7 @@ function App() {
             }
           />
         </Routes>
+        <Loader />
       </Canvas>
     </Router>
   );
