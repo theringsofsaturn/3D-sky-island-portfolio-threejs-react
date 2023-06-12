@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import OfficeRoom from './OfficeRoom';
 import GamingRoom from './GamingRoom';
 import DesktopRoom from './DesktopRoom';
+import CyberPunkRoom from './CyberPunkRoom';
 import './App.css';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" element={<DesktopRoom />} />
           <Route path="/office" element={<OfficeRoom />} />
           <Route path="/gaming" element={<GamingRoom />} />
+          <Route path="/cyberpunk" element={<CyberPunkRoom />} />
           {/* Add more routes for other rooms */}
         </Routes>
       </Canvas>

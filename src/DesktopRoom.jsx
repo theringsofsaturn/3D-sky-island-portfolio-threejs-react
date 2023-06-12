@@ -5,6 +5,7 @@ import GUI from 'lil-gui';
 
 const DesktopRoom = () => {
   const gltf = useGLTF('src/assets/room3/scene.gltf', true);
+  console.log(gltf.scene);
   const ref = React.useRef();
   useLayoutEffect(() => {
     ref.current = gltf.scene;
