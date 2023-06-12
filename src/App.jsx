@@ -17,6 +17,18 @@ function App() {
         <pointLight position={[-10, -10, -10]} />
         <Routes>
           <Route
+            path="/"
+            element={
+              <Room
+                path="src/assets/room3/scene.gltf"
+                position={[0.68, -2.76, 1.42]}
+                rotation={[0.3, -0.2, 0]}
+                scale={[2, 2, 2]}
+              />
+            }
+          />
+
+          <Route
             path="/room1"
             element={
               <Room
@@ -27,6 +39,7 @@ function App() {
               />
             }
           />
+
           <Route
             path="/room2"
             element={
