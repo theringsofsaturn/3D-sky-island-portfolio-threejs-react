@@ -1,4 +1,3 @@
-// useGUI.js
 import { useEffect } from 'react';
 import GUI from 'lil-gui';
 

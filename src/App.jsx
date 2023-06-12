@@ -19,8 +19,8 @@ function App() {
             element={
               <Room
                 path="src/assets/room1/scene.gltf"
-                position={[0, -2.16, -1]}
-                rotation={[0, 0, 0]}
+                position={[0, -2.16, -1.92]}
+                rotation={[0, 3.14, 0]}
                 scale={[1, 1, 1]}
               />
             }
@@ -30,9 +30,9 @@ function App() {
             element={
               <Room
                 path="src/assets/room2/scene.gltf"
-                position={[0, -2.16, -1]}
+                position={[0.3, -10.8, -28]}
                 rotation={[0, 0, 0]}
-                scale={[1, 1, 1]}
+                scale={[10, 10, 10]}
               />
             }
           />
@@ -41,9 +41,9 @@ function App() {
             element={
               <Room
                 path="src/assets/room3/scene.gltf"
-                position={[0, -2.16, -1]}
-                rotation={[0, 0, 0]}
-                scale={[1, 1, 1]}
+                position={[0.68, -2.76, 1.42]}
+                rotation={[0.3, -0.2, 0]}
+                scale={[2, 2, 2]}
               />
             }
           />
@@ -52,9 +52,9 @@ function App() {
             element={
               <Room
                 path="src/assets/room4/scene.gltf"
-                position={[0, -2.16, -1]}
-                rotation={[0, 0, 0]}
-                scale={[1, 1, 1]}
+                position={[-9.6, -9.6, -16.9]}
+                rotation={[0, 0.7, 0]}
+                scale={[10, 10, 10]}
               />
             }
           />
