@@ -18,6 +18,7 @@
     "react-icons": "^4.9.0",
     "react-router-dom": "^6.12.1",
     "styled-components": "*",
+    "tailwindcss": "^3.3.2",
     "three": "^0.153.0"
   },
   "devDependencies": {
