@@ -1,15 +1,17 @@
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import { useThree, useFrame } from '@react-three/fiber';
 import { useGLTF, useAnimations } from '@react-three/drei'; // useGLTF is a hook that loads a glTF model and returns it with all the materials, textures, and animations attached to it.
 import useGUI from './useGUI';
 
 // Will use Room to dynamically render the room based on the path, position, rotation, and scale props passed to it.
 const Room = ({ path, position, rotation, scale }) => {
+  const [isHovered, setHovered] = useState(false);
+
   const gltf = useGLTF(path, true); // The boolean true is passed to the useGLTF hook to enable draco compression. Draco is a library that compresses 3D models, which reduces the file size of the 3D model. This is useful when we have a large 3D model, which can take a long time to load. The draco compression reduces the file size of the 3D model, which reduces the loading time of the 3D model.
   console.log(gltf.scene);
 
   // Destructure animations and nodes from gltf
-  const { animations, nodes } = gltf;
+  const { animations, nodes, materials } = gltf;
 
   // Pass animations to useAnimations hook
   const { actions } = useAnimations(animations);
@@ -33,21 +35,23 @@ const Room = ({ path, position, rotation, scale }) => {
 
   useLayoutEffect(() => {
     // Assuming "ObjectName" is the name of an object in our GLTF model
-    meshRef.current = nodes.Object_2; // TODO: Find the proper name of the object
+    meshRef.current = nodes.Rahmen_Tshirt_Shade_0; // TODO: Find the proper name of the object
   }, [nodes]); // Depend on nodes
 
   const { raycaster, camera, scene, render } = useThree();
 
   useFrame(() => {
     if (meshRef.current) {
-      const intersections = raycaster.intersectObject(meshRef.current); // will return an array of intersections where the ray from the user's mouse intersects the object. If the user's mouse is over the object, it will return an array with at least one element. If the mouse isn't over the object, it will return an empty array. So if the array's length is greater than zero, we know the user is hovering over the object and we change its color.
+      const intersections = raycaster.intersectObject(meshRef.current);
 
-      if (intersections.length > 0) {
+      if (intersections.length > 0 && !isHovered) {
         meshRef.current.material.color.set('red');
-      } else {
-        meshRef.current.material.color.set('white');
+        setHovered(true);
+      } else if (intersections.length === 0 && isHovered) {
+        meshRef.current.material.color.set('blue');
+        setHovered(false);
       }
-    }
+    } // will return an array of intersections where the ray from the user's mouse intersects the object. If the user's mouse is over the object, it will return an array with at least one element. If the mouse isn't over the object, it will return an empty array. So if the array's length is greater than zero, we know the user is hovering over the object and we change its color.
   });
 
   return (
