@@ -33,7 +33,7 @@ export function Model({ setControlsEnabled, ...props }) {
   useFrame((state) => {
     if (clickedMesh) {
       state.camera.lookAt(clickedMesh.position);
-      vec.set(0, 0, -0.08);
+      vec.set(0, 0, -0.02);
       vec.applyQuaternion(state.camera.quaternion);
       target.copy(clickedMesh.position).add(vec);
 
