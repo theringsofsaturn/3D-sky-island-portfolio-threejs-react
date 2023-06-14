@@ -1,5 +1,5 @@
 import React from 'react';
-import { Suspense } from 'react';
+import { Suspense, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -9,12 +9,18 @@ import { Model } from './assets/room2/Scene';
 import './App.css';
 
 function App() {
+  const [controlsEnabled, setControlsEnabled] = useState(true);
+
   return (
     <Router>
       <Navbar />
       <Canvas camera={{ near: 0.1, far: 1000 }}>
         <Suspense fallback={<Loader />}>
-          <OrbitControls minDistance={0.1} maxDistance={100} />
+          <OrbitControls
+            enabled={controlsEnabled}
+            minDistance={0.1}
+            maxDistance={100}
+          />
           <ambientLight intensity={0.3} />
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
           <pointLight position={[-10, -10, -10]} />
@@ -22,7 +28,11 @@ function App() {
             <Route
               path="/"
               element={
-                <Model position={[0.3, -10.8, -28]} scale={[10, 10, 10]} />
+                <Model
+                  position={[0.3, -10.8, -28]}
+                  scale={[10, 10, 10]}
+                  setControlsEnabled={setControlsEnabled}
+                />
               }
             />
           </Routes>

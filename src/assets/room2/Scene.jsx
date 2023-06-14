@@ -12,7 +12,7 @@ import { useFrame, useThree } from '@react-three/fiber';
 import React, { useRef, useState, useMemo } from 'react';
 import { useGLTF } from '@react-three/drei';
 
-export function Model(props) {
+export function Model({ setControlsEnabled, ...props }) {
   const { nodes, materials } = useGLTF(
     'src/assets/room2/scene-transformed.glb'
   );
@@ -44,6 +44,7 @@ export function Model(props) {
       } else {
         // If we are close enough, we could consider the animation as finished
         setClickedMesh(null);
+        setControlsEnabled(true);
       }
     }
     return null;
@@ -93,7 +94,10 @@ export function Model(props) {
       />
       <mesh
         ref={ref1}
-        onClick={() => setClickedMesh(ref1.current)}
+        onClick={() => {
+          setControlsEnabled(false);
+          setClickedMesh(ref1.current);
+        }}
         geometry={nodes.Rahmen_Tshirt_Shade_0.geometry}
         material={materials['Shade.2']}
         position={[-1.38, 1.643, -0.832]}
