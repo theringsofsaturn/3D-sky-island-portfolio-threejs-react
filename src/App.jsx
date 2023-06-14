@@ -16,11 +16,11 @@ function App() {
       <Navbar />
       <Canvas camera={{ near: 0.1, far: 1000 }}>
         <Suspense fallback={<Loader />}>
-          <OrbitControls
+          {/* <OrbitControls
             enabled={controlsEnabled}
             minDistance={0.1}
             maxDistance={100}
-          />
+          /> */}
           <ambientLight intensity={0.3} />
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
           <pointLight position={[-10, -10, -10]} />
@@ -29,8 +29,9 @@ function App() {
               path="/"
               element={
                 <Model
-                  position={[0.3, -10.8, -28]}
-                  scale={[10, 10, 10]}
+                  position={[0.5, -1, 1]}
+                  rotation={[0, 0.2, 0]}
+                  scale={[1, 1, 1]}
                   setControlsEnabled={setControlsEnabled}
                 />
               }

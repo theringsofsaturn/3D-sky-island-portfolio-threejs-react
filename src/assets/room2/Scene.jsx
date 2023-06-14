@@ -11,6 +11,7 @@ import * as THREE from 'three';
 import { useFrame, useThree } from '@react-three/fiber';
 import React, { useRef, useState, useMemo } from 'react';
 import { useGLTF } from '@react-three/drei';
+import useGUI from '../../useGUI';
 
 export function Model({ setControlsEnabled, ...props }) {
   const { nodes, materials } = useGLTF(
@@ -38,8 +39,8 @@ export function Model({ setControlsEnabled, ...props }) {
       target.copy(clickedMesh.position).add(vec);
 
       // check if the distance to target is larger than an epsilon
-      if (state.camera.position.distanceTo(target) > 0.03) {
-        state.camera.position.lerp(target, 0.05);
+      if (state.camera.position.distanceTo(target) > 3.3) {
+        state.camera.position.lerp(target, 0.01);
         state.camera.updateProjectionMatrix();
       } else {
         // If we are close enough, we could consider the animation as finished
