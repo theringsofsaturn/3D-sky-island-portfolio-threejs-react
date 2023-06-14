@@ -12,28 +12,10 @@ const Navbar = () => {
       </h1>
       <div className="flex gap-6 overflow-x-auto scrollbar-hide">
         <Link
-          to="/room1"
+          to="/"
           className="text-white py-2 px-6 rounded-xl hover:bg-white hover:text-black transition-colors"
         >
           Room 1
-        </Link>
-        <Link
-          to="/room2"
-          className="text-white py-2 px-6 rounded-xl hover:bg-white hover:text-black transition-colors"
-        >
-          Room 2
-        </Link>
-        <Link
-          to="/room3"
-          className="text-white py-2 px-6 rounded-xl hover:bg-white hover:text-black transition-colors"
-        >
-          Room 3
-        </Link>
-        <Link
-          to="/room4"
-          className="text-white py-2 px-6 rounded-xl hover:bg-white hover:text-black transition-colors"
-        >
-          Room 4
         </Link>
       </div>
     </div>

@@ -9,14 +9,19 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-spring/core": "^9.7.2",
+    "@react-spring/three": "^9.7.2",
     "@react-three/drei": "^9.74.8",
     "@react-three/fiber": "^8.13.0",
+    "camera-controls": "^2.4.2",
     "drei": "^2.2.21",
+    "gsap": "^3.12.1",
     "lil-gui": "^0.17.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.9.0",
     "react-router-dom": "^6.12.1",
+    "react-spring": "^9.7.1",
     "styled-components": "*",
     "three": "^0.153.0"
   },
