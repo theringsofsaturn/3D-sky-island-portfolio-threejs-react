@@ -13,7 +13,7 @@ import React, { useRef, useState, useMemo } from 'react';
 import { useGLTF } from '@react-three/drei';
 import useGUI from '../../useGUI';
 
-export function Model({ setControlsEnabled, ...props }) {
+export function Model({ setControlsEnabled, setModalContent, ...props }) {
   const { nodes, materials } = useGLTF(
     'src/assets/room2/scene-transformed.glb'
   );
@@ -50,6 +50,12 @@ export function Model({ setControlsEnabled, ...props }) {
     }
     return null;
   });
+
+  // takes the content as a parameter and sets it as the modal content
+  function handleClick(content) {
+    setControlsEnabled(false);
+    setModalContent(content);
+  }
 
   return (
     <group {...props} dispose={null}>
@@ -98,6 +104,7 @@ export function Model({ setControlsEnabled, ...props }) {
         onClick={() => {
           setControlsEnabled(false);
           setClickedMesh(ref1.current);
+          handleClick(<p>This is the content for mesh 1</p>);
         }}
         geometry={nodes.Rahmen_Tshirt_Shade_0.geometry}
         material={materials['Shade.2']}

@@ -1,11 +1,12 @@
 import React from 'react';
-import { Suspense, useState } from 'react';
+import { Suspense, useState, useCallback } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './Navbar';
 import Loader from './Loader';
 import { Model } from './assets/room2/Scene';
+import Modal from './Modal';
 import './App.css';
 
 function App() {
@@ -34,12 +35,16 @@ function App() {
                   rotation={[0, 0.2, 0]}
                   scale={[1, 1, 1]}
                   setControlsEnabled={setControlsEnabled}
+                  setModalContent={setModalContent}
                 />
               }
             />
           </Routes>
         </Suspense>
       </Canvas>
+      {modalContent && (
+        <Modal content={modalContent} onClose={() => setModalContent(null)} />
+      )}
     </Router>
   );
 }
