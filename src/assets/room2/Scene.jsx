@@ -33,12 +33,12 @@ export function Model(props) {
   useFrame((state) => {
     if (clickedMesh) {
       state.camera.lookAt(clickedMesh.position);
-      vec.set(0, 0, -0.5);
+      vec.set(0, 0, -0.02);
       vec.applyQuaternion(state.camera.quaternion);
       target.copy(clickedMesh.position).add(vec);
 
       // check if the distance to target is larger than an epsilon
-      if (state.camera.position.distanceTo(target) > 0.05) {
+      if (state.camera.position.distanceTo(target) > 0.03) {
         state.camera.position.lerp(target, 0.05);
         state.camera.updateProjectionMatrix();
       } else {
