@@ -10,6 +10,7 @@ import './App.css';
 
 function App() {
   const [controlsEnabled, setControlsEnabled] = useState(true);
+  const [modalContent, setModalContent] = useState(null);
 
   return (
     <Router>
