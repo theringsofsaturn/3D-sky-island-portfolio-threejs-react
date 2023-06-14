@@ -9,9 +9,28 @@ Title: Medion Erazer Gaming Room Concept
 
 import React, { useRef } from 'react';
 import { useGLTF } from '@react-three/drei';
+import { useThree } from '@react-three/fiber';
+import { useSpring, a } from '@react-spring/three';
 
 export function Model(props) {
-  const { nodes, materials } = useGLTF('src/assets/room2/scene-transformed.glb');
+  const { camera } = useThree();
+  const { nodes, materials } = useGLTF(
+    'src/assets/room2/scene-transformed.glb'
+  );
+
+  console.log(nodes);
+
+  const [spring, setSpring] = useSpring(() => ({
+    position: [0, 0, 0], // Camera's initial position
+  }));
+
+  const zoomTo = (target) => {
+    setSpring({
+      position: target, // New camera position
+      config: { mass: 1, tension: 100, friction: 14, precision: 0.00001 },
+    });
+  };
+  
   return (
     <group {...props} dispose={null}>
       <mesh
@@ -790,4 +809,4 @@ export function Model(props) {
   );
 }
 
-useGLTF.preload('/scene-transformed.glb');
+useGLTF.preload('src/assets/room2/scene-transformed.glb');
