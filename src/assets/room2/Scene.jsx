@@ -11,45 +11,6 @@ import * as THREE from 'three';
 import { useFrame, useThree } from '@react-three/fiber';
 import React, { useRef, useState, useMemo } from 'react';
 import { useGLTF } from '@react-three/drei';
-import CameraControls from 'camera-controls';
-
-CameraControls.install({ THREE });
-
-function Controls({ zoom, focus }) {
-  const camera = useThree((state) => state.camera);
-  const gl = useThree((state) => state.gl);
-  const controls = useMemo(
-    () => new CameraControls(camera, gl.domElement),
-    [camera, gl.domElement]
-  );
-
-  const pos = new THREE.Vector3();
-  const look = new THREE.Vector3();
-
-  return useFrame((state, delta) => {
-    if (zoom) {
-      pos.set(focus.x, focus.y, focus.z + 0.002);
-      look.set(focus.x, focus.y, focus.z - 0.002);
-    } else {
-      pos.set(0, 0, 5);
-      look.set(0, 0, 4);
-    }
-
-    state.camera.position.lerp(pos, 0.5);
-    state.camera.updateProjectionMatrix();
-
-    controls.setLookAt(
-      state.camera.position.x,
-      state.camera.position.y,
-      state.camera.position.z,
-      look.x,
-      look.y,
-      look.z,
-      true
-    );
-    return controls.update(delta);
-  });
-}
 
 export function Model(props) {
   const { nodes, materials } = useGLTF(
@@ -57,9 +18,36 @@ export function Model(props) {
   );
   console.log(nodes);
 
-  const ref = useRef();
-  const [hovered, setHover] = useState(false);
-  const [focus, setFocus] = useState(false);
+  const [clickedMesh, setClickedMesh] = useState(null);
+  const ref1 = useRef();
+  const ref2 = useRef();
+  const ref3 = useRef();
+  const ref4 = useRef();
+  const ref5 = useRef();
+  const ref6 = useRef();
+  const vec = new THREE.Vector3();
+  const target = new THREE.Vector3();
+
+  const meshRefs = [ref1, ref2, ref3, ref4, ref5, ref6];
+
+  useFrame((state) => {
+    if (clickedMesh) {
+      state.camera.lookAt(clickedMesh.position);
+      vec.set(0, 0, -0.5);
+      vec.applyQuaternion(state.camera.quaternion);
+      target.copy(clickedMesh.position).add(vec);
+
+      // check if the distance to target is larger than an epsilon
+      if (state.camera.position.distanceTo(target) > 0.05) {
+        state.camera.position.lerp(target, 0.05);
+        state.camera.updateProjectionMatrix();
+      } else {
+        // If we are close enough, we could consider the animation as finished
+        setClickedMesh(null);
+      }
+    }
+    return null;
+  });
 
   return (
     <group {...props} dispose={null}>
@@ -104,10 +92,8 @@ export function Model(props) {
         material={materials.Keyboard_Mat}
       />
       <mesh
-        ref={ref}
-        onPointerOver={(e) => setHover(true)}
-        onPointerOut={(e) => setHover(false)}
-        onClick={(e) => setFocus(!focus)}
+        ref={ref1}
+        onClick={() => setClickedMesh(ref1.current)}
         geometry={nodes.Rahmen_Tshirt_Shade_0.geometry}
         material={materials['Shade.2']}
         position={[-1.38, 1.643, -0.832]}
@@ -169,6 +155,8 @@ export function Model(props) {
         scale={0.008}
       />
       <mesh
+        ref={ref2}
+        onClick={() => setClickedMesh(ref2.current)}
         geometry={nodes.flask_philodendron_Flower_pot_2_0.geometry}
         material={materials.Flower_pot_2}
         position={[1.276, 0.183, 1.979]}
@@ -197,6 +185,8 @@ export function Model(props) {
         scale={0.008}
       />
       <mesh
+        ref={ref3}
+        onClick={() => setClickedMesh(ref3.current)}
         geometry={nodes.Cactus_1_White_flower_pot_0.geometry}
         material={materials.White_flower_pot}
         position={[0.776, 1.596, -0.788]}
@@ -302,6 +292,8 @@ export function Model(props) {
         scale={0.806}
       />
       <mesh
+        ref={ref4}
+        onClick={() => setClickedMesh(ref4.current)}
         geometry={nodes.Nintendo_Switch_OLED_Box_Oled_0.geometry}
         material={materials.Oled}
         position={[0.218, 0.529, -0.582]}
@@ -614,6 +606,8 @@ export function Model(props) {
         scale={0.001}
       />
       <mesh
+        ref={ref5}
+        onClick={() => setClickedMesh(ref5.current)}
         geometry={nodes.Flat_TV_Simple_Mat_1.geometry}
         material={materials.Mat_0}
         position={[-2.157, 0.693, -0.646]}
@@ -621,6 +615,8 @@ export function Model(props) {
         scale={[0.009, 0.001, 0]}
       />
       <mesh
+        ref={ref6}
+        onClick={() => setClickedMesh(ref6.current)}
         geometry={nodes.Flat_TV_Simple_Material35_0.geometry}
         material={materials['Material.35.1']}
         position={[-2.157, 0.693, -0.646]}
@@ -839,8 +835,6 @@ export function Model(props) {
         rotation={[-Math.PI, 1.192, Math.PI]}
         scale={[-0.008, 0.008, 0.008]}
       />
-
-      {focus && <Controls zoom={focus} focus={ref.current.position} />}
     </group>
   );
 }

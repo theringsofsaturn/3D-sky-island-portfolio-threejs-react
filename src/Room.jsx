@@ -1,3 +1,5 @@
+// Not being used at the moment. We're using `Scene.jsx` in assets folder instead.
+
 import React, { useLayoutEffect, useRef, useState } from 'react';
 import { useThree, useFrame } from '@react-three/fiber';
 import { useGLTF, useAnimations } from '@react-three/drei'; // useGLTF is a hook that loads a glTF model and returns it with all the materials, textures, and animations attached to it.

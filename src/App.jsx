@@ -5,8 +5,8 @@ import { OrbitControls } from '@react-three/drei';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './Navbar';
 import Loader from './Loader';
-import './App.css';
 import { Model } from './assets/room2/Scene';
+import './App.css';
 
 function App() {
   return (
