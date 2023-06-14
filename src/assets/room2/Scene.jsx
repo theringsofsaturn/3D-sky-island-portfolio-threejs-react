@@ -17,7 +17,7 @@ CameraControls.install({ THREE });
 
 function Controls({ zoom, focus }) {
   const camera = useThree((state) => state.camera);
-  const gl = useThree((state) => state.gl); 
+  const gl = useThree((state) => state.gl);
   const controls = useMemo(
     () => new CameraControls(camera, gl.domElement),
     [camera, gl.domElement]
@@ -28,8 +28,8 @@ function Controls({ zoom, focus }) {
 
   return useFrame((state, delta) => {
     if (zoom) {
-      pos.set(focus.x, focus.y, focus.z + 0.2);
-      look.set(focus.x, focus.y, focus.z - 0.2);
+      pos.set(focus.x, focus.y, focus.z + 0.002);
+      look.set(focus.x, focus.y, focus.z - 0.002);
     } else {
       pos.set(0, 0, 5);
       look.set(0, 0, 4);
