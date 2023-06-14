@@ -7,30 +7,60 @@ Source: https://sketchfab.com/3d-models/medion-erazer-gaming-room-concept-95a23e
 Title: Medion Erazer Gaming Room Concept
 */
 
-import React, { useRef } from 'react';
+import * as THREE from 'three';
+import { useFrame, useThree } from '@react-three/fiber';
+import React, { useRef, useState, useMemo } from 'react';
 import { useGLTF } from '@react-three/drei';
-import { useThree } from '@react-three/fiber';
-import { useSpring, a } from '@react-spring/three';
+import CameraControls from 'camera-controls';
+
+CameraControls.install({ THREE });
+
+function Controls({ zoom, focus }) {
+  const camera = useThree((state) => state.camera);
+  const gl = useThree((state) => state.gl); 
+  const controls = useMemo(
+    () => new CameraControls(camera, gl.domElement),
+    [camera, gl.domElement]
+  );
+
+  const pos = new THREE.Vector3();
+  const look = new THREE.Vector3();
+
+  return useFrame((state, delta) => {
+    if (zoom) {
+      pos.set(focus.x, focus.y, focus.z + 0.2);
+      look.set(focus.x, focus.y, focus.z - 0.2);
+    } else {
+      pos.set(0, 0, 5);
+      look.set(0, 0, 4);
+    }
+
+    state.camera.position.lerp(pos, 0.5);
+    state.camera.updateProjectionMatrix();
+
+    controls.setLookAt(
+      state.camera.position.x,
+      state.camera.position.y,
+      state.camera.position.z,
+      look.x,
+      look.y,
+      look.z,
+      true
+    );
+    return controls.update(delta);
+  });
+}
 
 export function Model(props) {
-  const { camera } = useThree();
   const { nodes, materials } = useGLTF(
     'src/assets/room2/scene-transformed.glb'
   );
-
   console.log(nodes);
 
-  const [spring, setSpring] = useSpring(() => ({
-    position: [0, 0, 0], // Camera's initial position
-  }));
+  const ref = useRef();
+  const [hovered, setHover] = useState(false);
+  const [focus, setFocus] = useState(false);
 
-  const zoomTo = (target) => {
-    setSpring({
-      position: target, // New camera position
-      config: { mass: 1, tension: 100, friction: 14, precision: 0.00001 },
-    });
-  };
-  
   return (
     <group {...props} dispose={null}>
       <mesh
@@ -74,6 +104,10 @@ export function Model(props) {
         material={materials.Keyboard_Mat}
       />
       <mesh
+        ref={ref}
+        onPointerOver={(e) => setHover(true)}
+        onPointerOut={(e) => setHover(false)}
+        onClick={(e) => setFocus(!focus)}
         geometry={nodes.Rahmen_Tshirt_Shade_0.geometry}
         material={materials['Shade.2']}
         position={[-1.38, 1.643, -0.832]}
@@ -805,6 +839,8 @@ export function Model(props) {
         rotation={[-Math.PI, 1.192, Math.PI]}
         scale={[-0.008, 0.008, 0.008]}
       />
+
+      {focus && <Controls zoom={focus} focus={ref.current.position} />}
     </group>
   );
 }
