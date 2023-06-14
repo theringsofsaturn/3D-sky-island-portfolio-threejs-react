@@ -167,8 +167,6 @@ export function Model({ setControlsEnabled, setModalContent, ...props }) {
         scale={0.008}
       />
       <mesh
-        ref={ref2}
-        onClick={() => setClickedMesh(ref2.current)}
         geometry={nodes.flask_philodendron_Flower_pot_2_0.geometry}
         material={materials.Flower_pot_2}
         position={[1.276, 0.183, 1.979]}
@@ -197,8 +195,6 @@ export function Model({ setControlsEnabled, setModalContent, ...props }) {
         scale={0.008}
       />
       <mesh
-        ref={ref3}
-        onClick={() => setClickedMesh(ref3.current)}
         geometry={nodes.Cactus_1_White_flower_pot_0.geometry}
         material={materials.White_flower_pot}
         position={[0.776, 1.596, -0.788]}
@@ -304,8 +300,6 @@ export function Model({ setControlsEnabled, setModalContent, ...props }) {
         scale={0.806}
       />
       <mesh
-        ref={ref4}
-        onClick={() => setClickedMesh(ref4.current)}
         geometry={nodes.Nintendo_Switch_OLED_Box_Oled_0.geometry}
         material={materials.Oled}
         position={[0.218, 0.529, -0.582]}
@@ -618,8 +612,6 @@ export function Model({ setControlsEnabled, setModalContent, ...props }) {
         scale={0.001}
       />
       <mesh
-        ref={ref5}
-        onClick={() => setClickedMesh(ref5.current)}
         geometry={nodes.Flat_TV_Simple_Mat_1.geometry}
         material={materials.Mat_0}
         position={[-2.157, 0.693, -0.646]}
@@ -627,8 +619,6 @@ export function Model({ setControlsEnabled, setModalContent, ...props }) {
         scale={[0.009, 0.001, 0]}
       />
       <mesh
-        ref={ref6}
-        onClick={() => setClickedMesh(ref6.current)}
         geometry={nodes.Flat_TV_Simple_Material35_0.geometry}
         material={materials['Material.35.1']}
         position={[-2.157, 0.693, -0.646]}
@@ -672,20 +662,7 @@ export function Model({ setControlsEnabled, setModalContent, ...props }) {
         rotation={[0, -Math.PI / 2, 0]}
         scale={0.008}
       />
-      <mesh
-        geometry={nodes.Wire_Keyboard_Mat_0.geometry}
-        material={materials.Keyboard_Mat}
-        position={[1.218, 0.766, 0.87]}
-        rotation={[-Math.PI / 2, 0, -Math.PI / 2]}
-        scale={0.008}
-      />
-      <mesh
-        geometry={nodes['Deckfl��che_1_21_Keyboard_Mat_0'].geometry}
-        material={materials.Keyboard_Mat}
-        position={[1.206, 0.766, 0.861]}
-        rotation={[0, -1.48, 0]}
-        scale={0.008}
-      />
+
       <mesh
         geometry={nodes.Cylinder_4_Mat2_0.geometry}
         material={materials['Mat.2_3']}
@@ -812,41 +789,50 @@ export function Model({ setControlsEnabled, setModalContent, ...props }) {
         rotation={[-1.586, -0.004, -2.128]}
         scale={0.003}
       />
-      <mesh
-        geometry={nodes.Caster_Wheel_0136_Charcoal_0.geometry}
-        material={materials['0136_Charcoal']}
-        position={[0.288, 0.215, 1.24]}
-        rotation={[0, -0.564, 0]}
-        scale={0.008}
-      />
-      <mesh
-        geometry={nodes.Caster_Base_Mat5_1.geometry}
-        material={materials['Mat.5']}
-        position={[0.42, 0.214, 1.032]}
-        rotation={[-Math.PI, 1.192, Math.PI]}
-        scale={0.008}
-      />
-      <mesh
-        geometry={nodes.Caster_Base_0136_Charcoal_0.geometry}
-        material={materials['0136_Charcoal']}
-        position={[0.42, 0.214, 1.032]}
-        rotation={[-Math.PI, 1.192, Math.PI]}
-        scale={0.008}
-      />
-      <mesh
-        geometry={nodes.Arm_0136_Charcoal_0.geometry}
-        material={materials['0136_Charcoal']}
-        position={[0.338, 0.44, 0.826]}
-        rotation={[-Math.PI, 1.192, Math.PI]}
-        scale={[-0.008, 0.008, 0.008]}
-      />
-      <mesh
-        geometry={nodes.Gruppe_4_Mat5_1.geometry}
-        material={materials['Mat.5']}
-        position={[0.412, 0.513, 1.275]}
-        rotation={[-Math.PI, 1.192, Math.PI]}
-        scale={[-0.008, 0.008, 0.008]}
-      />
+      <group
+        ref={ref2}
+        onClick={() => {
+          setControlsEnabled(false);
+          setClickedMesh(ref2.current);
+          handleClick(<p>This is the content for mesh 2</p>);
+        }}
+      >
+        <mesh
+          geometry={nodes.Caster_Wheel_0136_Charcoal_0.geometry}
+          material={materials['0136_Charcoal']}
+          position={[0.288, 0.215, 1.24]}
+          rotation={[0, -0.564, 0]}
+          scale={0.008}
+        />
+        <mesh
+          geometry={nodes.Caster_Base_Mat5_1.geometry}
+          material={materials['Mat.5']}
+          position={[0.42, 0.214, 1.032]}
+          rotation={[-Math.PI, 1.192, Math.PI]}
+          scale={0.008}
+        />
+        <mesh
+          geometry={nodes.Caster_Base_0136_Charcoal_0.geometry}
+          material={materials['0136_Charcoal']}
+          position={[0.42, 0.214, 1.032]}
+          rotation={[-Math.PI, 1.192, Math.PI]}
+          scale={0.008}
+        />
+        <mesh
+          geometry={nodes.Arm_0136_Charcoal_0.geometry}
+          material={materials['0136_Charcoal']}
+          position={[0.338, 0.44, 0.826]}
+          rotation={[-Math.PI, 1.192, Math.PI]}
+          scale={[-0.008, 0.008, 0.008]}
+        />
+        <mesh
+          geometry={nodes.Gruppe_4_Mat5_1.geometry}
+          material={materials['Mat.5']}
+          position={[0.412, 0.513, 1.275]}
+          rotation={[-Math.PI, 1.192, Math.PI]}
+          scale={[-0.008, 0.008, 0.008]}
+        />
+      </group>
     </group>
   );
 }
