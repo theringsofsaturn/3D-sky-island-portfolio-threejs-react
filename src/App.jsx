@@ -32,8 +32,8 @@ function App() {
               path="/"
               element={
                 <Model
-                  position={[0, -0.5, 1]}
-                  rotation={[0.5, 0.3, 0]}
+                  position={[0.5, -1, 1]}
+                  rotation={[0.2, 0.2, 0]}
                   scale={[1, 1, 1]}
                   setControlsEnabled={setControlsEnabled}
                   setModalContent={setModalContent}
