@@ -37,20 +37,25 @@ export function Model({
   const meshRefs = [ref1, ref2, ref3, ref4, ref5, ref6];
 
   useFrame((state) => {
-    const mesh = meshRefs[currentStep].current;
-    if (mesh) {
-      state.camera.lookAt(mesh.position);
-      vec.set(0, 0, -0.02);
-      vec.applyQuaternion(state.camera.quaternion);
-      target.copy(mesh.position).add(vec);
+    if (currentStep >= 0) {
+      // If the tour has started...
+      const mesh = meshRefs[currentStep].current; // Get the mesh for the current step
+      if (mesh) {
+        // If the mesh exists...
+        state.camera.lookAt(mesh.position); // Look at the mesh position
+        vec.set(0, 0, -0.02); // Set a vector to move the camera
+        vec.applyQuaternion(state.camera.quaternion); // This ensures the vector is pointing in the same direction as the camera. This is important for when the camera is rotated (e.g. in the case of OrbitControls). If you don't apply the quaternion, the vector will always move the camera in the same direction, regardless of the camera's rotation.
+        target.copy(mesh.position).add(vec); // Set the target to the mesh position. Add the vector to the target so the camera moves back a bit from the mesh position.
 
-      // check if the distance to target is larger than an epsilon
-      if (state.camera.position.distanceTo(target) > 3.3) {
-        state.camera.position.lerp(target, 0.01);
-        state.camera.updateProjectionMatrix();
-      } else {
-        // If we are close enough, we could consider the animation as finished
-        setControlsEnabled(true);
+        // check if the distance to target is larger than an epsilon
+        if (!state.camera.position.equals(target)) {
+          // If the camera has not yet reached the target...
+          state.camera.position.lerp(target, 0.01); // To move the camera, we will utilize the lerp() function that will take two arguments: the point in space we want to move to (target) and how fast we want to move there.
+          state.camera.updateProjectionMatrix(); // To recalculate the projection.
+        } else {
+          // If the camera has reached the target...
+          setControlsEnabled(true); // Enable the controls
+        }
       }
     }
     return null;

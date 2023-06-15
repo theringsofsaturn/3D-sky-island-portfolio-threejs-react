@@ -33,3 +33,28 @@ button {
 button:hover {
   background-color: #45a049;
 }
+.fab-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 15px;
+  border-radius: 50%;
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.fab-button:hover {
+  background-color: #45a049;
+}
+
+canvas {
+  cursor: default;
+}
+
+canvas:hover {
+  cursor: pointer;
+}
