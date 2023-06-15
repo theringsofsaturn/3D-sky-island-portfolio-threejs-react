@@ -1,0 +1,11 @@
+Model Information:
+* title:	oriental cyberpunk room
+* source:	https://sketchfab.com/3d-models/oriental-cyberpunk-room-2a42d577f03a43469d2e897a99920e67
+* author:	isipeassy (https://sketchfab.com/Isi-peassy)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "oriental cyberpunk room" (https://sketchfab.com/3d-models/oriental-cyberpunk-room-2a42d577f03a43469d2e897a99920e67) by isipeassy (https://sketchfab.com/Isi-peassy) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

@@ -6,7 +6,7 @@ import { useThree } from '@react-three/fiber';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './Navbar';
 import Loader from './Loader';
-import { Model } from './assets/room2/Scene';
+import { Model } from './assets/gaming-room/Scene';
 import Modal from './Modal';
 import './App.css';
 
@@ -57,7 +57,7 @@ function App() {
             minDistance={0.1}
             maxDistance={100}
           />
-          <ambientLight intensity={0.3} />
+          <ambientLight intensity={1} />
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
           <pointLight position={[-10, -10, -10]} />
           <Routes>
@@ -65,8 +65,8 @@ function App() {
               path="/"
               element={
                 <Model
-                  position={[0.5, -1, 1]}
-                  rotation={[0.2, 0.2, 0]}
+                  position={[0, 0, 0]}
+                  rotation={[0, 0, 0]}
                   scale={[1, 1, 1]}
                   setControlsEnabled={setControlsEnabled}
                   setModalContent={setModalContent}
