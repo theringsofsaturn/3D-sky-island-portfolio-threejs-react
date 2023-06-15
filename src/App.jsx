@@ -2,6 +2,7 @@ import React from 'react';
 import { Suspense, useState, useCallback } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
+import { useThree } from '@react-three/fiber';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './Navbar';
 import Loader from './Loader';
@@ -23,6 +24,23 @@ function App() {
   const resetTour = useCallback(() => {
     setCurrentStep(-1);
   }, []);
+
+  const { camera, gl } = useThree();
+
+  useEffect(() => {
+    const handleMouseUp = () => {
+      console.log('Camera position:', camera.position);
+      console.log('Camera rotation:', camera.rotation);
+    };
+
+    const canvas = gl.domElement;
+    canvas.addEventListener('mouseup', handleMouseUp);
+
+    // cleanup function
+    return () => {
+      canvas.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [camera, gl]);
 
   return (
     <Router>
