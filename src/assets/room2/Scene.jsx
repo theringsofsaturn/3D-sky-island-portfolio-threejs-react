@@ -68,7 +68,22 @@ export function Model({
         if (state.camera.position.distanceTo(position) > 0.1) {
           // If the camera has not yet reached the target...
           state.camera.position.lerp(position, 0.1); // Move the camera position
-          state.camera.rotation.slerp(rotation, 0.1); // Rotate the camera
+
+          // Convert current camera rotation to quaternion for interpolation
+          let cameraQuaternion = new THREE.Quaternion();
+          cameraQuaternion.setFromEuler(state.camera.rotation);
+
+          // Interpolate between the current camera quaternion and the target quaternion
+          THREE.Quaternion.slerp(
+            cameraQuaternion,
+            rotation.toQuaternion(),
+            cameraQuaternion,
+            0.1
+          );
+
+          // Convert interpolated quaternion back to Euler for setting camera rotation
+          state.camera.rotation.setFromQuaternion(cameraQuaternion);
+
           state.camera.updateProjectionMatrix(); // To recalculate the projection.
         } else {
           // If the camera has reached the target...
