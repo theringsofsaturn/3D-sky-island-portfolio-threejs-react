@@ -13,7 +13,12 @@ import React, { useRef, useState, useMemo } from 'react';
 import { useGLTF } from '@react-three/drei';
 import useGUI from '../../useGUI';
 
-export function Model({ setControlsEnabled, setModalContent, ...props }) {
+export function Model({
+  setControlsEnabled,
+  setModalContent,
+  currentStep,
+  ...props
+}) {
   const { nodes, materials } = useGLTF(
     'src/assets/room2/scene-transformed.glb'
   );
@@ -32,11 +37,12 @@ export function Model({ setControlsEnabled, setModalContent, ...props }) {
   const meshRefs = [ref1, ref2, ref3, ref4, ref5, ref6];
 
   useFrame((state) => {
-    if (clickedMesh) {
-      state.camera.lookAt(clickedMesh.position);
+    const mesh = meshRefs[currentStep].current;
+    if (mesh) {
+      state.camera.lookAt(mesh.position);
       vec.set(0, 0, -0.02);
       vec.applyQuaternion(state.camera.quaternion);
-      target.copy(clickedMesh.position).add(vec);
+      target.copy(mesh.position).add(vec);
 
       // check if the distance to target is larger than an epsilon
       if (state.camera.position.distanceTo(target) > 3.3) {
@@ -44,7 +50,6 @@ export function Model({ setControlsEnabled, setModalContent, ...props }) {
         state.camera.updateProjectionMatrix();
       } else {
         // If we are close enough, we could consider the animation as finished
-        setClickedMesh(null);
         setControlsEnabled(true);
       }
     }
@@ -741,6 +746,12 @@ export function Model({ setControlsEnabled, setModalContent, ...props }) {
         scale={0.02}
       />
       <mesh
+        ref={ref3}
+        onClick={() => {
+          setControlsEnabled(false);
+          setClickedMesh(ref3.current);
+          handleClick(<p>This is the content for mesh 3</p>);
+        }}
         geometry={nodes.Solid1_Material351_0.geometry}
         material={materials['Material.35.1_0']}
         position={[1.554, 0.943, 1.059]}
