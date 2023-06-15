@@ -1,5 +1,5 @@
 import React from 'react';
-import { Suspense, useState, useCallback } from 'react';
+import { Suspense, useState, useEffect, useCallback } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { useThree } from '@react-three/fiber';
@@ -25,27 +25,30 @@ function App() {
     setCurrentStep(-1);
   }, []);
 
-  const { camera, gl } = useThree();
+  function CameraLogger() {
+    const { camera } = useThree();
 
-  useEffect(() => {
-    const handleMouseUp = () => {
-      console.log('Camera position:', camera.position);
-      console.log('Camera rotation:', camera.rotation);
-    };
+    useEffect(() => {
+      const logCameraData = () => {
+        console.log('Camera Position:', camera.position);
+        console.log('Camera Rotation:', camera.rotation);
+      };
 
-    const canvas = gl.domElement;
-    canvas.addEventListener('mouseup', handleMouseUp);
+      window.addEventListener('mousedown', logCameraData);
 
-    // cleanup function
-    return () => {
-      canvas.removeEventListener('mouseup', handleMouseUp);
-    };
-  }, [camera, gl]);
+      return () => {
+        window.removeEventListener('mousedown', logCameraData);
+      };
+    }, [camera]);
+
+    return null;
+  }
 
   return (
     <Router>
       <Navbar />
       <Canvas camera={{ near: 0.1, far: 1000 }}>
+        <CameraLogger />
         <Suspense fallback={<Loader />}>
           <OrbitControls
             enabled={controlsEnabled}
