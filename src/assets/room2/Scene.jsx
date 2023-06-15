@@ -9,7 +9,7 @@ Title: Medion Erazer Gaming Room Concept
 
 import * as THREE from 'three';
 import { useFrame, useThree } from '@react-three/fiber';
-import React, { useRef, useState, useMemo } from 'react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { useGLTF } from '@react-three/drei';
 import useGUI from '../../useGUI';
 
@@ -23,6 +23,10 @@ export function Model({
     'src/assets/room2/scene-transformed.glb'
   );
   console.log(nodes);
+
+  const { camera } = useThree();
+  const [initialCameraPosition, setInitialCameraPosition] = useState();
+  const [initialCameraRotation, setInitialCameraRotation] = useState();
 
   const [clickedMesh, setClickedMesh] = useState(null);
   const ref1 = useRef();
@@ -57,9 +61,26 @@ export function Model({
           setControlsEnabled(true); // Enable the controls
         }
       }
+    } else if ( 
+      currentStep === -1 &&
+      initialCameraPosition &&
+      initialCameraRotation
+    ) {
+      // If the tour has been reset...
+      camera.position.lerp(initialCameraPosition, 0.1);
+      camera.rotation.copy(initialCameraRotation);
+      camera.updateProjectionMatrix();
     }
     return null;
   });
+
+  useEffect(() => {
+    // Save initial camera position and rotation
+    if (currentStep === -1) {
+      setInitialCameraPosition(camera.position.clone());
+      setInitialCameraRotation(camera.rotation.clone());
+    }
+  }, [currentStep, camera]);
 
   // takes the content as a parameter and sets it as the modal content
   function handleClick(content) {

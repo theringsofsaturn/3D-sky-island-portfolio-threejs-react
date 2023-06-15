@@ -2,7 +2,6 @@ import React from 'react';
 import { Suspense, useState, useCallback } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
-import { useThree } from '@react-three/fiber';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './Navbar';
 import Loader from './Loader';
@@ -14,15 +13,6 @@ function App() {
   const [controlsEnabled, setControlsEnabled] = useState(true);
   const [modalContent, setModalContent] = useState(null);
   const [currentStep, setCurrentStep] = useState(-1); // Start at -1 so user has to click 'Start' to begin tour
-  const { camera } = useThree();
-  const [initialCameraPosition, setInitialCameraPosition] = useState();
-  const [initialCameraRotation, setInitialCameraRotation] = useState();
-
-  useEffect(() => {
-    // Save initial camera position and rotation
-    setInitialCameraPosition(camera.position.clone());
-    setInitialCameraRotation(camera.rotation.clone());
-  }, []);
 
   // Handle start of the tour
   const startTour = useCallback(() => {
@@ -32,9 +22,7 @@ function App() {
   // Handle reset of the tour
   const resetTour = useCallback(() => {
     setCurrentStep(-1);
-    camera.position.copy(initialCameraPosition);
-    camera.rotation.copy(initialCameraRotation);
-  }, [initialCameraPosition, initialCameraRotation]);
+  }, []);
 
   return (
     <Router>
