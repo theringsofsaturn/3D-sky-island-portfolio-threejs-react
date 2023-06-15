@@ -40,20 +40,20 @@ export function Model({
   const target = new THREE.Vector3();
 
   // Manual camera position and rotation for each mesh
-  // const cameraFocusPoints = useMemo(
-  //   () => [
-  //     {
-  //       position: new THREE.Vector3(x1, y1, z1),
-  //       rotation: new THREE.Euler(a1, b1, c1),
-  //     }, // for mesh 1
-  //     {
-  //       position: new THREE.Vector3(x2, y2, z2),
-  //       rotation: new THREE.Euler(a2, b2, c2),
-  //     }, // for mesh 2
-  //     // ... and so on for each mesh
-  //   ],
-  //   []
-  // );
+  const cameraFocusPoints = useMemo(
+    () => [
+      {
+        position: new THREE.Vector3(-0.1618, 0.4274, 1.5718),
+        rotation: new THREE.Euler(0.2375, 0.1385, -0.0334),
+      }, // for mesh 1
+      {
+        position: new THREE.Vector3(-0.1618, 0.02857, 3.2945),
+        rotation: new THREE.Euler(1.476, -0.193, -0.0769),
+      }, // for mesh 2
+      // ... and so on for each mesh
+    ],
+    []
+  );
 
   const meshRefs = [ref1, ref2, ref3, ref4, ref5, ref6];
 
