@@ -47,8 +47,8 @@ export function Model({
         vec.applyQuaternion(state.camera.quaternion); // This ensures the vector is pointing in the same direction as the camera. This is important for when the camera is rotated (e.g. in the case of OrbitControls). If you don't apply the quaternion, the vector will always move the camera in the same direction, regardless of the camera's rotation.
         target.copy(mesh.position).add(vec); // Set the target to the mesh position. Add the vector to the target so the camera moves back a bit from the mesh position.
 
-        // check if the distance to target is larger than an epsilon
-        if (!state.camera.position.equals(target)) {
+        // check if the distance to target is larger than 3.3 units
+        if (state.camera.position.distanceTo(target) > 3.3) {
           // If the camera has not yet reached the target...
           state.camera.position.lerp(target, 0.01); // To move the camera, we will utilize the lerp() function that will take two arguments: the point in space we want to move to (target) and how fast we want to move there.
           state.camera.updateProjectionMatrix(); // To recalculate the projection.
