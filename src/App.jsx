@@ -12,7 +12,17 @@ import './App.css';
 function App() {
   const [controlsEnabled, setControlsEnabled] = useState(true);
   const [modalContent, setModalContent] = useState(null);
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState(-1); // Start at -1 so user has to click 'Start' to begin tour
+
+  // Handle start of the tour
+  const startTour = useCallback(() => {
+    setCurrentStep(0);
+  }, []);
+
+  // Handle reset of the tour
+  const resetTour = useCallback(() => {
+    setCurrentStep(-1);
+  }, []);
 
   return (
     <Router>
@@ -47,7 +57,25 @@ function App() {
       {modalContent && (
         <Modal content={modalContent} onClose={() => setModalContent(null)} />
       )}
-      <button onClick={() => setCurrentStep(currentStep + 1)}>Next</button>
+      {currentStep < 0 ? (
+        // Start button if the tour hasn't started yet
+        <button className="fab-button" onClick={startTour}>
+          Start
+        </button>
+      ) : currentStep < 3 ? (
+        // Next button during the tour
+        <button
+          className="fab-button"
+          onClick={() => setCurrentStep(currentStep + 1)}
+        >
+          Next
+        </button>
+      ) : (
+        // Reset button after all objects are viewed
+        <button className="fab-button" onClick={resetTour}>
+          Reset
+        </button>
+      )}
     </Router>
   );
 }
