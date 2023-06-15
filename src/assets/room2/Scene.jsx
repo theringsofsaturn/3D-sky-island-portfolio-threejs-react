@@ -61,7 +61,7 @@ export function Model({
           setControlsEnabled(true); // Enable the controls
         }
       }
-    } else if ( 
+    } else if (
       currentStep === -1 &&
       initialCameraPosition &&
       initialCameraRotation
@@ -74,13 +74,15 @@ export function Model({
     return null;
   });
 
+  // save the initial camera position and rotation once, right after the component has mounted
+  // and before any changes are made to the camera position and rotation.
   useEffect(() => {
     // Save initial camera position and rotation
-    if (currentStep === -1) {
+    if (!initialCameraPosition && !initialCameraRotation) {
       setInitialCameraPosition(camera.position.clone());
       setInitialCameraRotation(camera.rotation.clone());
     }
-  }, [currentStep, camera]);
+  }, [camera, initialCameraPosition, initialCameraRotation]);
 
   // takes the content as a parameter and sets it as the modal content
   function handleClick(content) {
