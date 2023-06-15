@@ -17,6 +17,7 @@ export function Model({
   setControlsEnabled,
   setModalContent,
   currentStep,
+  manualControl,
   ...props
 }) {
   const { nodes, materials } = useGLTF(
@@ -39,55 +40,54 @@ export function Model({
   const target = new THREE.Vector3();
 
   // Manual camera position and rotation for each mesh
-  const cameraFocusPoints = useMemo(
-    () => [
-      {
-        position: new THREE.Vector3(x1, y1, z1),
-        rotation: new THREE.Euler(a1, b1, c1),
-      }, // for mesh 1
-      {
-        position: new THREE.Vector3(x2, y2, z2),
-        rotation: new THREE.Euler(a2, b2, c2),
-      }, // for mesh 2
-      // ... and so on for each mesh
-    ],
-    []
-  );
+  // const cameraFocusPoints = useMemo(
+  //   () => [
+  //     {
+  //       position: new THREE.Vector3(x1, y1, z1),
+  //       rotation: new THREE.Euler(a1, b1, c1),
+  //     }, // for mesh 1
+  //     {
+  //       position: new THREE.Vector3(x2, y2, z2),
+  //       rotation: new THREE.Euler(a2, b2, c2),
+  //     }, // for mesh 2
+  //     // ... and so on for each mesh
+  //   ],
+  //   []
+  // );
 
   const meshRefs = [ref1, ref2, ref3, ref4, ref5, ref6];
 
   useFrame((state) => {
+    // When the tour has started...
     if (currentStep >= 0) {
-      // If the tour has started...
       const mesh = meshRefs[currentStep].current; // Get the mesh for the current step
       if (mesh) {
-        // If the mesh exists...
-        state.camera.lookAt(mesh.position); // Look at the mesh position
-        vec.set(0, 0, -0.02); // Set a vector to move the camera
-        vec.applyQuaternion(state.camera.quaternion); // This ensures the vector is pointing in the same direction as the camera. This is important for when the camera is rotated (e.g. in the case of OrbitControls). If you don't apply the quaternion, the vector will always move the camera in the same direction, regardless of the camera's rotation.
-        target.copy(mesh.position).add(vec); // Set the target to the mesh position. Add the vector to the target so the camera moves back a bit from the mesh position.
+        const { position, rotation } = cameraFocusPoints[currentStep]; // Get the position and rotation for the current step
 
-        // check if the distance to target is larger than 3.3 units
-        if (state.camera.position.distanceTo(target) > 3.3) {
+        // check if the distance to target is larger than 0.1 units
+        if (state.camera.position.distanceTo(position) > 0.1) {
           // If the camera has not yet reached the target...
-          state.camera.position.lerp(target, 0.01); // To move the camera, we will utilize the lerp() function that will take two arguments: the point in space we want to move to (target) and how fast we want to move there.
+          state.camera.position.lerp(position, 0.1); // Move the camera position
+          state.camera.rotation.slerp(rotation, 0.1); // Rotate the camera
           state.camera.updateProjectionMatrix(); // To recalculate the projection.
         } else {
           // If the camera has reached the target...
           setControlsEnabled(true); // Enable the controls
         }
       }
-    } else if (
+    }
+    // If the tour has been reset AND manual control is not enabled...
+    else if (
       currentStep === -1 &&
+      !manualControl &&
       initialCameraPosition &&
       initialCameraRotation
     ) {
-      // If the tour has been reset...
+      // Reset the camera position and rotation to the initial state
       camera.position.lerp(initialCameraPosition, 0.1);
       camera.rotation.copy(initialCameraRotation);
       camera.updateProjectionMatrix();
     }
-    return null;
   });
 
   // save the initial camera position and rotation once, right after the component has mounted

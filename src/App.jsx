@@ -13,11 +13,13 @@ import './App.css';
 function App() {
   const [controlsEnabled, setControlsEnabled] = useState(true);
   const [modalContent, setModalContent] = useState(null);
+  const [manualControl, setManualControl] = useState(false);
   const [currentStep, setCurrentStep] = useState(-1); // Start at -1 so user has to click 'Start' to begin tour
 
   // Handle start of the tour
   const startTour = useCallback(() => {
     setCurrentStep(0);
+    setManualControl(false);
   }, []);
 
   // Handle reset of the tour
@@ -69,6 +71,7 @@ function App() {
                   setControlsEnabled={setControlsEnabled}
                   setModalContent={setModalContent}
                   currentStep={currentStep}
+                  manualControl={manualControl}
                 />
               }
             />
@@ -97,6 +100,18 @@ function App() {
           Reset
         </button>
       )}
+      <button
+        style={{
+          position: 'absolute',
+          bottom: '20px',
+          left: '10px',
+          width: '300px',
+          height: '50px',
+        }}
+        onClick={() => setManualControl((prev) => !prev)}
+      >
+        {manualControl ? 'Turn off manual control' : 'Turn on manual control'}
+      </button>
     </Router>
   );
 }
