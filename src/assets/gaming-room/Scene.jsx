@@ -5,16 +5,166 @@ Source: https://sketchfab.com/3d-models/oriental-cyberpunk-room-2a42d577f03a4346
 Title: oriental cyberpunk room
 */
 
-import React, { useRef } from 'react';
+import * as THREE from 'three';
+import { useFrame, useThree } from '@react-three/fiber';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { useGLTF } from '@react-three/drei';
+import useGUI from '../../useGUI';
 
-export function Model(props) {
+export function Model({
+  setControlsEnabled,
+  setModalContent,
+  currentStep,
+  manualControl,
+  ...props
+}) {
   const { nodes, materials } = useGLTF(
     'src/assets/gaming-room/scene-transformed.glb'
   );
+  console.log(nodes);
+
+  const { camera } = useThree();
+  const [initialCameraPosition, setInitialCameraPosition] = useState();
+  const [initialCameraRotation, setInitialCameraRotation] = useState();
+
+  const [clickedMesh, setClickedMesh] = useState(null);
+  const ref1 = useRef();
+  const ref2 = useRef();
+  const ref3 = useRef();
+  const vec = new THREE.Vector3();
+  const target = new THREE.Vector3();
+
+  // Camera animation 1
+  // Camera Position: Vector3 {x: 0, y: 6.91728092725427e-17, z: 1.129677704962827}
+  // Camera Rotation: Euler {isEuler: true, _x: -6.123233995736766e-17, _y: 0, _z: 0, _order: 'XYZ', …}
+
+  // Camera animation 2
+  // Camera Position: Vector3 {x: -0.6774055523162299, y: -0.07510321437276035, z: 1.5175570485960659}
+  // App.jsx:36 Camera Rotation: Euler {isEuler: true, _x: -1.5575184590343871, _y: -0.34358849761578875, _z: -1.5313987682146446, _order: 'XYZ', …}
+
+  // Camera animation 3
+  // Camera Position:  Vector3 {x: 0.03996188120764549, y: 0.2664344544399111, z: 0.5821011844350341}
+  // Camera Rotation: Euler {isEuler: true, _x: -1.0412416586326239, _y: -1.518329332870249, _z: -1.040641128861739, _order: 'XYZ', …}
+
+  // Manual camera position and rotation for each mesh
+  const cameraFocusPoints = useMemo(
+    () => [
+      {
+        position: new THREE.Vector3(0, 6.91728092725427e-17, 1.129677704962827),
+        rotation: new THREE.Euler(
+          -1.5514407265310686,
+          -0.4737038972650475,
+          -1.5283872339968605
+        ),
+      }, // for mesh 1
+      {
+        position: new THREE.Vector3(
+          -0.6774055523162299,
+          -0.07510321437276035,
+          1.5175570485960659
+        ),
+        rotation: new THREE.Euler(
+          -1.5575184590343871,
+          -1.518329332870249,
+          -1.040641128861739
+        ),
+      }, // for mesh 2
+      {
+        position: new THREE.Vector3(
+          0.03996188120764549,
+          0.2664344544399111,
+          0.5821011844350341
+        ),
+        rotation: new THREE.Euler(
+          -1.0412416586326239,
+          -1.518329332870249,
+          -1.040641128861739
+        ),
+      }, // for mesh 3
+      // ... and so on for each mesh
+    ],
+    []
+  );
+
+  const meshRefs = [ref1, ref2, ref3];
+
+  useFrame((state) => {
+    // When the tour has started...
+    if (currentStep >= 0) {
+      const mesh = meshRefs[currentStep].current; // Get the mesh for the current step
+      if (mesh) {
+        const { position, rotation } = cameraFocusPoints[currentStep]; // Get the position and rotation for the current step
+
+        // check if the distance to target is larger than 0.1 units
+        if (state.camera.position.distanceTo(position) > 0.5) {
+          // If the camera has not yet reached the target...
+          state.camera.position.lerp(position, 0.1); // Move the camera position
+
+          // Convert current camera rotation to quaternion for interpolation
+          let cameraQuaternion = new THREE.Quaternion();
+          cameraQuaternion.setFromEuler(state.camera.rotation);
+
+          // Convert target rotation to quaternion for interpolation
+          let targetQuaternion = new THREE.Quaternion();
+          targetQuaternion.setFromEuler(rotation);
+
+          // Interpolate between the current camera quaternion and the target quaternion
+          cameraQuaternion.slerpQuaternions(
+            cameraQuaternion,
+            targetQuaternion,
+            0.1
+          );
+
+          // Convert interpolated quaternion back to Euler for setting camera rotation
+          state.camera.rotation.setFromQuaternion(cameraQuaternion);
+
+          state.camera.updateProjectionMatrix(); // To recalculate the projection.
+        } else {
+          // If the camera has reached the target...
+          setControlsEnabled(true); // Enable the controls
+        }
+      }
+    }
+    // If the tour has been reset AND manual control is not enabled...
+    else if (
+      currentStep === -1 &&
+      !manualControl &&
+      initialCameraPosition &&
+      initialCameraRotation
+    ) {
+      // Reset the camera position and rotation to the initial state
+      camera.position.lerp(initialCameraPosition, 0.1);
+      camera.rotation.copy(initialCameraRotation);
+      camera.updateProjectionMatrix();
+    }
+  });
+
+  // save the initial camera position and rotation once, right after the component has mounted
+  // and before any changes are made to the camera position and rotation.
+  useEffect(() => {
+    // Save initial camera position and rotation
+    if (!initialCameraPosition && !initialCameraRotation) {
+      setInitialCameraPosition(camera.position.clone());
+      setInitialCameraRotation(camera.rotation.clone());
+    }
+  }, [camera, initialCameraPosition, initialCameraRotation]);
+
+  // takes the content as a parameter and sets it as the modal content
+  function handleClick(content) {
+    setControlsEnabled(false);
+    setModalContent(content);
+  }
+
   return (
     <group {...props} dispose={null}>
+      {/* Wheel Mesh */}
       <mesh
+        ref={ref1}
+        onClick={() => {
+          setControlsEnabled(false);
+          setClickedMesh(ref1.current);
+          handleClick(<p>This is the content for mesh 1</p>);
+        }}
         geometry={nodes.Object_2.geometry}
         material={materials.blinn2SG}
         rotation={[-Math.PI / 2, 0, 0]}
@@ -26,18 +176,27 @@ export function Model(props) {
         rotation={[-Math.PI / 2, 0, 0]}
         scale={0.197}
       />
+      {/* Computer Mesh */}
       <mesh
+        ref={ref3}
+        onClick={() => {
+          setControlsEnabled(false);
+          setClickedMesh(ref3.current);
+          handleClick(<p>This is the content for mesh 3</p>);
+        }}
         geometry={nodes.Object_4.geometry}
         material={materials.blinn4SG}
         rotation={[-Math.PI / 2, 0, 0]}
         scale={0.197}
       />
+      {/* Tea Kettle Mesh */}
       <mesh
         geometry={nodes.Object_5.geometry}
         material={materials.blinn5SG}
         rotation={[-Math.PI / 2, 0, 0]}
         scale={0.197}
       />
+      {/* Japanese symbol on the wall */}
       <mesh
         geometry={nodes.Object_6.geometry}
         material={materials.lambert10SG}
@@ -50,114 +209,139 @@ export function Model(props) {
         rotation={[-Math.PI / 2, 0, 0]}
         scale={0.197}
       />
+      {/* Green bed Sheet Mesh */}
       <mesh
         geometry={nodes.Object_8.geometry}
         material={materials.lambert15SG}
         rotation={[-Math.PI / 2, 0, 0]}
         scale={0.197}
       />
+      {/* Comptuter Table Mesh */}
       <mesh
         geometry={nodes.Object_9.geometry}
         material={materials.lambert20SG}
         rotation={[-Math.PI / 2, 0, 0]}
         scale={0.197}
       />
+      {/* White bed Mesh */}
       <mesh
         geometry={nodes.Object_10.geometry}
         material={materials.lambert16SG}
         rotation={[-Math.PI / 2, 0, 0]}
         scale={0.197}
       />
+      {/* Trash Can Mesh */}
       <mesh
         geometry={nodes.Object_11.geometry}
         material={materials.lambert23SG}
         rotation={[-Math.PI / 2, 0, 0]}
         scale={0.197}
       />
+      {/* Red Wall holding the Wheel Mesh */}
       <mesh
         geometry={nodes.Object_12.geometry}
         material={materials.lambert3SG}
         rotation={[-Math.PI / 2, 0, 0]}
         scale={0.197}
       />
+      {/* Black Big Box Mesh */}
       <mesh
         geometry={nodes.Object_13.geometry}
         material={materials.lambert8SG}
         rotation={[-Math.PI / 2, 0, 0]}
         scale={0.197}
       />
+      {/* Computer Chair Mesh */}
       <mesh
         geometry={nodes.Object_14.geometry}
         material={materials.lambert22SG}
         rotation={[-Math.PI / 2, 0, 0]}
         scale={0.197}
       />
+      {/* Written Letter on thr Table Mesh */}
       <mesh
         geometry={nodes.Object_15.geometry}
         material={materials.lambert26SG}
         rotation={[-Math.PI / 2, 0, 0]}
         scale={0.197}
       />
+      {/* Foot Mat Mesh */}
       <mesh
         geometry={nodes.Object_16.geometry}
         material={materials.lambert28SG}
         rotation={[-Math.PI / 2, 0, 0]}
         scale={0.197}
       />
+      {/* Duck Artwork Mesh */}
       <mesh
         geometry={nodes.Object_19.geometry}
         material={materials.lambert11SG}
         rotation={[-Math.PI / 2, 0, 0]}
         scale={0.197}
       />
+      {/* Frame holding the Samurai Sword Mesh */}
       <mesh
         geometry={nodes.Object_20.geometry}
         material={materials.lambert12SG}
         rotation={[-Math.PI / 2, 0, 0]}
         scale={0.197}
       />
+      {/* Table in the Middle of the Room Mesh */}
       <mesh
+        ref={ref2}
+        onClick={() => {
+          setControlsEnabled(false);
+          setClickedMesh(ref2.current);
+          handleClick(<p>This is the content for mesh 2</p>);
+        }}
         geometry={nodes.Object_21.geometry}
         material={materials.lambert19SG}
         rotation={[-Math.PI / 2, 0, 0]}
         scale={0.197}
       />
+      {/* Wooden Pallets at the Computer Table Mesh */}
       <mesh
         geometry={nodes.Object_22.geometry}
         material={materials.lambert21SG}
         rotation={[-Math.PI / 2, 0, 0]}
         scale={0.197}
       />
+      {/* The Walls, Floor and Ceiling Mesh */}
       <mesh
         geometry={nodes.Object_23.geometry}
         material={materials.lambert14SG}
         rotation={[-Math.PI / 2, 0, 0]}
         scale={0.197}
       />
+      {/* Samurai Sword Mesh  */}
       <mesh
         geometry={nodes.Object_24.geometry}
         material={materials.lambert13SG}
         rotation={[-Math.PI / 2, 0, 0]}
         scale={0.197}
       />
+      {/* Books on the Table Mesh */}
       <mesh
         geometry={nodes.Object_26.geometry}
         material={materials.lambert18SG}
         rotation={[-Math.PI / 2, 0, 0]}
         scale={0.197}
       />
+      {/* Japanese Food on he Table Mesh */}
       <mesh
         geometry={nodes.Object_27.geometry}
         material={materials.lambert24SG}
         rotation={[-Math.PI / 2, 0, 0]}
         scale={0.197}
       />
+      {/* Wheel Circle Mesh */}
       <mesh
         geometry={nodes.Object_29.geometry}
         material={materials.lambert4SG}
         rotation={[-Math.PI / 2, 0, 0]}
         scale={0.197}
       />
+      {/* The Blue lights on the Ceiling and under the Chair Mesh  */}
       <mesh
         geometry={nodes.Object_30.geometry}
         material={materials.lambert9SG}
@@ -170,12 +354,14 @@ export function Model(props) {
         rotation={[-Math.PI / 2, 0, 0]}
         scale={0.197}
       />
+      {/* The white Trash Mesh */}
       <mesh
         geometry={nodes.Object_32.geometry}
         material={materials.lambert27SG}
         rotation={[-Math.PI / 2, 0, 0]}
         scale={0.197}
       />
+      {/* The Wall at the Door and Computer Side Mesh */}
       <mesh
         geometry={nodes.Object_33.geometry}
         material={materials.lambert2SG}

@@ -65,7 +65,7 @@ function App() {
               path="/"
               element={
                 <Model
-                  position={[0, 0, 0]}
+                  position={[0, -1.2, 0.7]}
                   rotation={[0, 0, 0]}
                   scale={[1, 1, 1]}
                   setControlsEnabled={setControlsEnabled}
