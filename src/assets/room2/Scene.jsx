@@ -39,12 +39,23 @@ export function Model({
   const vec = new THREE.Vector3();
   const target = new THREE.Vector3();
 
+  //   Camera Position: Vector3 {x: 0.4450008652621184, y: 0.2911159785925302, z: 1.579900872626353}
+  // Camera Rotation: Euler {isEuler: true, _x: 0.17528429442939752, _y: 0.19515212537139107, _z: -0.03432934333894356, _order: 'XYZ', …}
+
   // Manual camera position and rotation for each mesh
   const cameraFocusPoints = useMemo(
     () => [
       {
-        position: new THREE.Vector3(-0.1618, 0.4274, 1.5718),
-        rotation: new THREE.Euler(0.2375, 0.1385, -0.0334),
+        position: new THREE.Vector3(
+          0.4450008652621184,
+          1.2911159785925302,
+          1.579900872626353
+        ),
+        rotation: new THREE.Euler(
+          0.17528429442939752,
+          0.19515212537139107,
+          -0.03432934333894356
+        ),
       }, // for mesh 1
       {
         position: new THREE.Vector3(-0.1618, 0.02857, 3.2945),
@@ -73,11 +84,14 @@ export function Model({
           let cameraQuaternion = new THREE.Quaternion();
           cameraQuaternion.setFromEuler(state.camera.rotation);
 
+          // Convert target rotation to quaternion for interpolation
+          let targetQuaternion = new THREE.Quaternion();
+          targetQuaternion.setFromEuler(rotation);
+
           // Interpolate between the current camera quaternion and the target quaternion
-          THREE.Quaternion.slerp(
+          cameraQuaternion.slerpQuaternions(
             cameraQuaternion,
-            rotation.toQuaternion(),
-            cameraQuaternion,
+            targetQuaternion,
             0.1
           );
 
