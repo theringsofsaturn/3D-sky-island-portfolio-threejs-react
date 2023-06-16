@@ -28,7 +28,9 @@ export function Model({
   const [initialCameraPosition, setInitialCameraPosition] = useState();
   const [initialCameraRotation, setInitialCameraRotation] = useState();
 
+  // Spring animation states
   const [hovered, setHovered] = useState(false);
+  const [wobble, setWobble] = useState(false);
 
   const [clickedMesh, setClickedMesh] = useState(null);
   const ref1 = useRef();
@@ -36,6 +38,21 @@ export function Model({
   const ref3 = useRef();
   const vec = new THREE.Vector3();
   const target = new THREE.Vector3();
+
+  // Animation config for the wobble effect
+  const wobbleConfig = {
+    rotation: wobble ? [0, 0.1, 0] : [0, 0, 0],
+    config: { mass: 1, tension: 50, friction: 10, precision: 0.0001 },
+  };
+
+  // React Spring animation hook for the wobble effect.
+  const wobbleAnimation = useSpring(wobbleConfig);
+
+  // Toggle the wobble state on hover
+  const handleHover = () => {
+    setHovered(!hovered);
+    setWobble(!wobble);
+  };
 
   // Manual camera position and rotation for each mesh
   const cameraFocusPoints = useMemo(
@@ -286,12 +303,19 @@ export function Model({
         scale={0.197}
       />
       {/* Duck Artwork Mesh */}
-      <mesh
+      <a.mesh
         geometry={nodes.Object_19.geometry}
         material={materials.lambert11SG}
         rotation={[-Math.PI / 2, 0, 0]}
         scale={0.197}
-      />
+        onPointerOver={handleHover}
+        onPointerOut={handleHover}
+      >
+        <a.mesh {...wobbleAnimation}>
+          <bufferGeometry attach="geometry" {...nodes.Object_19.geometry} />
+          <meshStandardMaterial attach="material" {...materials.lambert11SG} />
+        </a.mesh>
+      </a.mesh>
       {/* Frame holding the Samurai Sword Mesh */}
       <mesh
         geometry={nodes.Object_20.geometry}
