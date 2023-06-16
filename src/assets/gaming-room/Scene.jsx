@@ -40,7 +40,7 @@ export function Model({
 
   // Camera animation 2
   // Camera Position: Vector3 {x: -0.6774055523162299, y: -0.07510321437276035, z: 1.5175570485960659}
-  // App.jsx:36 Camera Rotation: Euler {isEuler: true, _x: -1.5575184590343871, _y: -0.34358849761578875, _z: -1.5313987682146446, _order: 'XYZ', …}
+  // Camera Rotation: Euler {isEuler: true, _x: -1.5575184590343871, _y: -0.34358849761578875, _z: -1.5313987682146446, _order: 'XYZ', …}
 
   // Camera animation 3
   // Camera Position:  Vector3 {x: 0.03996188120764549, y: 0.2664344544399111, z: 0.5821011844350341}
@@ -51,11 +51,7 @@ export function Model({
     () => [
       {
         position: new THREE.Vector3(0, 6.91728092725427e-17, 1.129677704962827),
-        rotation: new THREE.Euler(
-          -1.5514407265310686,
-          -0.4737038972650475,
-          -1.5283872339968605
-        ),
+        rotation: new THREE.Euler(-6.123233995736766e-17, 0, 0),
       }, // for mesh 1
       {
         position: new THREE.Vector3(
@@ -65,8 +61,8 @@ export function Model({
         ),
         rotation: new THREE.Euler(
           -1.5575184590343871,
-          -1.518329332870249,
-          -1.040641128861739
+          -0.34358849761578875,
+          -1.5313987682146446
         ),
       }, // for mesh 2
       {
@@ -96,17 +92,15 @@ export function Model({
         const { position, rotation } = cameraFocusPoints[currentStep]; // Get the position and rotation for the current step
 
         // check if the distance to target is larger than 0.1 units
-        if (state.camera.position.distanceTo(position) > 0.5) {
+        if (state.camera.position.distanceTo(position) > 0.1) {
           // If the camera has not yet reached the target...
           state.camera.position.lerp(position, 0.1); // Move the camera position
 
           // Convert current camera rotation to quaternion for interpolation
-          let cameraQuaternion = new THREE.Quaternion();
-          cameraQuaternion.setFromEuler(state.camera.rotation);
+          let cameraQuaternion = state.camera.quaternion.clone();
 
-          // Convert target rotation to quaternion for interpolation
-          let targetQuaternion = new THREE.Quaternion();
-          targetQuaternion.setFromEuler(rotation);
+          // Convert the target rotation to a Quaternion
+          let targetQuaternion = new THREE.Quaternion().setFromEuler(rotation);
 
           // Interpolate between the current camera quaternion and the target quaternion
           cameraQuaternion.slerpQuaternions(
@@ -115,9 +109,14 @@ export function Model({
             0.1
           );
 
-          // Convert interpolated quaternion back to Euler for setting camera rotation
-          state.camera.rotation.setFromQuaternion(cameraQuaternion);
+          // Update the camera's quaternion
+          state.camera.quaternion.copy(cameraQuaternion);
 
+          state.camera.updateProjectionMatrix(); // To recalculate the projection.
+        } else if (state.camera.position.distanceTo(position) <= 0.1) {
+          // If the camera is very close to the target...
+          state.camera.position.copy(position); // Set the camera position directly to the target
+          state.camera.rotation.copy(rotation); // Set the camera rotation directly to the target
           state.camera.updateProjectionMatrix(); // To recalculate the projection.
         } else {
           // If the camera has reached the target...
@@ -133,9 +132,9 @@ export function Model({
       initialCameraRotation
     ) {
       // Reset the camera position and rotation to the initial state
-      camera.position.lerp(initialCameraPosition, 0.1);
-      camera.rotation.copy(initialCameraRotation);
-      camera.updateProjectionMatrix();
+      state.camera.position.lerp(initialCameraPosition, 0.1);
+      state.camera.rotation.copy(initialCameraRotation);
+      state.camera.updateProjectionMatrix();
     }
   });
 
@@ -161,7 +160,7 @@ export function Model({
       <mesh
         ref={ref1}
         onClick={() => {
-          setControlsEnabled(false);
+          // setControlsEnabled(false);
           setClickedMesh(ref1.current);
           handleClick(<p>This is the content for mesh 1</p>);
         }}
