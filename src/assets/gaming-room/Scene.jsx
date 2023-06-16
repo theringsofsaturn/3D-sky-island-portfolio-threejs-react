@@ -10,6 +10,7 @@ import { useFrame, useThree } from '@react-three/fiber';
 import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { useGLTF } from '@react-three/drei';
 import useGUI from '../../useGUI';
+import { useSpring, a } from '@react-spring/three';
 
 export function Model({
   setControlsEnabled,
@@ -26,6 +27,12 @@ export function Model({
   const { camera } = useThree();
   const [initialCameraPosition, setInitialCameraPosition] = useState();
   const [initialCameraRotation, setInitialCameraRotation] = useState();
+
+  const [hovered, setHovered] = useState(false);
+  // Define spring animation for scaling the mesh on hover
+  const { scale } = useSpring({
+    scale: hovered ? [1.1, 1.1, 1.1] : [1, 1, 1],
+  });
 
   const [clickedMesh, setClickedMesh] = useState(null);
   const ref1 = useRef();
@@ -156,8 +163,11 @@ export function Model({
 
   return (
     <group {...props} dispose={null}>
-      {/* Wheel Mesh */}
+      {/* Window with the Form of a Wheel Mesh */}
       <mesh
+        onPointerOver={(e) => setHovered(true)}
+        onPointerOut={(e) => setHovered(false)}
+        scale={hovered ? scale : [0.197, 0.197, 0.197]}
         ref={ref1}
         onClick={() => {
           // setControlsEnabled(false);
@@ -167,7 +177,6 @@ export function Model({
         geometry={nodes.Object_2.geometry}
         material={materials.blinn2SG}
         rotation={[-Math.PI / 2, 0, 0]}
-        scale={0.197}
       />
       <mesh
         geometry={nodes.Object_3.geometry}
@@ -236,7 +245,7 @@ export function Model({
         rotation={[-Math.PI / 2, 0, 0]}
         scale={0.197}
       />
-      {/* Red Wall holding the Wheel Mesh */}
+      {/* Red Wall holding the Wheel Form Window Mesh */}
       <mesh
         geometry={nodes.Object_12.geometry}
         material={materials.lambert3SG}
@@ -333,7 +342,7 @@ export function Model({
         rotation={[-Math.PI / 2, 0, 0]}
         scale={0.197}
       />
-      {/* Wheel Circle Mesh */}
+      {/* Wheel Circle concrete Surrounding the Window Mesh */}
       <mesh
         geometry={nodes.Object_29.geometry}
         material={materials.lambert4SG}

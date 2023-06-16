@@ -13,6 +13,7 @@
     "@react-spring/three": "^9.7.2",
     "@react-three/drei": "^9.74.8",
     "@react-three/fiber": "^8.13.0",
+    "@tweenjs/tween.js": "^20.0.3",
     "camera-controls": "^2.4.2",
     "drei": "^2.2.21",
     "gsap": "^3.12.1",
