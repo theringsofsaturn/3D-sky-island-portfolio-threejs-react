@@ -29,10 +29,6 @@ export function Model({
   const [initialCameraRotation, setInitialCameraRotation] = useState();
 
   const [hovered, setHovered] = useState(false);
-  // Define spring animation for scaling the mesh on hover
-  const { scale } = useSpring({
-    scale: hovered ? [1.1, 1.1, 1.1] : [1, 1, 1],
-  });
 
   const [clickedMesh, setClickedMesh] = useState(null);
   const ref1 = useRef();
@@ -40,18 +36,6 @@ export function Model({
   const ref3 = useRef();
   const vec = new THREE.Vector3();
   const target = new THREE.Vector3();
-
-  // Camera animation 1
-  // Camera Position: Vector3 {x: 0, y: 6.91728092725427e-17, z: 1.129677704962827}
-  // Camera Rotation: Euler {isEuler: true, _x: -6.123233995736766e-17, _y: 0, _z: 0, _order: 'XYZ', …}
-
-  // Camera animation 2
-  // Camera Position: Vector3 {x: -0.6774055523162299, y: -0.07510321437276035, z: 1.5175570485960659}
-  // Camera Rotation: Euler {isEuler: true, _x: -1.5575184590343871, _y: -0.34358849761578875, _z: -1.5313987682146446, _order: 'XYZ', …}
-
-  // Camera animation 3
-  // Camera Position:  Vector3 {x: 0.03996188120764549, y: 0.2664344544399111, z: 0.5821011844350341}
-  // Camera Rotation: Euler {isEuler: true, _x: -1.0412416586326239, _y: -1.518329332870249, _z: -1.040641128861739, _order: 'XYZ', …}
 
   // Manual camera position and rotation for each mesh
   const cameraFocusPoints = useMemo(
@@ -161,22 +145,43 @@ export function Model({
     setModalContent(content);
   }
 
+  // Save the initial material color of thw window
+  const initialMaterialColor = useRef(materials.blinn2SG.color.clone());
+
+  // Update the material color on hover
+  useEffect(() => {
+    if (hovered) {
+      materials.blinn2SG.color.set('red');
+    } else {
+      materials.blinn2SG.color.copy(initialMaterialColor.current);
+    }
+    // Update the material
+    materials.blinn2SG.needsUpdate = true;
+  }, [hovered, materials.blinn2SG]);
+
   return (
     <group {...props} dispose={null}>
-      {/* Window with the Form of a Wheel Mesh */}
+      {/* Wheel Circle concrete Surrounding the Window Mesh */}
       <mesh
-        onPointerOver={(e) => setHovered(true)}
-        onPointerOut={(e) => setHovered(false)}
-        scale={hovered ? scale : [0.197, 0.197, 0.197]}
+        geometry={nodes.Object_29.geometry}
+        material={materials.lambert4SG}
+        rotation={[-Math.PI / 2, 0, 0]}
+        scale={0.197}
+      />
+      {/* Window with the Form of a Wheel Mesh */}
+      <a.mesh
+        onPointerOver={() => setHovered(true)}
+        onPointerOut={() => setHovered(false)}
         ref={ref1}
         onClick={() => {
-          // setControlsEnabled(false);
+          setControlsEnabled(false);
           setClickedMesh(ref1.current);
           handleClick(<p>This is the content for mesh 1</p>);
         }}
+        scale={[0.197, 0.197, 0.197]}
+        rotation={[-Math.PI / 2, 0, 0]}
         geometry={nodes.Object_2.geometry}
         material={materials.blinn2SG}
-        rotation={[-Math.PI / 2, 0, 0]}
       />
       <mesh
         geometry={nodes.Object_3.geometry}
@@ -339,13 +344,6 @@ export function Model({
       <mesh
         geometry={nodes.Object_27.geometry}
         material={materials.lambert24SG}
-        rotation={[-Math.PI / 2, 0, 0]}
-        scale={0.197}
-      />
-      {/* Wheel Circle concrete Surrounding the Window Mesh */}
-      <mesh
-        geometry={nodes.Object_29.geometry}
-        material={materials.lambert4SG}
         rotation={[-Math.PI / 2, 0, 0]}
         scale={0.197}
       />
