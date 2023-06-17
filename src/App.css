@@ -17,30 +17,29 @@ body {
   align-items: center;
 }
 
-button {
-  position: fixed;
+.manual-btn {
+  position: absolute;
   bottom: 20px;
-  right: 20px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  background-color: #4caf50;
+  left: 10px;
+  width: 200px;
+  height: 50px;
+  background: rgba(40, 36, 36, 0.6);
   color: white;
-  font-size: 16px;
-  cursor: pointer;
 }
 
-button:hover {
-  background-color: #45a049;
+.manual-btn:hover {
+  background: rgba(0, 0, 0, 0.9);
+  transition: 0.3s;
 }
+
 .fab-button {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 10px;
+  right: 120px;
   padding: 15px;
   border-radius: 50%;
   border: none;
-  background-color: #4caf50;
+  background: rgba(40, 36, 36, 0.6);
   color: white;
   font-size: 24px;
   cursor: pointer;
@@ -48,7 +47,7 @@ button:hover {
 }
 
 .fab-button:hover {
-  background-color: #45a049;
+  background: rgba(0, 0, 0, 0.9);
 }
 
 canvas {

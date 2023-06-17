@@ -8,6 +8,8 @@ import Navbar from './Navbar';
 import Loader from './Loader';
 import { Model } from './assets/gaming-room/Scene';
 import Modal from './Modal';
+import ControlPanel from './ControlPanel';
+import InfoModal from './InfoModal';
 import './App.css';
 
 function App() {
@@ -15,6 +17,10 @@ function App() {
   const [modalContent, setModalContent] = useState(null);
   const [manualControl, setManualControl] = useState(false);
   const [currentStep, setCurrentStep] = useState(-1); // Start at -1 so user has to click 'Start' to begin tour
+  const [isInfoOpen, setInfoOpen] = useState(false);
+  const [selectedMesh, setSelectedMesh] = useState(null);
+
+  const meshes = [{ name: 'Mesh 1' }, { name: 'Mesh 2' }, { name: 'Mesh 3' }];
 
   // Handle start of the tour
   const startTour = useCallback(() => {
@@ -26,6 +32,11 @@ function App() {
   const resetTour = useCallback(() => {
     setCurrentStep(-1);
   }, []);
+
+  const selectMesh = (i) => {
+    setSelectedMesh(meshes[i]);
+    setInfoOpen(true);
+  };
 
   function CameraLogger() {
     const { camera } = useThree();
@@ -102,17 +113,24 @@ function App() {
         </button>
       )}
       <button
-        style={{
-          position: 'absolute',
-          bottom: '20px',
-          left: '10px',
-          width: '300px',
-          height: '50px',
-        }}
         onClick={() => setManualControl((prev) => !prev)}
+        className="manual-btn"
       >
         {manualControl ? 'Turn off manual control' : 'Turn on manual control'}
       </button>
+
+      <ControlPanel
+        startTour={startTour}
+        stopTour={resetTour}
+        meshes={meshes}
+        selectMesh={selectMesh}
+      />
+
+      <InfoModal
+        isOpen={isInfoOpen}
+        close={() => setInfoOpen(false)}
+        mesh={selectedMesh}
+      />
     </Router>
   );
 }
