@@ -7,8 +7,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './Navbar';
 import Loader from './Loader';
 import { Model } from './assets/gaming-room/Scene';
-import ControlPanel from './ControlPanel';
-import ModalContent from './ModalContent';
 import FullScreenOverlay from './FullScreenOverlay';
 import './App.css';
 
@@ -20,7 +18,11 @@ function App() {
   const [isInfoOpen, setInfoOpen] = useState(false);
   const [selectedMesh, setSelectedMesh] = useState(null);
 
-  const meshes = [{ name: 'Mesh 1' }, { name: 'Mesh 2' }, { name: 'Mesh 3' }];
+  const meshes = [
+    { name: 'About Me' },
+    { name: 'My Blog Posts' },
+    { name: 'My Projects' },
+  ];
 
   // Handle start of the tour
   const startTour = useCallback(() => {
@@ -60,7 +62,7 @@ function App() {
 
   return (
     <Router>
-      <Navbar />
+      <Navbar meshes={meshes} selectMesh={selectMesh} />
       <Canvas camera={{ near: 0.1, far: 1000 }}>
         <CameraLogger />
         <Suspense fallback={<Loader />}>
@@ -94,21 +96,28 @@ function App() {
       </Canvas>
 
       {currentStep < 0 ? (
-        <button className="fab-button" onClick={startTour}>
+        <button className="start-tour-btn" onClick={startTour}>
           Start
         </button>
       ) : currentStep < 3 ? (
         <button
-          className="fab-button"
+          className="start-tour-btn"
           onClick={() => setCurrentStep(currentStep + 1)}
         >
           Next
         </button>
       ) : (
-        <button className="fab-button" onClick={resetTour}>
+        <button className="start-tour-btn" onClick={resetTour}>
           Reset
         </button>
       )}
+
+      {currentStep >= 0 && (
+        <button onClick={resetTour} className="stop-tour-btn">
+          Stop
+        </button>
+      )}
+
       <button
         onClick={() => setManualControl((prev) => !prev)}
         className="manual-btn"
@@ -122,12 +131,6 @@ function App() {
           setInfoOpen(false);
         }}
         mesh={selectedMesh}
-      />
-      <ControlPanel
-        startTour={startTour}
-        stopTour={resetTour}
-        meshes={meshes}
-        selectMesh={selectMesh}
       />
     </Router>
   );

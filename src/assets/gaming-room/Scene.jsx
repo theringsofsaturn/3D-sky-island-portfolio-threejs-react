@@ -196,7 +196,7 @@ export function Model({
         onPointerOver={() => setHovered(true)}
         onPointerOut={() => setHovered(false)}
         ref={ref1}
-        onClick={() => handleClick('Mesh 1')}
+        onClick={() => handleClick('About Me')}
         scale={[0.197, 0.197, 0.197]}
         rotation={[-Math.PI / 2, 0, 0]}
         geometry={nodes.Object_2.geometry}
@@ -211,7 +211,7 @@ export function Model({
       {/* Computer Mesh */}
       <mesh
         ref={ref3}
-        onClick={() => handleClick('Mesh 2')}
+        onClick={() => handleClick('My Blog Posts')}
         geometry={nodes.Object_4.geometry}
         material={materials.blinn4SG}
         rotation={[-Math.PI / 2, 0, 0]}
@@ -324,7 +324,7 @@ export function Model({
       {/* Table in the Middle of the Room Mesh */}
       <mesh
         ref={ref2}
-        onClick={() => handleClick('Mesh 3')}
+        onClick={() => handleClick('My Projects')}
         geometry={nodes.Object_21.geometry}
         material={materials.lambert19SG}
         rotation={[-Math.PI / 2, 0, 0]}

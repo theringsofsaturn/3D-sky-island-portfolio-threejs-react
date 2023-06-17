@@ -2,7 +2,7 @@ import React from 'react';
 import './ModalContent.css';
 
 const ModalContent = ({ mesh }) => {
-  if (mesh && mesh.name === 'Mesh 1') {
+  if (mesh && mesh.name === 'About Me') {
     return (
       <div className="modal-content">
         <h2 className="modal-heading">About Me</h2>
@@ -16,7 +16,7 @@ const ModalContent = ({ mesh }) => {
     );
   }
 
-  if (mesh && mesh.name === 'Mesh 2') {
+  if (mesh && mesh.name === 'My Blog Posts') {
     return (
       <div className="modal-content">
         <h2 className="modal-heading">My Blog Posts</h2>
@@ -31,7 +31,7 @@ const ModalContent = ({ mesh }) => {
     );
   }
 
-  if (mesh && mesh.name === 'Mesh 3') {
+  if (mesh && mesh.name === 'My Projects') {
     return (
       <div className="modal-content">
         <h2 className="modal-heading">My Projects</h2>
