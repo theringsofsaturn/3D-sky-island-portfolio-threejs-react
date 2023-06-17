@@ -35,7 +35,7 @@ function App() {
 
   const selectMesh = (i) => {
     setSelectedMesh(meshes[i]);
-    setModalContent(meshes[i].name);
+    setModalContent(meshes[i]);
     setInfoOpen(true);
   };
 
@@ -82,8 +82,10 @@ function App() {
                   scale={[1, 1, 1]}
                   setControlsEnabled={setControlsEnabled}
                   setModalContent={setModalContent}
+                  setSelectedMesh={setSelectedMesh}
                   currentStep={currentStep}
                   manualControl={manualControl}
+                  setInfoOpen={setInfoOpen}
                 />
               }
             />

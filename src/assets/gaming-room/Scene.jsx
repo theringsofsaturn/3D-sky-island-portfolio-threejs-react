@@ -16,8 +16,10 @@ export function Model({
   setControlsEnabled,
   setModalContent,
   modalContent,
+  setSelectedMesh,
   currentStep,
   manualControl,
+  setInfoOpen,
   ...props
 }) {
   const { nodes, materials } = useGLTF(
@@ -158,11 +160,12 @@ export function Model({
   }, [camera, initialCameraPosition, initialCameraRotation]);
 
   // takes the content as a parameter and sets it as the modal content
-  function handleClick() {
-    console.log('Mesh clicked');
+  function handleClick(meshName) {
+    console.log('Mesh clicked', meshName);
     setControlsEnabled(false);
-    setModalContent(ref1.current);
-    console.log('Modal content', ref1.current);
+    setSelectedMesh({ name: meshName });
+    setModalContent({ name: meshName });
+    setInfoOpen(true);
   }
 
   // Save the initial material color of the window
@@ -193,11 +196,7 @@ export function Model({
         onPointerOver={() => setHovered(true)}
         onPointerOut={() => setHovered(false)}
         ref={ref1}
-        onClick={() => {
-          setControlsEnabled(false);
-          setClickedMesh(ref1.current);
-          handleClick('Mesh 1');
-        }}
+        onClick={() => handleClick('Mesh 1')}
         scale={[0.197, 0.197, 0.197]}
         rotation={[-Math.PI / 2, 0, 0]}
         geometry={nodes.Object_2.geometry}
@@ -212,11 +211,7 @@ export function Model({
       {/* Computer Mesh */}
       <mesh
         ref={ref3}
-        onClick={() => {
-          setControlsEnabled(false);
-          setClickedMesh(ref3.current);
-          handleClick('Mesh 2');
-        }}
+        onClick={() => handleClick('Mesh 2')}
         geometry={nodes.Object_4.geometry}
         material={materials.blinn4SG}
         rotation={[-Math.PI / 2, 0, 0]}
@@ -329,11 +324,7 @@ export function Model({
       {/* Table in the Middle of the Room Mesh */}
       <mesh
         ref={ref2}
-        onClick={() => {
-          setControlsEnabled(false);
-          setClickedMesh(ref2.current);
-          handleClick('Mesh 3');
-        }}
+        onClick={() => handleClick('Mesh 3')}
         geometry={nodes.Object_21.geometry}
         material={materials.lambert19SG}
         rotation={[-Math.PI / 2, 0, 0]}
