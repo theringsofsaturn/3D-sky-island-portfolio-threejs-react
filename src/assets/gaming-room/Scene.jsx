@@ -15,6 +15,7 @@ import { useSpring, a } from '@react-spring/three';
 export function Model({
   setControlsEnabled,
   setModalContent,
+  modalContent,
   currentStep,
   manualControl,
   ...props
@@ -157,9 +158,11 @@ export function Model({
   }, [camera, initialCameraPosition, initialCameraRotation]);
 
   // takes the content as a parameter and sets it as the modal content
-  function handleClick(content) {
+  function handleClick(modalContent) {
+    console.log('Mesh clicked');
     setControlsEnabled(false);
-    setModalContent(content);
+    setModalContent(modalContent);
+    console.log("Modal content",modalContent);
   }
 
   // Save the initial material color of thw window

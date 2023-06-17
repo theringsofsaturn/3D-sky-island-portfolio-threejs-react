@@ -10,6 +10,7 @@ import { Model } from './assets/gaming-room/Scene';
 import Modal from './Modal';
 import ControlPanel from './ControlPanel';
 import InfoModal from './InfoModal';
+import FullScreenOverlay from './FullScreenOverlay';
 import './App.css';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
   const [currentStep, setCurrentStep] = useState(-1); // Start at -1 so user has to click 'Start' to begin tour
   const [isInfoOpen, setInfoOpen] = useState(false);
   const [selectedMesh, setSelectedMesh] = useState(null);
+  const [isOverlayOpen, setOverlayOpen] = useState(false);
 
   const meshes = [{ name: 'Mesh 1' }, { name: 'Mesh 2' }, { name: 'Mesh 3' }];
 
@@ -35,7 +37,7 @@ function App() {
 
   const selectMesh = (i) => {
     setSelectedMesh(meshes[i]);
-    setInfoOpen(true);
+    setOverlayOpen(true);
   };
 
   function CameraLogger() {
@@ -71,7 +73,6 @@ function App() {
           <ambientLight intensity={1} />
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
           <pointLight position={[-10, -10, -10]} />
-          {/* <directionalLight position={[10, 10, 0]} /> */}
           <Routes>
             <Route
               path="/"
@@ -91,15 +92,19 @@ function App() {
         </Suspense>
       </Canvas>
       {modalContent && (
-        <Modal content={modalContent} onClose={() => setModalContent(null)} />
+        <FullScreenOverlay
+          isOpen={true}
+          onClose={() => setModalContent(null)}
+          mesh={selectedMesh}
+          modalContent={modalContent}
+        />
       )}
+
       {currentStep < 0 ? (
-        // Start button if the tour hasn't started yet
         <button className="fab-button" onClick={startTour}>
           Start
         </button>
       ) : currentStep < 3 ? (
-        // Next button during the tour
         <button
           className="fab-button"
           onClick={() => setCurrentStep(currentStep + 1)}
@@ -107,7 +112,6 @@ function App() {
           Next
         </button>
       ) : (
-        // Reset button after all objects are viewed
         <button className="fab-button" onClick={resetTour}>
           Reset
         </button>
@@ -118,17 +122,15 @@ function App() {
       >
         {manualControl ? 'Turn off manual control' : 'Turn on manual control'}
       </button>
-
       <ControlPanel
         startTour={startTour}
         stopTour={resetTour}
         meshes={meshes}
         selectMesh={selectMesh}
       />
-
-      <InfoModal
+      <FullScreenOverlay
         isOpen={isInfoOpen}
-        close={() => setInfoOpen(false)}
+        onClose={() => setInfoOpen(false)}
         mesh={selectedMesh}
       />
     </Router>
