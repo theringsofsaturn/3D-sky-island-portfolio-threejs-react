@@ -162,7 +162,7 @@ export function Model({
     console.log('Mesh clicked');
     setControlsEnabled(false);
     setModalContent(modalContent);
-    console.log("Modal content",modalContent);
+    console.log('Modal content', modalContent);
   }
 
   // Save the initial material color of thw window
@@ -196,7 +196,7 @@ export function Model({
         onClick={() => {
           setControlsEnabled(false);
           setClickedMesh(ref1.current);
-          handleClick(<p>This is the content for mesh 1</p>);
+          handleClick('Mesh 1');
         }}
         scale={[0.197, 0.197, 0.197]}
         rotation={[-Math.PI / 2, 0, 0]}
@@ -215,7 +215,7 @@ export function Model({
         onClick={() => {
           setControlsEnabled(false);
           setClickedMesh(ref3.current);
-          handleClick(<p>This is the content for mesh 3</p>);
+          handleClick('Mesh 2');
         }}
         geometry={nodes.Object_4.geometry}
         material={materials.blinn4SG}
@@ -332,7 +332,7 @@ export function Model({
         onClick={() => {
           setControlsEnabled(false);
           setClickedMesh(ref2.current);
-          handleClick(<p>This is the content for mesh 2</p>);
+          handleClick('Mesh 3');
         }}
         geometry={nodes.Object_21.geometry}
         material={materials.lambert19SG}

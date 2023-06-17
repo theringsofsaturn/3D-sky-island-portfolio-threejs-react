@@ -35,4 +35,5 @@
   height: 80%;
   overflow: auto;
   position: relative;
+  border-radius: 10px;
 }

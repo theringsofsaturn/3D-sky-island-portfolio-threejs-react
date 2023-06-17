@@ -7,7 +7,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './Navbar';
 import Loader from './Loader';
 import { Model } from './assets/gaming-room/Scene';
-import Modal from './Modal';
 import ControlPanel from './ControlPanel';
 import InfoModal from './InfoModal';
 import FullScreenOverlay from './FullScreenOverlay';

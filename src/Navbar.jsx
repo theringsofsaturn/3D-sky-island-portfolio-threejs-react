@@ -10,12 +10,12 @@ const Navbar = () => {
         <span className="text-2xl font-semibold">3D Portfolio</span>
       </h1>
       <div className="flex gap-6 overflow-x-auto scrollbar-hide">
-        {/* <Link
+        <Link
           to="/"
           className="text-white py-2 px-6 rounded-xl hover:bg-white hover:text-black transition-colors"
         >
           Projects
-        </Link> */}
+        </Link>
       </div>
     </div>
   );
