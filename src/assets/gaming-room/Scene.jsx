@@ -158,14 +158,14 @@ export function Model({
   }, [camera, initialCameraPosition, initialCameraRotation]);
 
   // takes the content as a parameter and sets it as the modal content
-  function handleClick(modalContent) {
+  function handleClick() {
     console.log('Mesh clicked');
     setControlsEnabled(false);
-    setModalContent(modalContent);
-    console.log('Modal content', modalContent);
+    setModalContent(ref1.current);
+    console.log('Modal content', ref1.current);
   }
 
-  // Save the initial material color of thw window
+  // Save the initial material color of the window
   const initialMaterialColor = useRef(materials.blinn2SG.color.clone());
 
   // Update the material color on hover

@@ -1,0 +1,18 @@
+.modal-content {
+  padding: 20px;
+  color: #333;
+}
+
+.modal-heading {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.modal-text {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+
+.modal-list {
+  font-size: 1.2em;
+}

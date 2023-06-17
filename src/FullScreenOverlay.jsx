@@ -1,8 +1,9 @@
 import React from 'react';
 import ModalContent from './ModalContent';
+import { motion } from 'framer-motion';
 import './FullScreenOverlay.css';
 
-const FullScreenOverlay = ({ isOpen, onClose, mesh, modalContent }) => {
+const FullScreenOverlay = ({ isOpen, onClose, mesh }) => {
   if (!isOpen) return null;
 
   return (
@@ -12,8 +13,8 @@ const FullScreenOverlay = ({ isOpen, onClose, mesh, modalContent }) => {
           X
         </button>
         <ModalContent mesh={mesh} />
+
         {/* Place for carousel, videos, and other interactive elements */}
-        {modalContent}
       </div>
     </div>
   );

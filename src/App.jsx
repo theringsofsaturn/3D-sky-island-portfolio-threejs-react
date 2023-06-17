@@ -8,7 +8,7 @@ import Navbar from './Navbar';
 import Loader from './Loader';
 import { Model } from './assets/gaming-room/Scene';
 import ControlPanel from './ControlPanel';
-import InfoModal from './InfoModal';
+import ModalContent from './ModalContent';
 import FullScreenOverlay from './FullScreenOverlay';
 import './App.css';
 
@@ -19,7 +19,6 @@ function App() {
   const [currentStep, setCurrentStep] = useState(-1); // Start at -1 so user has to click 'Start' to begin tour
   const [isInfoOpen, setInfoOpen] = useState(false);
   const [selectedMesh, setSelectedMesh] = useState(null);
-  const [isOverlayOpen, setOverlayOpen] = useState(false);
 
   const meshes = [{ name: 'Mesh 1' }, { name: 'Mesh 2' }, { name: 'Mesh 3' }];
 
@@ -36,7 +35,8 @@ function App() {
 
   const selectMesh = (i) => {
     setSelectedMesh(meshes[i]);
-    setOverlayOpen(true);
+    setModalContent(meshes[i].name);
+    setInfoOpen(true);
   };
 
   function CameraLogger() {
@@ -90,14 +90,6 @@ function App() {
           </Routes>
         </Suspense>
       </Canvas>
-      {modalContent && (
-        <FullScreenOverlay
-          isOpen={true}
-          onClose={() => setModalContent(null)}
-          mesh={selectedMesh}
-          modalContent={modalContent}
-        />
-      )}
 
       {currentStep < 0 ? (
         <button className="fab-button" onClick={startTour}>
@@ -121,16 +113,19 @@ function App() {
       >
         {manualControl ? 'Turn off manual control' : 'Turn on manual control'}
       </button>
+      <FullScreenOverlay
+        isOpen={isInfoOpen}
+        onClose={() => {
+          setModalContent(null);
+          setInfoOpen(false);
+        }}
+        mesh={selectedMesh}
+      />
       <ControlPanel
         startTour={startTour}
         stopTour={resetTour}
         meshes={meshes}
         selectMesh={selectMesh}
-      />
-      <FullScreenOverlay
-        isOpen={isInfoOpen}
-        onClose={() => setInfoOpen(false)}
-        mesh={selectedMesh}
       />
     </Router>
   );

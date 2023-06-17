@@ -1,31 +1,46 @@
 import React from 'react';
+import './ModalContent.css';
 
 const ModalContent = ({ mesh }) => {
-  if (mesh === 'Mesh 1') {
+  if (mesh && mesh.name === 'Mesh 1') {
     return (
       <div className="modal-content">
-        <h2>About Me</h2>
-        <p>Here is some information about me...</p>
-        {/* //TODO Add any other content or components related to "Mesh 1" */}
+        <h2 className="modal-heading">About Me</h2>
+        <p className="modal-text">Here is some information about me...</p>
+        <ul className="modal-list">
+          <li>My Experience</li>
+          <li>My Skills</li>
+          <li>My Hobbies</li>
+        </ul>
       </div>
     );
   }
 
-  if (mesh === 'Mesh 2') {
+  if (mesh && mesh.name === 'Mesh 2') {
     return (
       <div className="modal-content">
-        <h2>My Blog Posts</h2>
-        <p>Here are some of my blog posts...</p>
+        <h2 className="modal-heading">My Blog Posts</h2>
+        <p className="modal-text">Here is some of my blog...</p>
+        <ul className="modal-list">
+          <li>My Experience</li>
+          <li>My Skills</li>
+          <li>My Hobbies</li>
+        </ul>
         {/* //TODO Add any other content or components related to "Mesh 2" */}
       </div>
     );
   }
 
-  if (mesh === 'Mesh 3') {
+  if (mesh && mesh.name === 'Mesh 3') {
     return (
       <div className="modal-content">
-        <h2>My Projects</h2>
-        <p>Here are some of my projects...</p>
+        <h2 className="modal-heading">My Projects</h2>
+        <p className="modal-text">Here are some of my projects...</p>
+        <ul className="modal-list">
+          <li>My Experience</li>
+          <li>My Skills</li>
+          <li>My Hobbies</li>
+        </ul>
         {/* //TODO Add any other content or components related to "Mesh 3" */}
       </div>
     );

@@ -14,9 +14,7 @@ const ControlPanel = ({ startTour, stopTour, meshes, selectMesh }) => {
           </li>
         ))}
       </ul>
-      <button onClick={() => selectMesh(0)} className="info-btn">
-        Info
-      </button>
+      <button>Info</button>
     </div>
   );
 };
