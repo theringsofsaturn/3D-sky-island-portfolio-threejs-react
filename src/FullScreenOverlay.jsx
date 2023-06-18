@@ -22,8 +22,8 @@ const ModalWrapper = styled.div`
 
 const CloseButton = styled.button`
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 30px;
+  right: 30px;
   background: rgb(92, 177, 239); /* light blue, similar to the lights */
   color: #e21c1c;
   border: none;
