@@ -1,32 +1,15 @@
 import React from 'react';
-import { Card, CardContent, Typography } from '@material-ui/core';
-import styled from 'styled-components';
-// import './ModalContent.css';
-
-const StyledCard = styled(Card)`
-  background-color: #3f51b5;
-  color: #fff;
-`;
+import Timeline from './Timeline';
+import ProjectCard from './ProjectCard';
+import BlogCard from './BlogCard';
+import './ModalContent.css';
 
 const ModalContent = ({ mesh }) => {
   if (mesh && mesh.name === 'About Me') {
     return (
       <div className="modal-content">
         <h2 className="modal-heading">About Me</h2>
-        <p className="modal-text">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro harum,
-          repellat amet perspiciatis culpa quia voluptatibus consectetur, ut
-          temporibus consequatur ducimus dolores, eveniet ullam cupiditate
-          labore! Inventore a ullam sapiente. Lorem ipsum dolor, sit amet
-          consectetur adipisicing elit. Similique officiis et quae culpa.
-          Incidunt, quod accusantium soluta nihil modi fugiat iste doloribus
-          velit, necessitatibus suscipit sed eius corporis quidem libero?
-        </p>
-        <ul className="modal-list">
-          <li>My Experience</li>
-          <li>My Skills</li>
-          <li>My Hobbies</li>
-        </ul>
+        <Timeline />
       </div>
     );
   }
@@ -35,13 +18,8 @@ const ModalContent = ({ mesh }) => {
     return (
       <div className="modal-content">
         <h2 className="modal-heading">My Blog Posts</h2>
-        <p className="modal-text">Here is some of my blog...</p>
-        <ul className="modal-list">
-          <li>My Experience</li>
-          <li>My Skills</li>
-          <li>My Hobbies</li>
-        </ul>
-        {/* //TODO Add any other content or components related to "Mesh 2" */}
+        <BlogCard title="Blog Post 1" date="June 23, 2023" />
+        <BlogCard title="Blog Post 2" date="May 18, 2023" />
       </div>
     );
   }
@@ -50,34 +28,18 @@ const ModalContent = ({ mesh }) => {
     return (
       <div className="modal-content">
         <h2 className="modal-heading">My Projects</h2>
-        <p className="modal-text">Here are some of my projects...</p>
-        <ul className="modal-list">
-          <li>My Experience</li>
-          <li>My Skills</li>
-          <li>My Hobbies</li>
-        </ul>
-        {/* //TODO Add any other content or components related to "Mesh 3" */}
+        <ProjectCard title="Project 1" technologies="React, Node.js" />
+        <ProjectCard title="Project 2" technologies="Python, Django" />
       </div>
     );
   }
 
   return (
-    <StyledCard>
-      <CardContent>
-        <Typography variant="h5" component="h2" gutterBottom>
-          {mesh.name}
-        </Typography>
-        {/* ... remaining contents ... */}
-      </CardContent>
-    </StyledCard>
+    <div className="modal-content">
+      <h2 className="modal-heading">{mesh.name}</h2>
+      <p>Content for {mesh.name}...</p>
+    </div>
   );
-
-  // For all other meshes
-  //   return (
-  //     <div className="modal-content">
-  //       <p>Default content for all other meshes...</p>
-  //     </div>
-  //   );
 };
 
 export default ModalContent;
