@@ -21,7 +21,9 @@ export const GlobalStyles = createGlobalStyle`
     margin: 10px;
     transition: background-color 0.3s ease;
     &:hover {
-     /* Green color on hover, similar to our bedsheet and Japanese symbol */
+      transition: 0.3s; /* Green color on hover, similar to our bedsheet and Japanese symbol */
+      background: rgb(90, 193, 77);
+      color: white;
     }
   }
 `;

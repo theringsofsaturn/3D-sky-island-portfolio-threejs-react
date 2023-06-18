@@ -81,7 +81,7 @@ function App() {
       <Navbar meshes={meshes} selectMesh={selectMesh} />
       <Canvas camera={{ near: 0.1, far: 1000 }}>
         <CameraLogger />
-        <Suspense fallback={<Loader />}>
+         <Suspense fallback={<Loader />}>
           <OrbitControls
             enabled={controlsEnabled}
             minDistance={0.1}

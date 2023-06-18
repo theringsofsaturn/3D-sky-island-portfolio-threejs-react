@@ -13,7 +13,15 @@ const ModalContent = ({ mesh }) => {
     return (
       <div className="modal-content">
         <h2 className="modal-heading">About Me</h2>
-        <p className="modal-text">Here is some information about me...</p>
+        <p className="modal-text">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro harum,
+          repellat amet perspiciatis culpa quia voluptatibus consectetur, ut
+          temporibus consequatur ducimus dolores, eveniet ullam cupiditate
+          labore! Inventore a ullam sapiente. Lorem ipsum dolor, sit amet
+          consectetur adipisicing elit. Similique officiis et quae culpa.
+          Incidunt, quod accusantium soluta nihil modi fugiat iste doloribus
+          velit, necessitatibus suscipit sed eius corporis quidem libero?
+        </p>
         <ul className="modal-list">
           <li>My Experience</li>
           <li>My Skills</li>

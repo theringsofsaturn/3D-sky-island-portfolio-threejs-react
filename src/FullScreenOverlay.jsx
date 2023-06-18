@@ -2,7 +2,7 @@ import React from 'react';
 import ModalContent from './ModalContent';
 import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components';
-import "./FullSCreenOverlay.css"
+import './FullSCreenOverlay.css';
 
 const Overlay = styled(animated.div)`
   position: fixed;
@@ -16,6 +16,31 @@ const Overlay = styled(animated.div)`
   align-items: center;
 `;
 
+const ModalWrapper = styled.div`
+  position: relative;
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgb(92, 177, 239); /* light blue, similar to the lights */
+  color: #e21c1c;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+`;
+
 const FullScreenOverlay = ({ isOpen, onClose, mesh }) => {
   const animation = useSpring({
     opacity: isOpen ? 1 : 0,
@@ -26,14 +51,13 @@ const FullScreenOverlay = ({ isOpen, onClose, mesh }) => {
 
   return (
     <Overlay style={animation}>
-      <div className="overlay-content">
-        <button onClick={onClose} className="exit-button">
-          X
-        </button>
-        <ModalContent mesh={mesh} />
-
-        {/* Place for carousel, videos, and other interactive elements */}
-      </div>
+      <ModalWrapper>
+        <CloseButton onClick={onClose}>X</CloseButton>
+        <div className="overlay-content">
+          <ModalContent mesh={mesh} />
+          {/* Place for carousel, videos, and other interactive elements */}
+        </div>
+      </ModalWrapper>
     </Overlay>
   );
 };

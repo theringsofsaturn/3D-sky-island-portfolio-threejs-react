@@ -27,11 +27,6 @@ body {
   color: white;
 }
 
-.manual-btn:hover {
-  background: rgba(0, 0, 0, 0.9);
-  transition: 0.3s;
-}
-
 .start-tour-btn {
   position: fixed;
   bottom: 10px;
@@ -57,10 +52,6 @@ body {
   font-size: 24px;
   cursor: pointer;
   transition: background-color 0.3s;
-}
-
-.stop-tour-btn:hover {
-  background: rgba(0, 0, 0, 0.9);
 }
 
 canvas {

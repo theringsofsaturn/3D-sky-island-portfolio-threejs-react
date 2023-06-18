@@ -1,26 +1,33 @@
-import React, { useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Html } from '@react-three/drei';
 
-function BoxLoader() {
-  // This reference will give us direct access to the mesh
-  const mesh = useRef();
+import React from 'react';
+import styled from 'styled-components';
+import './Loader.css';
 
-  // Rotate mesh every frame, this is outside of React without overhead
-  useFrame(() => (mesh.current.rotation.x = mesh.current.rotation.y += 0.01));
+const LoaderContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+`;
 
+const LoaderCircle = styled.div`
+  border: 10px solid rgba(92, 177, 239, 0.2); /* Light blue, similar to the lights */
+  border-top: 10px solid rgb(92, 177, 239); /* Light blue, similar to the lights */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 1s linear infinite;
+`;
+
+const Loader = () => {
   return (
-    <mesh ref={mesh}>
-      <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={'rgb(92, 177, 239)'} />
-    </mesh>
+    <Html>
+      <LoaderContainer>
+        <LoaderCircle />
+      </LoaderContainer>
+    </Html>
   );
-}
+};
 
-export default function Loader() {
-  return (
-    <Canvas style={{ position: 'fixed', top: 0, left: 0 }}>
-      <ambientLight />
-      <BoxLoader />
-    </Canvas>
-  );
-}
+export default Loader;
