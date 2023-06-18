@@ -14,6 +14,7 @@ import { useSpring, a } from '@react-spring/three';
 
 export function Model({
   setControlsEnabled,
+  handleCameraMoveEnd,
   setModalContent,
   modalContent,
   setSelectedMesh,
@@ -129,6 +130,7 @@ export function Model({
           state.camera.position.copy(position); // Set the camera position directly to the target
           state.camera.rotation.copy(rotation); // Set the camera rotation directly to the target
           state.camera.updateProjectionMatrix(); // To recalculate the projection.
+          handleCameraMoveEnd(); // Triggered when the camera has reached the desired position.
         } else {
           // If the camera has reached the target...
           setControlsEnabled(true); // Enable the controls

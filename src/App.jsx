@@ -7,7 +7,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './Navbar';
 import Loader from './Loader';
 import { Model } from './assets/gaming-room/Scene';
-import FullScreenOverlay from './FullScreenOverlay';
+import FullScreenOverlay from './FullScreenOverlay.jsx';
+import { GlobalStyles } from './GlobalStyles';
 import './App.css';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
   const [currentStep, setCurrentStep] = useState(-1); // Start at -1 so user has to click 'Start' to begin tour
   const [isInfoOpen, setInfoOpen] = useState(false);
   const [selectedMesh, setSelectedMesh] = useState(null);
+  const [shouldCameraMove, setShouldCameraMove] = useState(false);
 
   const meshes = [
     { name: 'About Me' },
@@ -27,18 +29,31 @@ function App() {
   // Handle start of the tour
   const startTour = useCallback(() => {
     setCurrentStep(0);
+    setSelectedMesh(meshes[0]);
     setManualControl(false);
+    setShouldCameraMove(true);
   }, []);
 
   // Handle reset of the tour
   const resetTour = useCallback(() => {
     setCurrentStep(-1);
+    setShouldCameraMove(false);
   }, []);
 
   const selectMesh = (i) => {
     setSelectedMesh(meshes[i]);
-    setModalContent(meshes[i]);
-    setInfoOpen(true);
+    setCurrentStep(i);
+    setShouldCameraMove(true);
+  };
+
+  const handleCameraMoveEnd = () => {
+    if (shouldCameraMove) {
+      setTimeout(() => {
+        setModalContent(selectedMesh);
+        setInfoOpen(true);
+      }, 1000);
+      setShouldCameraMove(false); // Reset this after the camera move is done.
+    }
   };
 
   function CameraLogger() {
@@ -62,6 +77,7 @@ function App() {
 
   return (
     <Router>
+      <GlobalStyles />
       <Navbar meshes={meshes} selectMesh={selectMesh} />
       <Canvas camera={{ near: 0.1, far: 1000 }}>
         <CameraLogger />
@@ -88,6 +104,7 @@ function App() {
                   currentStep={currentStep}
                   manualControl={manualControl}
                   setInfoOpen={setInfoOpen}
+                  handleCameraMoveEnd={handleCameraMoveEnd}
                 />
               }
             />
@@ -99,10 +116,10 @@ function App() {
         <button className="start-tour-btn" onClick={startTour}>
           Start
         </button>
-      ) : currentStep < 3 ? (
+      ) : currentStep < 2 ? (
         <button
           className="start-tour-btn"
-          onClick={() => setCurrentStep(currentStep + 1)}
+          onClick={() => selectMesh(currentStep + 1)}
         >
           Next
         </button>
@@ -111,7 +128,6 @@ function App() {
           Reset
         </button>
       )}
-
       {currentStep >= 0 && (
         <button onClick={resetTour} className="stop-tour-btn">
           Stop
@@ -129,6 +145,7 @@ function App() {
         onClose={() => {
           setModalContent(null);
           setInfoOpen(false);
+          setShouldCameraMove(false);
         }}
         mesh={selectedMesh}
       />

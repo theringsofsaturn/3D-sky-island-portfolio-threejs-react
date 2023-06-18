@@ -1,5 +1,12 @@
 import React from 'react';
-import './ModalContent.css';
+import { Card, CardContent, Typography } from '@material-ui/core';
+import styled from 'styled-components';
+// import './ModalContent.css';
+
+const StyledCard = styled(Card)`
+  background-color: #3f51b5;
+  color: #fff;
+`;
 
 const ModalContent = ({ mesh }) => {
   if (mesh && mesh.name === 'About Me') {
@@ -45,6 +52,17 @@ const ModalContent = ({ mesh }) => {
       </div>
     );
   }
+
+  return (
+    <StyledCard>
+      <CardContent>
+        <Typography variant="h5" component="h2" gutterBottom>
+          {mesh.name}
+        </Typography>
+        {/* ... remaining contents ... */}
+      </CardContent>
+    </StyledCard>
+  );
 
   // For all other meshes
   //   return (
