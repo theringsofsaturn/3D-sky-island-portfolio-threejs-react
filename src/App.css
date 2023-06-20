@@ -54,6 +54,16 @@ body {
   transition: background-color 0.3s;
 }
 
+.play-btn {
+  position: absolute;
+  bottom: 10px;
+  left: 250px;
+  width: 150px;
+  height: 50px;
+  background: rgba(40, 36, 36, 0.6);
+  color: white;
+}
+
 canvas {
   cursor: default;
 }

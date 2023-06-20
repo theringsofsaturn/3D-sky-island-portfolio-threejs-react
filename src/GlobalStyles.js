@@ -10,7 +10,7 @@ export const GlobalStyles = createGlobalStyle`
     overflow-x: hidden;
   }
 
-  .start-tour-btn, .stop-tour-btn, .manual-btn {
+  .start-tour-btn, .stop-tour-btn, .manual-btn, .play-btn {
     background-color: rgb(30, 6, 13); /* Dark red, similar to our wallpaper */
     color: rgb(92, 177, 239); /* Text color similar to our lights */
     padding: 10px 15px;

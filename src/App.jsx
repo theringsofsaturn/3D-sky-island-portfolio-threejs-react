@@ -9,6 +9,7 @@ import Loader from './Loader';
 import { Model } from './assets/gaming-room/Scene';
 import FullScreenOverlay from './FullScreenOverlay.jsx';
 import { GlobalStyles } from './GlobalStyles';
+import musicPath from '../public/music.mp3';
 import './App.css';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
   const [isInfoOpen, setInfoOpen] = useState(false);
   const [selectedMesh, setSelectedMesh] = useState(null);
   const [shouldCameraMove, setShouldCameraMove] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const meshes = [
     { name: 'About Me' },
@@ -74,6 +76,18 @@ function App() {
 
     return null;
   }
+
+  useEffect(() => {
+    const audio = new Audio(musicPath);
+    audio.loop = true;
+    if (isPlaying) {
+      audio.play();
+    }
+
+    return () => {
+      audio.pause();
+    };
+  }, [isPlaying]);
 
   return (
     <Router>
@@ -140,6 +154,11 @@ function App() {
       >
         {manualControl ? 'Turn off manual control' : 'Turn on manual control'}
       </button>
+
+      <button onClick={() => setIsPlaying(!isPlaying)} className="play-btn">
+        {isPlaying ? 'Pause Music' : 'Play Music'}
+      </button>
+
       <FullScreenOverlay
         isOpen={isInfoOpen}
         onClose={() => {
