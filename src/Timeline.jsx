@@ -41,10 +41,10 @@ const Timeline = () => {
     },
   ];
 
-  return (
+  return(
     <div className="timeline">
       {experience.map((exp, i) => (
-        <div key={i} className="timeline-item">
+        <div key={i} className="timeline-item" style={{ '--order': i }}>
           <div className="timeline-item-year">{exp.year}</div>
           <div className="timeline-item-content">
             <h3>

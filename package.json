@@ -9,7 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@material-ui/core": "^4.12.4",
     "@react-spring/core": "^9.7.2",
     "@react-spring/three": "^9.7.2",
     "@react-three/drei": "^9.76.0",
