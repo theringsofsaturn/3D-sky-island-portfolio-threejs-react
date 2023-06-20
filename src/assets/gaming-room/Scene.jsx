@@ -11,6 +11,7 @@ import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { useGLTF } from '@react-three/drei';
 import useGUI from '../../useGUI';
 import { useSpring, a } from '@react-spring/three';
+import scenePath from './scene-transformed.glb';
 
 export function Model({
   setControlsEnabled,
@@ -23,9 +24,7 @@ export function Model({
   setInfoOpen,
   ...props
 }) {
-  const { nodes, materials } = useGLTF(
-    'src/assets/gaming-room/scene-transformed.glb'
-  );
+  const { nodes, materials } = useGLTF(scenePath);
   console.log(nodes);
 
   const clock = new THREE.Clock();
@@ -156,7 +155,7 @@ export function Model({
     }
 
     const delta = clock.getDelta();
-    
+
     // Rotate the door if it's supposed to be open
     if (doorOpen && doorRef.current) {
       // Calculate the desired door angle
@@ -439,4 +438,4 @@ export function Model({
   );
 }
 
-useGLTF.preload('src/assets/gaming-room/scene-transformed.glb');
+useGLTF.preload(scenePath);
