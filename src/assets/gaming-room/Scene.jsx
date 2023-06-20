@@ -35,10 +35,6 @@ export function Model({
 
   const [hovered, setHovered] = useState(false);
   const [wobble, setWobble] = useState(false);
-  const [doorOpen, setDoorOpen] = useState(false);
-
-  const doorRef = useRef();
-  const hingePoint = new THREE.Vector3(1, 0, 0);
 
   const [clickedMesh, setClickedMesh] = useState(null);
   const ref1 = useRef();
@@ -153,39 +149,6 @@ export function Model({
       state.camera.rotation.copy(initialCameraRotation);
       state.camera.updateProjectionMatrix();
     }
-
-    const delta = clock.getDelta();
-
-    // Rotate the door if it's supposed to be open
-    if (doorOpen && doorRef.current) {
-      // Calculate the desired door angle
-      let desiredAngle = Math.PI / 2; // 90 degrees in radians
-
-      // Calculate the current angle
-      let currentAngle = doorRef.current.rotation.y;
-
-      // If the current angle is less than the desired angle, continue rotating
-      if (currentAngle < desiredAngle) {
-        let newAngle = Math.min(currentAngle + delta, desiredAngle); // Delta time to smooth animation
-
-        doorRef.current.rotateOnWorldAxis(hingePoint, newAngle - currentAngle); // Rotate around hinge
-      }
-    }
-    // If the door is supposed to be closed and it's not already
-    else if (!doorOpen && doorRef.current && doorRef.current.rotation.y > 0) {
-      // Calculate the desired door angle
-      let desiredAngle = 0;
-
-      // Calculate the current angle
-      let currentAngle = doorRef.current.rotation.y;
-
-      // If the current angle is more than the desired angle, continue rotating
-      if (currentAngle > desiredAngle) {
-        let newAngle = Math.max(currentAngle - delta, desiredAngle); // Delta time to smooth animation
-
-        doorRef.current.rotateOnWorldAxis(hingePoint, newAngle - currentAngle); // Rotate around hinge
-      }
-    }
   });
 
   // save the initial camera position and rotation once, right after the component has mounted
@@ -243,17 +206,15 @@ export function Model({
       />
       {/* The Door Mesh */}
       <mesh
-        ref={doorRef}
         geometry={nodes.Object_3.geometry}
         material={materials.blinn3SG}
-        onClick={() => setDoorOpen(!doorOpen)}
         rotation={[-Math.PI / 2, 0, 0]}
         scale={0.197}
       />
       {/* Computer Mesh */}
       <mesh
         ref={ref3}
-        onClick={() => handleClick('My Blog Posts')}
+        onClick={() => handleClick('My Socials')}
         geometry={nodes.Object_4.geometry}
         material={materials.blinn4SG}
         rotation={[-Math.PI / 2, 0, 0]}

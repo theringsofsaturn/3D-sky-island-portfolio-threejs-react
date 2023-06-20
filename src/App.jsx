@@ -22,7 +22,7 @@ function App() {
 
   const meshes = [
     { name: 'About Me' },
-    { name: 'My Blog Posts' },
+    { name: 'My Socials' },
     { name: 'My Projects' },
   ];
 

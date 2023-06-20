@@ -26,3 +26,10 @@
   margin-top: 0.5rem;
   color: #666666;
 }
+
+.project-card-video {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
