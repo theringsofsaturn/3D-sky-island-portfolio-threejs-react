@@ -2,7 +2,7 @@ import React from 'react';
 import ModalContent from './ModalContent';
 import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components';
-import './FullSCreenOverlay.css';
+import './FullScreenOverlay.css';
 
 const Overlay = styled(animated.div)`
   position: fixed;
