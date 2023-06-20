@@ -2,6 +2,8 @@ import React from 'react';
 import Timeline from './Timeline';
 import ProjectCard from './ProjectCard';
 import SocialCard from './SocialCard';
+import videoPath1 from '../public/portfolio3d.mp4';
+import videoPath2 from '../public/3D-art-gallery.mp4';
 import {
   FaGithub,
   FaLinkedin,
@@ -85,12 +87,12 @@ const ModalContent = ({ mesh }) => {
         <ProjectCard
           title="3D Portfolio Website"
           technologies="JavaScript, Three.js"
-          videoSrc="src/assets/videos/portfolio3d.mp4"
+          videoSrc={videoPath1}
         />
         <ProjectCard
           title="3D Art Gallery"
           technologies="JavaScript, Three.js"
-          videoSrc="src/assets/videos/3D-art-gallery.mp4"
+          videoSrc={videoPath2}
         />
       </div>
     );
