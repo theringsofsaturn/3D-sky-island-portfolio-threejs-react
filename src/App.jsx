@@ -1,16 +1,16 @@
-import React from 'react';
-import { Suspense, useState, useEffect, useCallback } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
-import { useThree } from '@react-three/fiber';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './Navbar';
-import Loader from './Loader';
-import { Model } from './assets/gaming-room/Scene';
-import FullScreenOverlay from './FullScreenOverlay.jsx';
-import { GlobalStyles } from './GlobalStyles';
-import musicPath from '../public/music.mp3';
-import './App.css';
+import React from "react";
+import { Suspense, useState, useEffect, useCallback } from "react";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
+import { useThree } from "@react-three/fiber";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./Navbar";
+import Loader from "./Loader";
+import { Model } from "./assets/foxs_islands/Scene";
+import FullScreenOverlay from "./FullScreenOverlay.jsx";
+import { GlobalStyles } from "./GlobalStyles";
+import musicPath from "../public/music.mp3";
+import "./App.css";
 
 function App() {
   const [controlsEnabled, setControlsEnabled] = useState(true);
@@ -23,9 +23,9 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const meshes = [
-    { name: 'About Me' },
-    { name: 'My Socials' },
-    { name: 'My Projects' },
+    { name: "About Me" },
+    { name: "My Socials" },
+    { name: "My Projects" },
   ];
 
   // Handle start of the tour
@@ -63,14 +63,14 @@ function App() {
 
     useEffect(() => {
       const logCameraData = () => {
-        console.log('Camera Position:', camera.position);
-        console.log('Camera Rotation:', camera.rotation);
+        console.log("Camera Position:", camera.position);
+        console.log("Camera Rotation:", camera.rotation);
       };
 
-      window.addEventListener('mousedown', logCameraData);
+      window.addEventListener("mousedown", logCameraData);
 
       return () => {
-        window.removeEventListener('mousedown', logCameraData);
+        window.removeEventListener("mousedown", logCameraData);
       };
     }, [camera]);
 
@@ -109,7 +109,7 @@ function App() {
               path="/"
               element={
                 <Model
-                  position={[0, -1.2, 0.7]}
+                  position={[0, 0, 0]}
                   rotation={[0, 0, 0]}
                   scale={[1, 1, 1]}
                   setControlsEnabled={setControlsEnabled}
@@ -152,11 +152,11 @@ function App() {
         onClick={() => setManualControl((prev) => !prev)}
         className="manual-btn"
       >
-        {manualControl ? 'Turn off manual control' : 'Turn on manual control'}
+        {manualControl ? "Turn off manual control" : "Turn on manual control"}
       </button>
 
       <button onClick={() => setIsPlaying(!isPlaying)} className="play-btn">
-        {isPlaying ? 'Pause Music' : 'Play Music'}
+        {isPlaying ? "Pause Music" : "Play Music"}
       </button>
 
       <FullScreenOverlay
