@@ -29,8 +29,18 @@ export function Model({
   const { nodes, materials } = useGLTF(scenePath);
   console.log(nodes);
 
+  const modelRef = useRef();
+
+  useEffect(() => {
+    useGUI({
+      position: modelRef.current.position,
+      rotation: modelRef.current.rotation,
+      scale: modelRef.current.scale,
+    });
+  }, []);
+
   return (
-    <group {...props} dispose={null}>
+    <group ref={modelRef} {...props} dispose={null}>
       <mesh
         geometry={nodes.polySurface944_tree_body_0.geometry}
         material={materials.PaletteMaterial001}
