@@ -26,21 +26,41 @@ export function Model({
   setInfoOpen,
   ...props
 }) {
+  const ref = useRef();
   const { nodes, materials } = useGLTF(scenePath);
-  console.log(nodes);
 
-  const modelRef = useRef();
+  const groupProps = useSpring({
+    position: props.position,
+    rotation: props.rotation,
+    scale: props.scale,
+  });
 
-  useEffect(() => {
-    useGUI({
-      position: modelRef.current.position,
-      rotation: modelRef.current.rotation,
-      scale: modelRef.current.scale,
-    });
+  // Add GUI Controls
+  useGUI((gui) => {
+    const folder = gui.addFolder("Model Transformations");
+    folder.open();
+
+    const positionFolder = folder.addFolder("Position");
+    positionFolder.open();
+    positionFolder.add(ref.current.position, "x", -50, 50, 0.1);
+    positionFolder.add(ref.current.position, "y", -50, 50, 0.1);
+    positionFolder.add(ref.current.position, "z", -50, 50, 0.1);
+
+    const rotationFolder = folder.addFolder("Rotation");
+    rotationFolder.open();
+    rotationFolder.add(ref.current.rotation, "x", -Math.PI, Math.PI, 0.01);
+    rotationFolder.add(ref.current.rotation, "y", -Math.PI, Math.PI, 0.01);
+    rotationFolder.add(ref.current.rotation, "z", -Math.PI, Math.PI, 0.01);
+
+    const scaleFolder = folder.addFolder("Scale");
+    scaleFolder.open();
+    scaleFolder.add(ref.current.scale, "x", 0.1, 5, 0.1);
+    scaleFolder.add(ref.current.scale, "y", 0.1, 5, 0.1);
+    scaleFolder.add(ref.current.scale, "z", 0.1, 5, 0.1);
   }, []);
 
   return (
-    <group ref={modelRef} {...props} dispose={null}>
+    <a.group {...groupProps} {...props} ref={ref} dispose={null}>
       <mesh
         geometry={nodes.polySurface944_tree_body_0.geometry}
         material={materials.PaletteMaterial001}
@@ -69,7 +89,7 @@ export function Model({
         geometry={nodes.pCube11_rocks1_0.geometry}
         material={materials.PaletteMaterial001}
       />
-    </group>
+    </a.group>
   );
 }
 

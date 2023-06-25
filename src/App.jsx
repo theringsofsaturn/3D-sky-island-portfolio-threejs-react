@@ -109,8 +109,8 @@ function App() {
               path="/"
               element={
                 <Model
-                  position={[0, 0, 0]}
-                  rotation={[0, 0, 0]}
+                  position={[0, -3.7, -36.4]}
+                  rotation={[0.1, 0.59, 0]}
                   scale={[1, 1, 1]}
                   setControlsEnabled={setControlsEnabled}
                   setModalContent={setModalContent}

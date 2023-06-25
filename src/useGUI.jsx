@@ -1,22 +1,12 @@
 import { GUI } from "lil-gui";
+import { useEffect } from "react";
 
-const useGUI = (settings, parentGui = null) => {
-  const guiRef = parentGui || new GUI();
-
-  Object.keys(settings).forEach((key) => {
-    if (
-      typeof settings[key] === "object" &&
-      !Array.isArray(settings[key]) &&
-      settings[key] !== null
-    ) {
-      const folder = guiRef.addFolder(key);
-      useGUI(settings[key], folder);
-    } else {
-      guiRef.add(settings, key);
-    }
-  });
-
-  return guiRef;
+const useGUI = (callback) => {
+  useEffect(() => {
+    const gui = new GUI();
+    callback(gui);
+    return () => gui.destroy();
+  }, [callback]);
 };
 
 export default useGUI;
