@@ -26,69 +26,105 @@ export function Model({
   setInfoOpen,
   ...props
 }) {
-  const ref = useRef();
   const { nodes, materials } = useGLTF(scenePath);
 
-  const groupProps = useSpring({
-    position: props.position,
-    rotation: props.rotation,
-    scale: props.scale,
-  });
+  const sceneRef = useRef();
+  const islandGroup = useRef();
+  // const bubblesGroup = useRef(); // hide bubbles for now because not sure how to implement exactly
 
   // Add GUI Controls
   useGUI((gui) => {
     const folder = gui.addFolder("Model Transformations");
-    folder.open();
+    folder.close();
 
     const positionFolder = folder.addFolder("Position");
     positionFolder.open();
-    positionFolder.add(ref.current.position, "x", -50, 50, 0.1);
-    positionFolder.add(ref.current.position, "y", -50, 50, 0.1);
-    positionFolder.add(ref.current.position, "z", -50, 50, 0.1);
+    positionFolder.add(islandGroup.current.position, "x", -50, 50, 0.1);
+    positionFolder.add(islandGroup.current.position, "y", -50, 50, 0.1);
+    positionFolder.add(islandGroup.current.position, "z", -50, 50, 0.1);
 
     const rotationFolder = folder.addFolder("Rotation");
     rotationFolder.open();
-    rotationFolder.add(ref.current.rotation, "x", -Math.PI, Math.PI, 0.01);
-    rotationFolder.add(ref.current.rotation, "y", -Math.PI, Math.PI, 0.01);
-    rotationFolder.add(ref.current.rotation, "z", -Math.PI, Math.PI, 0.01);
+    rotationFolder.add(
+      islandGroup.current.rotation,
+      "x",
+      -Math.PI,
+      Math.PI,
+      0.01
+    );
+    rotationFolder.add(
+      islandGroup.current.rotation,
+      "y",
+      -Math.PI,
+      Math.PI,
+      0.01
+    );
+    rotationFolder.add(
+      islandGroup.current.rotation,
+      "z",
+      -Math.PI,
+      Math.PI,
+      0.01
+    );
 
     const scaleFolder = folder.addFolder("Scale");
     scaleFolder.open();
-    scaleFolder.add(ref.current.scale, "x", 0.1, 5, 0.1);
-    scaleFolder.add(ref.current.scale, "y", 0.1, 5, 0.1);
-    scaleFolder.add(ref.current.scale, "z", 0.1, 5, 0.1);
+    scaleFolder.add(islandGroup.current.scale, "x", 0.1, 5, 0.1);
+    scaleFolder.add(islandGroup.current.scale, "y", 0.1, 5, 0.1);
+    scaleFolder.add(islandGroup.current.scale, "z", 0.1, 5, 0.1);
   }, []);
 
+  useFrame(() => {
+    if (islandGroup.current) {
+      islandGroup.current.rotation.y += 0.001;
+    }
+  });
+
+  // Handle clicking on the mesh (we can modify this to handle different meshes)
+  // const onMeshClick = () => {
+  //   setModalContent("About Me");
+  //   setInfoOpen(true);
+  // };
+
   return (
-    <a.group {...groupProps} {...props} ref={ref} dispose={null}>
-      <mesh
-        geometry={nodes.polySurface944_tree_body_0.geometry}
-        material={materials.PaletteMaterial001}
-      />
-      <mesh
-        geometry={nodes.polySurface945_tree1_0.geometry}
-        material={materials.PaletteMaterial001}
-      />
-      <mesh
-        geometry={nodes.polySurface946_tree2_0.geometry}
-        material={materials.PaletteMaterial001}
-      />
-      <mesh
-        geometry={nodes.polySurface947_tree1_0.geometry}
-        material={materials.PaletteMaterial001}
-      />
-      <mesh
-        geometry={nodes.polySurface948_tree_body_0.geometry}
-        material={materials.PaletteMaterial001}
-      />
-      <mesh
-        geometry={nodes.polySurface949_tree_body_0.geometry}
-        material={materials.PaletteMaterial001}
-      />
-      <mesh
-        geometry={nodes.pCube11_rocks1_0.geometry}
-        material={materials.PaletteMaterial001}
-      />
+    <a.group {...props} ref={sceneRef} dispose={null}>
+      <group ref={islandGroup}>
+        <mesh
+          geometry={nodes.polySurface944_tree_body_0.geometry}
+          material={materials.PaletteMaterial001}
+        />
+        <mesh
+          geometry={nodes.polySurface945_tree1_0.geometry}
+          material={materials.PaletteMaterial001}
+        />
+        <mesh
+          geometry={nodes.polySurface946_tree2_0.geometry}
+          material={materials.PaletteMaterial001}
+        />
+        <mesh
+          geometry={nodes.polySurface947_tree1_0.geometry}
+          material={materials.PaletteMaterial001}
+        />
+        <mesh
+          geometry={nodes.polySurface948_tree_body_0.geometry}
+          material={materials.PaletteMaterial001}
+        />
+        <mesh
+          geometry={nodes.polySurface949_tree_body_0.geometry}
+          material={materials.PaletteMaterial001}
+        />
+        <mesh
+          geometry={nodes.pCube11_rocks1_0.geometry}
+          material={materials.PaletteMaterial001}
+        />
+      </group>
+      {/* Here I started the idea of bubbles but not sure how to implement it yet, so I am hidding it */}
+      {/* <group ref={bubblesGroup} position={[10, 0, -10]}>
+        <mesh position={[0, 0, 0]} onClick={onMeshClick}>
+          <boxBufferGeometry args={[5, 5, 5]} />
+          <meshStandardMaterial color="hotpink" />
+        </mesh>
+      </group> */}
     </a.group>
   );
 }
