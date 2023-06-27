@@ -1,29 +1,55 @@
-.navbar {
-  background-color: rgb(27, 20, 40);
-  padding: 1rem;
-  position: sticky;
+.navbar-sidebar {
+  position: absolute;
   top: 0;
-  z-index: 100;
-}
-
-.navbar-list {
+  left: 0;
+  height: 100vh;
+  width: 200px;
+  background-color: rgba(166, 128, 100, 0.9);
+  border-right: 2px solid #3e4e50;
   display: flex;
-  justify-content: space-around;
-  list-style: none;
-  padding: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
 }
 
-.navbar-item {
-  margin: 0;
+.navbar-sidebar.open {
+  transform: translateX(0);
 }
 
-.navbar-link {
-  color: rgb(92, 177, 239);
+.navbar-sidebar a {
+  margin: 20px 0;
   text-decoration: none;
-  font-size: 1.5rem;
-  transition: color 0.3s ease;
+  color: #ffffff;
+  font-family: "Papyrus", fantasy;
+  font-size: 18px;
 }
 
-.navbar-link:hover {
-  color: rgb(90, 193, 77);
+.navbar-sidebar a:hover {
+  color: #ffd700;
+  cursor: pointer;
+}
+
+.compass-icon {
+  position: absolute;
+  top: 40px;
+  left: 80px;
+  width: 100px;
+  height: 100px;
+
+  background-size: contain;
+  cursor: pointer;
+  animation: floatAnimation 3s ease-in-out infinite;
+  z-index: 10; 
+}
+
+@keyframes floatAnimation {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }

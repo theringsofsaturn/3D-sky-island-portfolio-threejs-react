@@ -1,74 +1,30 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import React, { useState } from "react";
+import "./Navbar.css";
 
-const NavbarContainer = styled(motion.nav)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 1000;
-  background-color: rgba(
-    53,
-    45,
-    60,
-    0.8
-  ); // A transparent dark tone, similar to the walls color
-`;
+const Navbar = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-const Logo = styled(motion.h1)`
-  font-size: 1.5em;
-  color: rgb(92, 177, 239); // Text color similar to our lights
-  cursor: pointer;
-`;
+  const toggleSidebar = () => {
+    console.log("Toggling sidebar"); // Add this log statement for debugging
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
-const NavbarItems = styled(motion.div)`
-  display: flex;
-  gap: 15px;
-`;
-
-const NavbarItem = styled(motion.button)`
-  background: transparent;
-  border: none;
-  color: rgb(92, 177, 239); // Text color similar to our lights
-  font-size: 1.2em;
-  cursor: pointer;
-
-  &:hover {
-    color: rgb(
-      90,
-      193,
-      77
-    ); // Green color on hover, similar to our bedsheet and Japanese symbol
-  }
-`;
-
-const Navbar = ({ meshes, selectMesh }) => {
   return (
-    <NavbarContainer
-      initial={{ y: '-100vh' }}
-      animate={{ y: 0 }}
-      transition={{ type: 'spring', stiffness: 120 }}
-    >
-      <Logo>My Room</Logo>
-      <NavbarItems>
-        {meshes.map((mesh, index) => (
-          <NavbarItem
-            key={index}
-            onClick={() => selectMesh(index)}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            {mesh.name}
-          </NavbarItem>
-        ))}
-      </NavbarItems>
-    </NavbarContainer>
+    <>
+      <div className={`navbar-sidebar ${isSidebarOpen ? "open" : ""}`}>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <div className="compass-icon" onClick={toggleSidebar}>
+        {/* Add compass icon or image here */}
+        <img
+          src="https://th.bing.com/th/id/R.bc0bd051ebd9c504b2f5840fd23b4499?rik=Z2UC7XIwAaPGvw&riu=http%3a%2f%2fvignette1.wikia.nocookie.net%2ffarmville%2fimages%2fb%2fb3%2fPirates_Compass-icon.png%2frevision%2flatest%3fcb%3d20130415034238&ehk=XuDkt55JPsM4qCJ4RfOkwScbN6IByNs7xA3mVnuDHgY%3d&risl=&pid=ImgRaw&r=0"
+          alt=""
+        />
+      </div>
+    </>
   );
 };
 

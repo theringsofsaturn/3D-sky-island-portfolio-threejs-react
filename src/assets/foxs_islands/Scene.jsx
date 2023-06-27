@@ -15,116 +15,102 @@ import useGUI from "../../useGUI";
 import { useSpring, a } from "@react-spring/three";
 import scenePath from "./scene-transformed.glb";
 
-export function Model({
-  setControlsEnabled,
-  handleCameraMoveEnd,
-  setModalContent,
-  modalContent,
-  setSelectedMesh,
-  currentStep,
-  manualControl,
-  setInfoOpen,
-  ...props
-}) {
+export function Model({ ...props }) {
   const { nodes, materials } = useGLTF(scenePath);
 
-  const sceneRef = useRef();
+  const { viewport } = useThree();
   const islandGroup = useRef();
-  // const bubblesGroup = useRef(); // hide bubbles for now because not sure how to implement exactly
+  const [rotation, setRotation] = useState(0); // Store rotation state
+  const [isDragging, setIsDragging] = useState(false); // Track if currently dragging
+  const [lastX, setLastX] = useState(0); // Store the last mouse x position
 
-  // Add GUI Controls
-  useGUI((gui) => {
-    const folder = gui.addFolder("Model Transformations");
-    folder.close();
+  // Handle mouse drag start
+  const handlePointerDown = (event) => {
+    setIsDragging(true);
+    setLastX(event.clientX);
+  };
 
-    const positionFolder = folder.addFolder("Position");
-    positionFolder.open();
-    positionFolder.add(islandGroup.current.position, "x", -50, 50, 0.1);
-    positionFolder.add(islandGroup.current.position, "y", -50, 50, 0.1);
-    positionFolder.add(islandGroup.current.position, "z", -50, 50, 0.1);
+  // Handle mouse drag end
+  const handlePointerUp = () => {
+    setIsDragging(false);
+  };
 
-    const rotationFolder = folder.addFolder("Rotation");
-    rotationFolder.open();
-    rotationFolder.add(
-      islandGroup.current.rotation,
-      "x",
-      -Math.PI,
-      Math.PI,
-      0.01
-    );
-    rotationFolder.add(
-      islandGroup.current.rotation,
-      "y",
-      -Math.PI,
-      Math.PI,
-      0.01
-    );
-    rotationFolder.add(
-      islandGroup.current.rotation,
-      "z",
-      -Math.PI,
-      Math.PI,
-      0.01
-    );
+  // Handle mouse drag
+  const handlePointerMove = (event) => {
+    if (isDragging) {
+      const delta = (event.clientX - lastX) / viewport.width; // Calculate change in x position
+      const newRotation = rotation + delta * 0.01 * Math.PI; // Modify this line, use Math.PI instead of 2 * Math.PI
+      setRotation(newRotation);
+      setLastX(event.clientX); // Update last x position
+    }
+  };
 
-    const scaleFolder = folder.addFolder("Scale");
-    scaleFolder.open();
-    scaleFolder.add(islandGroup.current.scale, "x", 0.1, 5, 0.1);
-    scaleFolder.add(islandGroup.current.scale, "y", 0.1, 5, 0.1);
-    scaleFolder.add(islandGroup.current.scale, "z", 0.1, 5, 0.1);
-  }, []);
+  // Register event handlers
+  useEffect(() => {
+    window.addEventListener("pointerdown", handlePointerDown);
+    window.addEventListener("pointerup", handlePointerUp);
+    window.addEventListener("pointermove", handlePointerMove);
+    return () => {
+      window.removeEventListener("pointerdown", handlePointerDown);
+      window.removeEventListener("pointerup", handlePointerUp);
+      window.removeEventListener("pointermove", handlePointerMove);
+    };
+  }, [handlePointerDown, handlePointerUp, handlePointerMove]);
 
+  // Rotate island group based on state
   useFrame(() => {
     if (islandGroup.current) {
-      islandGroup.current.rotation.y += 0.001;
+      islandGroup.current.rotation.y = rotation;
     }
   });
 
-  // Handle clicking on the mesh (we can modify this to handle different meshes)
-  // const onMeshClick = () => {
-  //   setModalContent("About Me");
-  //   setInfoOpen(true);
-  // };
+  const sectionThresholds = [Math.PI / 2, Math.PI, (3 * Math.PI) / 2]; // Example for 4 sections
+
+  useEffect(() => {
+    const normalizedRotation =
+      ((rotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI); // Normalize to [0, 2*Math.PI]
+
+    let sectionIndex = 0;
+    while (
+      sectionIndex < sectionThresholds.length &&
+      normalizedRotation >= sectionThresholds[sectionIndex]
+    ) {
+      sectionIndex++;
+    }
+
+    props.setCurrentStage(sectionIndex + 1); // Update currentStage passed as a prop, and add 1 to make it 1-based
+  }, [rotation]);
 
   return (
-    <a.group {...props} ref={sceneRef} dispose={null}>
-      <group ref={islandGroup}>
-        <mesh
-          geometry={nodes.polySurface944_tree_body_0.geometry}
-          material={materials.PaletteMaterial001}
-        />
-        <mesh
-          geometry={nodes.polySurface945_tree1_0.geometry}
-          material={materials.PaletteMaterial001}
-        />
-        <mesh
-          geometry={nodes.polySurface946_tree2_0.geometry}
-          material={materials.PaletteMaterial001}
-        />
-        <mesh
-          geometry={nodes.polySurface947_tree1_0.geometry}
-          material={materials.PaletteMaterial001}
-        />
-        <mesh
-          geometry={nodes.polySurface948_tree_body_0.geometry}
-          material={materials.PaletteMaterial001}
-        />
-        <mesh
-          geometry={nodes.polySurface949_tree_body_0.geometry}
-          material={materials.PaletteMaterial001}
-        />
-        <mesh
-          geometry={nodes.pCube11_rocks1_0.geometry}
-          material={materials.PaletteMaterial001}
-        />
-      </group>
-      {/* Here I started the idea of bubbles but not sure how to implement it yet, so I am hidding it */}
-      {/* <group ref={bubblesGroup} position={[10, 0, -10]}>
-        <mesh position={[0, 0, 0]} onClick={onMeshClick}>
-          <boxBufferGeometry args={[5, 5, 5]} />
-          <meshStandardMaterial color="hotpink" />
-        </mesh>
-      </group> */}
+    <a.group ref={islandGroup} {...props} dispose={null}>
+      <mesh
+        geometry={nodes.polySurface944_tree_body_0.geometry}
+        material={materials.PaletteMaterial001}
+      />
+      <mesh
+        geometry={nodes.polySurface945_tree1_0.geometry}
+        material={materials.PaletteMaterial001}
+      />
+      <mesh
+        geometry={nodes.polySurface946_tree2_0.geometry}
+        material={materials.PaletteMaterial001}
+      />
+      <mesh
+        geometry={nodes.polySurface947_tree1_0.geometry}
+        material={materials.PaletteMaterial001}
+      />
+      <mesh
+        geometry={nodes.polySurface948_tree_body_0.geometry}
+        material={materials.PaletteMaterial001}
+      />
+      <mesh
+        geometry={nodes.polySurface949_tree_body_0.geometry}
+        material={materials.PaletteMaterial001}
+      />
+      <mesh
+        geometry={nodes.pCube11_rocks1_0.geometry}
+        material={materials.PaletteMaterial001}
+      />
     </a.group>
   );
 }
