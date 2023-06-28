@@ -1,0 +1,11 @@
+Model Information:
+* title:	Aircarft Biplane
+* source:	https://sketchfab.com/3d-models/aircarft-biplane-29c2f61dcb014ca5997f2833153f8e34
+* author:	Nicola Ristagno (https://sketchfab.com/NickFrame)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Aircarft Biplane" (https://sketchfab.com/3d-models/aircarft-biplane-29c2f61dcb014ca5997f2833153f8e34) by Nicola Ristagno (https://sketchfab.com/NickFrame) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
