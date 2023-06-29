@@ -19,6 +19,21 @@
   transform: translateX(0);
 }
 
+.navbar-sidebar li {
+  margin: 20px 0;
+  text-decoration: none;
+  color: #ffffff;
+  font-family: "Papyrus", fantasy;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.navbar-sidebar li:hover {
+  color: #ffd700;
+  cursor: pointer;
+}
+
 .navbar-sidebar a {
   margin: 20px 0;
   text-decoration: none;

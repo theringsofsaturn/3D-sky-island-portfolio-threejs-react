@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Navbar.css";
 
-const Navbar = () => {
+const Navbar = ({ onLinkClick }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = (event) => {
@@ -10,18 +10,21 @@ const Navbar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  const handleLinkClick = (linkName) => {
+    onLinkClick(linkName);
+  };
+
   return (
     <>
       <div
         className={`navbar-sidebar ${isSidebarOpen ? "open" : ""}`}
         onClick={(e) => e.stopPropagation()}
       >
-        <a href="https://www.youtube.com/c/EmilianKasemi" target="_blank">
-          About Me
-        </a>
-        <a href="https://github.com/theringsofsaturn" target="_blank">
-          Projects
-        </a>
+        <ul>
+          <li onClick={() => handleLinkClick("About Me")}>About Me</li>
+          <li onClick={() => handleLinkClick("My Projects")}>My Projects</li>
+          <li onClick={() => handleLinkClick("My Socials")}>My Socials</li>
+        </ul>
         <a href="mailto: emiliankasemi@gmail.com">Contact</a>
       </div>
 

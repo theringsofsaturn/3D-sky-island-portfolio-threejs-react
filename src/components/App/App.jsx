@@ -1,7 +1,15 @@
 import React from "react";
-import { Suspense, useState, useEffect, useRef } from "react";
+import * as THREE from "three";
+import {
+  Suspense,
+  useState,
+  useEffect,
+  useRef,
+  useMemo,
+  useCallback,
+} from "react";
 import { Canvas } from "@react-three/fiber";
-import { useThree } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Loader from "../Loader/Loader";
 import Navbar from "../Navbar/Navbar";
@@ -15,6 +23,76 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentStage, setCurrentStage] = useState(1);
   const [isPlaneAnimating, setIsPlaneAnimating] = useState(false);
+  const [currentFocusPoint, setCurrentFocusPoint] = useState(null);
+
+  // Calculated positions and rotations for the camera focus points
+  // Focus 1, Projects:
+  // Camera Position: Vector3 {x: 26.821953263146206, y: -0.24159068794677374, z: -16.097774258883316}
+  // Camera Rotation: Euler {isEuler: true, _x: -1.8428861795342415, _y: 1.1464437830601515, _z: 1.8678989597283515, _order: 'XYZ', …}
+
+  // Focus 2, About Me:
+  // Camera Position: Vector3 {x: 0.9109051463908377, y: 11.104644233971035, z: -21.925567769518434}
+  // Camera Rotation: Euler {isEuler: true, _x: -0.06379959841432846, _y: 0.02729615222054837, _z: 0.0017436319314354082, _order: 'XYZ', …}
+
+  // Focus 3, My Socials:
+  // Camera Position: Vector3 {x: -27.321939090982713, y: -4.057135017739707, z: -21.682316625241455}
+  // Camera Rotation: Euler {isEuler: true, _x: -0.1467556446986102, _y: -0.7981415355774825, _z: -0.10545417872465107, _order: 'XYZ', …}
+
+  // Camera focus points for the navbar links
+  const cameraFocusPoints = useMemo(
+    () => [
+      {
+        name: "About Me",
+        position: new THREE.Vector3(
+          26.821953263146206,
+          -0.24159068794677374,
+          -16.097774258883316
+        ),
+        rotation: new THREE.Euler(
+          -1.8428861795342415,
+          1.1464437830601515,
+          1.8678989597283515
+        ),
+      },
+      {
+        name: "My Projects",
+        position: new THREE.Vector3(
+          0.9109051463908377,
+          11.104644233971035,
+          -21.925567769518434
+        ),
+        rotation: new THREE.Euler(
+          -0.06379959841432846,
+          0.02729615222054837,
+          0.0017436319314354082
+        ),
+      },
+      {
+        name: "My Socials",
+        position: new THREE.Vector3(
+          -27.321939090982713,
+          -4.057135017739707,
+          -21.682316625241455
+        ),
+        rotation: new THREE.Euler(
+          -0.1467556446986102,
+          -0.7981415355774825,
+          -0.10545417872465107
+        ),
+      },
+    ],
+    []
+  );
+
+  const handleNavbarLinkClick = useCallback(
+    (linkName) => {
+      const focusPoint = cameraFocusPoints.find(
+        (point) => point.name === linkName
+      );
+      setCurrentFocusPoint(focusPoint);
+    },
+    [cameraFocusPoints]
+  );
 
   const audioRef = useRef(new Audio(soundPath));
 
@@ -32,8 +110,9 @@ function App() {
 
   return (
     <Router>
-      <Navbar />
+      <Navbar onLinkClick={handleNavbarLinkClick} />
       <Canvas camera={{ near: 0.1, far: 1000 }}>
+        <OrbitControls minDistance={0.1} maxDistance={100} />
         <Biplane
           position={[0, -3, -4]}
           rotation={[0, 0, 0]}
@@ -55,6 +134,7 @@ function App() {
                   setCurrentStage={setCurrentStage}
                   setIsPlaneAnimating={setIsPlaneAnimating}
                   audioRef={audioRef}
+                  currentFocusPoint={currentFocusPoint}
                 />
               }
             />

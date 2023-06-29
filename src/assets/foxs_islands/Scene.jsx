@@ -1,13 +1,21 @@
+import * as THREE from "three";
 import { useFrame, useThree } from "@react-three/fiber";
 import React, { useEffect, useRef, useState } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useSpring, a } from "@react-spring/three";
 import scenePath from "./scene-transformed.glb";
 
-export function Island({ setIsPlaneAnimating, audioRef, ...props }) {
+export function Island({
+  setIsPlaneAnimating,
+  currentFocusPoint,
+  onCameraMoveEnd,
+  audioRef,
+  ...props
+}) {
   const { nodes, materials } = useGLTF(scenePath);
 
   const { viewport } = useThree();
+  const { camera } = useThree();
   const islandGroup = useRef();
   const [rotation, setRotation] = useState(0); // Store rotation state
   const [isDragging, setIsDragging] = useState(false); // Track if currently dragging
@@ -22,6 +30,10 @@ export function Island({ setIsPlaneAnimating, audioRef, ...props }) {
     setIsPlaneAnimating(true);
     audioRef.current.play();
     setLastX(event.clientX);
+
+    // Log camera position and rotation
+    console.log("Camera Position:", camera.position);
+    console.log("Camera Rotation:", camera.rotation);
   };
 
   // Handle mouse drag end
@@ -59,7 +71,41 @@ export function Island({ setIsPlaneAnimating, audioRef, ...props }) {
   }, [gl, handlePointerDown, handlePointerUp, handlePointerMove]);
 
   // UseFrame hook to update rotation
-  useFrame(() => {
+  useFrame((state) => {
+    // If a focus point has been set...
+    if (currentFocusPoint) {
+      const { position, rotation } = currentFocusPoint; // Get the position and rotation of the focus point
+
+      // Check if the distance to target is larger than 0.1 units
+      if (state.camera.position.distanceTo(position) > 0.1) {
+        // If the camera has not yet reached the target...
+        state.camera.position.lerp(position, 0.05); // Move the camera position
+
+        // Convert current camera rotation to quaternion for interpolation
+        let cameraQuaternion = state.camera.quaternion.clone();
+
+        // Convert the target rotation to a Quaternion
+        let targetQuaternion = new THREE.Quaternion().setFromEuler(rotation);
+
+        // Interpolate between the currentcamera quaternion and the target quaternion
+        cameraQuaternion.slerpQuaternions(
+          cameraQuaternion,
+          targetQuaternion,
+          0.1
+        );
+
+        // Update the camera's quaternion
+        state.camera.quaternion.copy(cameraQuaternion);
+
+        state.camera.updateProjectionMatrix(); // To recalculate the projection.
+      } else if (state.camera.position.distanceTo(position) <= 0.1) {
+        // If the camera is very close to the target...
+        state.camera.position.copy(position); // Set the camera position directly to the target
+        state.camera.rotation.copy(rotation); // Set the camera rotation directly to the target
+        state.camera.updateProjectionMatrix(); // To recalculate the projection.
+      }
+    }
+
     if (islandGroup.current) {
       islandGroup.current.rotation.y = rotation;
     }
