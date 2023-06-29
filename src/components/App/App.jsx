@@ -141,7 +141,6 @@ function App() {
           </Routes>
         </Suspense>
       </Canvas>
-
       <div className={`info-box ${currentStage > 0 ? "visible" : ""}`}>
         {currentStage === 1 && (
           <p>
@@ -183,7 +182,11 @@ function App() {
       </div>
 
       <button onClick={() => setIsPlaying(!isPlaying)} className="play-btn">
-        {isPlaying ? "Pause Music" : "Play Music"}
+        {isPlaying ? (
+          <img src="../../public/play_off.svg" alt="Pause Music" />
+        ) : (
+          <img src="../../public/play_off.svg" alt="Play Music" />
+        )}
       </button>
     </Router>
   );
