@@ -25,19 +25,6 @@ function App() {
   const [isPlaneAnimating, setIsPlaneAnimating] = useState(false);
   const [currentFocusPoint, setCurrentFocusPoint] = useState(null);
 
-  // Calculated positions and rotations for the camera focus points
-  // Focus 1, Projects:
-  // Camera Position: Vector3 {x: 26.821953263146206, y: -0.24159068794677374, z: -16.097774258883316}
-  // Camera Rotation: Euler {isEuler: true, _x: -1.8428861795342415, _y: 1.1464437830601515, _z: 1.8678989597283515, _order: 'XYZ', …}
-
-  // Focus 2, About Me:
-  // Camera Position: Vector3 {x: 0.9109051463908377, y: 11.104644233971035, z: -21.925567769518434}
-  // Camera Rotation: Euler {isEuler: true, _x: -0.06379959841432846, _y: 0.02729615222054837, _z: 0.0017436319314354082, _order: 'XYZ', …}
-
-  // Focus 3, My Socials:
-  // Camera Position: Vector3 {x: -27.321939090982713, y: -4.057135017739707, z: -21.682316625241455}
-  // Camera Rotation: Euler {isEuler: true, _x: -0.1467556446986102, _y: -0.7981415355774825, _z: -0.10545417872465107, _order: 'XYZ', …}
-
   // Camera focus points for the navbar links
   const cameraFocusPoints = useMemo(
     () => [
@@ -141,6 +128,7 @@ function App() {
           </Routes>
         </Suspense>
       </Canvas>
+
       <div className={`info-box ${currentStage > 0 ? "visible" : ""}`}>
         {currentStage === 1 && (
           <p>
@@ -160,7 +148,11 @@ function App() {
           <div>
             <p>You can view some of my projects on my:</p>
             <button>
-              <a href="https://github.com/theringsofsaturn" target="_blank">
+              <a
+                href="https://github.com/theringsofsaturn"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Github
               </a>
             </button>
@@ -173,7 +165,11 @@ function App() {
               company called OMRT.
             </p>
             <button>
-              <a href="https://omrt.tech" target="_blank">
+              <a
+                href="https://omrt.tech"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 OMRT Website
               </a>
             </button>

@@ -5,11 +5,10 @@
 body {
   margin: 0;
   padding: 0;
-  background: linear-gradient(
-    to bottom,
-    rgb(134, 180, 241) 0%,
-    rgb(157, 193, 255) 100%
-  );
+  background-image: url("https://cdn3d.iconscout.com/3d/premium/thumb/cloud-3100509-2589436.png"),
+    linear-gradient(to bottom, rgb(134, 180, 241) 0%, rgb(157, 193, 255) 100%);
+  background-repeat: repeat-x;
+  animation: moveClouds 55s linear infinite;
   overflow: hidden;
 }
 
@@ -31,18 +30,57 @@ canvas:hover {
 }
 
 .info-box {
-  background-color: rgba(253, 246, 227, 0.9);
-  border: 2px solid #3e4e50;
-  padding: 20px;
-  border-radius: 10px;
-  font-family: "Amatic SC", cursive;
-  font-size: 20px;
-  text-align: center;
+  background: linear-gradient(
+    180deg,
+    rgba(149, 193, 255, 0.6) 0%,
+    rgba(202, 223, 255, 0.6) 100%
+  );
+  border: 1px solid #73b1ff;
+  border-radius: 20px;
+  padding: 31px 36px 31px 37px;
+  backdrop-filter: blur(35px);
   position: absolute;
   top: 5%;
   left: 50%;
   transform: translateX(-50%);
   animation: floatAnimation 3s ease-in-out infinite;
+  color: #1d2235;
+  font-size: 26px;
+  font-family: Manrope;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-align: center;
+}
+
+.info-box > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info-box button {
+  background: #406aff;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.info-box button a {
+  color: #fff;
+  font-size: 14px;
+  font-family: Manrope;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-decoration: none;
 }
 
 .info-box.visible {
@@ -59,11 +97,13 @@ canvas:hover {
   }
 }
 
-/* App.css */
 .play-btn {
   position: absolute;
   bottom: 20px;
   left: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #e59671;
   width: 72px;
   height: 72px;
@@ -91,27 +131,4 @@ canvas:hover {
   100% {
     background-position: 500px 0;
   }
-}
-
-body {
-  background-image: url("https://cdn3d.iconscout.com/3d/premium/thumb/cloud-3100509-2589436.png"),
-    linear-gradient(to bottom, rgb(134, 180, 241) 0%, rgb(157, 193, 255) 100%);
-  background-repeat: repeat-x;
-  animation: moveClouds 55s linear infinite;
-}
-
-button {
-  background-color: #8b4513;
-  border: 2px solid #3e4e50;
-  padding: 10px 20px;
-  margin-top: 10px;
-  border-radius: 10px;
-  font-family: "Papyrus", fantasy;
-  font-size: 16px;
-  color: white;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #a0522d;
 }
