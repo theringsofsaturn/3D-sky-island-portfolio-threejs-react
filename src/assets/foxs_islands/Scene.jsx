@@ -10,6 +10,7 @@ export function Island({
   currentFocusPoint,
   onCameraMoveEnd,
   audioRef,
+  setShowHint,
   ...props
 }) {
   const { nodes, materials } = useGLTF(scenePath);
@@ -31,9 +32,11 @@ export function Island({
     audioRef.current.play();
     setLastX(event.clientX);
 
+    setShowHint(false);
+
     // Log camera position and rotation
-    console.log("Camera Position:", camera.position);
-    console.log("Camera Rotation:", camera.rotation);
+    // console.log("Camera Position:", camera.position);
+    // console.log("Camera Rotation:", camera.rotation);
   };
 
   // Handle mouse drag end

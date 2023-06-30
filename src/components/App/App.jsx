@@ -26,6 +26,7 @@ function App() {
   const [currentStage, setCurrentStage] = useState(1);
   const [isPlaneAnimating, setIsPlaneAnimating] = useState(false);
   const [currentFocusPoint, setCurrentFocusPoint] = useState(null);
+  const [showHint, setShowHint] = useState(true);
 
   // Camera focus points for the navbar links
   const cameraFocusPoints = useMemo(
@@ -124,6 +125,7 @@ function App() {
                   setIsPlaneAnimating={setIsPlaneAnimating}
                   audioRef={audioRef}
                   currentFocusPoint={currentFocusPoint}
+                  setShowHint={setShowHint}
                 />
               }
             />
@@ -134,6 +136,8 @@ function App() {
       <div className="logo-container">
         <img src={Logo} alt="Emilian Kasemi" />
       </div>
+
+      {showHint && <div className="hint-button">Click and Drag to Explore</div>}
 
       <div className={`info-box ${currentStage > 0 ? "visible" : ""}`}>
         {currentStage === 1 && (

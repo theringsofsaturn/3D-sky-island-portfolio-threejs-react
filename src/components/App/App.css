@@ -145,3 +145,38 @@ canvas:hover {
 .play-btn:hover {
   background-color: rgb(11, 120, 153);
 }
+
+.hint-button {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  gap: 10px;
+  border-radius: 20px;
+  background-color: #ffffff;
+  color: #000000;
+  cursor: pointer;
+  animation: dragAndPulseAnimation 3s ease-in-out infinite;
+  font-weight: bold;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes dragAndPulseAnimation {
+  0%,
+  100% {
+    transform: translateX(-50%) scale(1);
+  }
+  25% {
+    transform: translateX(-60%) scale(1.05);
+  }
+  50% {
+    transform: translateX(-50%) scale(1);
+  }
+  75% {
+    transform: translateX(-40%) scale(1.05);
+  }
+}
