@@ -15,8 +15,10 @@ import Loader from "../Loader/Loader";
 import Navbar from "../Navbar/Navbar";
 import { Island } from "../../assets/foxs_islands/Scene";
 import { Biplane } from "../../assets/aircarft_biplane/Scene";
+import Logo from "../../../public/emilian.svg";
 import musicPath from "../../../public/everloving.mp3";
 import soundPath from "../../../public/engine_loop.wav";
+import playIcon from "../../../public/play_off.svg";
 import "./App.css";
 
 function App() {
@@ -129,6 +131,10 @@ function App() {
         </Suspense>
       </Canvas>
 
+      <div className="logo-container">
+        <img src={Logo} alt="Emilian Kasemi" />
+      </div>
+
       <div className={`info-box ${currentStage > 0 ? "visible" : ""}`}>
         {currentStage === 1 && (
           <p>
@@ -181,7 +187,7 @@ function App() {
         {isPlaying ? (
           <img src="../../public/play_off.svg" alt="Pause Music" />
         ) : (
-          <img src="../../public/play_off.svg" alt="Play Music" />
+          <img src={playIcon} alt="Play Music" />
         )}
       </button>
     </Router>

@@ -12,6 +12,15 @@ body {
   overflow: hidden;
 }
 
+@keyframes moveClouds {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 500px 0;
+  }
+}
+
 #root {
   height: 100vh;
   width: 100vw;
@@ -97,6 +106,19 @@ canvas:hover {
   }
 }
 
+.logo-container {
+  position: absolute;
+  top: 70px;
+  left: 90px;
+  z-index: 10;
+}
+
+.logo-container img {
+  width: 158.44px;
+  height: 63.506px;
+  flex-shrink: 0;
+}
+
 .play-btn {
   position: absolute;
   bottom: 20px;
@@ -122,13 +144,4 @@ canvas:hover {
 
 .play-btn:hover {
   background-color: rgb(11, 120, 153);
-}
-
-@keyframes moveClouds {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 500px 0;
-  }
 }
