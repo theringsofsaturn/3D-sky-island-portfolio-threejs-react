@@ -9,16 +9,21 @@ import {
   useCallback,
 } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+// import { OrbitControls } from "@react-three/drei";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Loader from "../Loader/Loader";
 import Navbar from "../Navbar/Navbar";
+import About from "../../pages/About/About";
+import Projects from "../../pages/Projects/Projects";
+import Contact from "../../pages/Contact/Contact";
+import Testimonials from "../../pages/Testimonials/Testimonials";
 import { Island } from "../../assets/foxs_islands/Scene";
 import { Biplane } from "../../assets/aircarft_biplane/Scene";
 import Logo from "../../../public/emilian.svg";
 import musicPath from "../../../public/everloving.mp3";
 import soundPath from "../../../public/engine_loop.wav";
-import playIcon from "../../../public/play_off.svg";
+import playOffIcon from "../../../public/play_off.svg";
+import playOnIcon from "../../../public/play_on.svg";
 import "./App.css";
 
 function App() {
@@ -100,23 +105,30 @@ function App() {
 
   return (
     <Router>
-      <Navbar onLinkClick={handleNavbarLinkClick} />
-      <Canvas camera={{ near: 0.1, far: 1000 }}>
-        <OrbitControls minDistance={0.1} maxDistance={100} />
-        <Biplane
-          position={[0, -3, -4]}
-          rotation={[0, 0, 0]}
-          scale={[2, 2, 2]}
-          isAnimating={isPlaneAnimating}
-        />
-        <Suspense fallback={<Loader />}>
-          <ambientLight intensity={0.5} />
-          <spotLight position={[10, 50, 10]} angle={0.15} penumbra={1} />
-          <pointLight position={[50, 50, 20]} />
-          <Routes>
-            <Route
-              path="/"
-              element={
+      <Navbar
+        onLinkClick={handleNavbarLinkClick}
+        currentFocusPoint={currentFocusPoint}
+      />
+
+      <Routes>
+        <Route path="/about" element={<About />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/testimonials" element={<Testimonials />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route
+          path="/"
+          element={
+            <Canvas camera={{ near: 0.1, far: 1000 }}>
+              <Biplane
+                position={[0, -3, -4]}
+                rotation={[0, 0, 0]}
+                scale={[2, 2, 2]}
+                isAnimating={isPlaneAnimating}
+              />
+              <Suspense fallback={<Loader />}>
+                <ambientLight intensity={0.5} />
+                <spotLight position={[10, 50, 10]} angle={0.15} penumbra={1} />
+                <pointLight position={[50, 50, 20]} />
                 <Island
                   position={[0, -5.7, -40.4]}
                   rotation={[0.1, 0.59, 0]}
@@ -127,11 +139,11 @@ function App() {
                   currentFocusPoint={currentFocusPoint}
                   setShowHint={setShowHint}
                 />
-              }
-            />
-          </Routes>
-        </Suspense>
-      </Canvas>
+              </Suspense>
+            </Canvas>
+          }
+        />
+      </Routes>
 
       <div className="logo-container">
         <img src={Logo} alt="Emilian Kasemi" />
@@ -189,9 +201,9 @@ function App() {
 
       <button onClick={() => setIsPlaying(!isPlaying)} className="play-btn">
         {isPlaying ? (
-          <img src="../../public/play_off.svg" alt="Pause Music" />
+          <img src={playOnIcon} alt="Pause Music" />
         ) : (
-          <img src={playIcon} alt="Play Music" />
+          <img src={playOffIcon} alt="Play Music" />
         )}
       </button>
     </Router>
