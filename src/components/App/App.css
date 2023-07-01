@@ -9,7 +9,7 @@ body {
     linear-gradient(to bottom, rgb(134, 180, 241) 0%, rgb(157, 193, 255) 100%);
   background-repeat: repeat-x;
   animation: moveClouds 55s linear infinite;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 @keyframes moveClouds {
@@ -60,6 +60,7 @@ canvas:hover {
   font-weight: 600;
   line-height: normal;
   text-align: center;
+  z-index: 10;
 }
 
 .info-box > div {
@@ -163,6 +164,7 @@ canvas:hover {
   animation: dragAndPulseAnimation 3s ease-in-out infinite;
   font-weight: bold;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+  z-index: 10;
 }
 
 @keyframes dragAndPulseAnimation {

@@ -27,7 +27,7 @@
 }
 
 .navbar-sidebar li {
-  margin: 20px 0;
+  margin: 50px 0;
   text-decoration: none;
   color: #1d2235;
   font-family: Manrope;
@@ -61,23 +61,6 @@
   .navbar-sidebar li {
     font-size: 36px;
   }
-}
-
-.navbar-sidebar a {
-  margin: 20px 0;
-  text-decoration: none;
-  color: #1d2235;
-  font-family: Manrope;
-  font-size: 36px;
-  font-weight: 800;
-  line-height: normal;
-  letter-spacing: -0.96px;
-  cursor: pointer;
-}
-
-.navbar-sidebar a:hover {
-  color: #406aff;
-  cursor: pointer;
 }
 
 @media screen and (min-width: 768px) {
