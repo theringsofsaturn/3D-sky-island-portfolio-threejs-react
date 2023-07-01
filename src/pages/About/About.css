@@ -1,0 +1,123 @@
+.about-me-card {
+  width: 100%;
+  min-height: 100vh;
+  flex-shrink: 0;
+  border-radius: 20px;
+  border: 1px solid #73b1ff;
+  background: linear-gradient(
+    180deg,
+    rgba(149, 193, 255, 0.6) 0%,
+    rgba(202, 223, 255, 0.6) 100%
+  );
+  backdrop-filter: blur(35px);
+  z-index: 100;
+}
+
+.about-me-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 126px 140px 200px 150px;
+}
+
+.about-me-title {
+  color: #1d2235;
+  font-size: 48px;
+  font-family: Manrope;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  letter-spacing: -0.96px;
+  margin-bottom: 77px;
+}
+
+.about-me-profile-section {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.about-me-profile-picture {
+  width: 260px;
+  height: 260px;
+  flex-shrink: 0;
+  margin-right: 30px;
+  flex-shrink: 0;
+  border-radius: 260px;
+  background: lightgray 50% / cover no-repeat;
+}
+
+.about-me-greetings {
+  font-size: 58px;
+  font-family: Manrope;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.about-me-greetings .about-me-hi {
+  color: #363f62;
+}
+
+.about-me-greetings .about-me-name {
+  color: #406aff;
+}
+
+.about-me-vector-image {
+  width: 473px;
+  height: 107px;
+  margin-top: 10px;
+}
+
+.about-me-description {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  color: #303750;
+  font-size: 40px;
+  font-family: Manrope;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 160%;
+  margin-top: 20px;
+}
+
+.skills-title {
+  color: #1d2235;
+  font-size: 63.626px;
+  font-family: Manrope;
+  font-weight: 700;
+  line-height: 160%;
+  margin-top: 50px;
+}
+
+.skills-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.skill-circle-wrapper {
+  width: 130px;
+  height: 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 50px;
+  margin-bottom: 45px;
+}
+
+.skill-circle {
+  width: 122.669px;
+  height: 122.669px;
+  border-radius: 122.669px;
+  background: #f6f6f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.skill-icon {
+  width: 60px;
+  height: 60px;
+}

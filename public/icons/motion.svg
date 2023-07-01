@@ -1,0 +1,14 @@
+<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="motion" clip-path="url(#clip0_170_3409)">
+<g id="surface1">
+<path id="Vector" d="M60 0V30L30 60L15 45L30 30L60 0Z" fill="#59529D"/>
+<path id="Vector_2" d="M60 30V60L45 45L60 30Z" fill="#5271B4"/>
+<path id="Vector_3" d="M30 30L0 60V0L30 30Z" fill="#BB4B96"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_170_3409">
+<rect width="60" height="60" fill="white"/>
+</clipPath>
+</defs>
+</svg>

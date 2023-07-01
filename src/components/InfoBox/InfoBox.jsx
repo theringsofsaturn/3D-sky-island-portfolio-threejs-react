@@ -5,8 +5,7 @@ const InfoBox = ({ currentStage }) => {
     <div className={`info-box ${currentStage > 0 ? "visible" : ""}`}>
       {currentStage === 1 && (
         <p>
-          Hi, I am Emilian Kasemi. I am a Software Engineer. <br /> I am from
-          Albania.
+          Hi, I am Emilian Kasemi 👋 <br /> Software Engineer based in Albania.
         </p>
       )}
       {currentStage === 2 && (
@@ -26,7 +25,7 @@ const InfoBox = ({ currentStage }) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Github
+              Show Projects
             </a>
           </button>
         </div>
@@ -34,18 +33,9 @@ const InfoBox = ({ currentStage }) => {
       {currentStage === 4 && (
         <div>
           <p>
-            Now I moved to Netherlands working as a Frontend Engineer at a
-            company called OMRT.
+            Now I moved to Netherlands working as a <br /> Frontend Engineer at
+            a company called OMRT.
           </p>
-          <button>
-            <a
-              href="https://omrt.tech"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              OMRT Website
-            </a>
-          </button>
         </div>
       )}
     </div>
