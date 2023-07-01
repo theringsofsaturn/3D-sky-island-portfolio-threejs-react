@@ -1,0 +1,69 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  justify-content: center;
+  border-radius: 20px;
+}
+
+.upper {
+  display: flex;
+  gap: 9px;
+}
+
+.image-placeholder {
+  display: flex;
+  width: 100px;
+  height: 100px;
+  padding: 23px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  background: #fff;
+}
+
+.title-description {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 348px;
+  gap: 6px;
+}
+
+.title {
+  color: #1d2235;
+  font-size: 26px;
+  font-family: Manrope;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  color: #45517d;
+  font-size: 20px;
+  font-family: Manrope;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 130%;
+}
+
+.show-projects {
+  display: flex;
+  width: 457px;
+  padding: 16px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 12px;
+  background: #406aff;
+
+  color: #fff;
+  font-size: 14px;
+  font-family: Manrope;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
