@@ -24,7 +24,6 @@ body {
 #root {
   height: 100vh;
   width: 100vw;
-
 }
 
 canvas {
@@ -37,58 +36,13 @@ canvas:hover {
 }
 
 .info-box {
-  background: linear-gradient(
-    180deg,
-    rgba(149, 193, 255, 0.6) 0%,
-    rgba(202, 223, 255, 0.6) 100%
-  );
-  border: 1px solid #73b1ff;
-  border-radius: 20px;
-  padding: 31px 36px 31px 37px;
-  backdrop-filter: blur(35px);
   position: absolute;
   top: 5%;
   left: 50%;
   transform: translateX(-50%);
   animation: floatAnimation 3s ease-in-out infinite;
-  color: #1d2235;
-  font-size: 26px;
-  font-family: Manrope;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  text-align: center;
+
   z-index: 10;
-}
-
-.info-box > div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.info-box button {
-  background: #406aff;
-  border-radius: 12px;
-  padding: 16px 20px;
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  border: none;
-  cursor: pointer;
-  box-sizing: border-box;
-}
-
-.info-box button a {
-  color: #fff;
-  font-size: 14px;
-  font-family: Manrope;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  text-decoration: none;
 }
 
 .info-box.visible {

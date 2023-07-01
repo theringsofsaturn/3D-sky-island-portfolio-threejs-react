@@ -1,4 +1,5 @@
 import React from "react";
+import ProjectCard from "../ProjectCard/ProjectCard";
 
 const InfoBox = ({ currentStage }) => {
   return (
@@ -16,20 +17,7 @@ const InfoBox = ({ currentStage }) => {
           </button>
         </div>
       )}
-      {currentStage === 3 && (
-        <div>
-          <p>You can view some of my projects on my:</p>
-          <button>
-            <a
-              href="https://github.com/theringsofsaturn"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Show Projects
-            </a>
-          </button>
-        </div>
-      )}
+      {currentStage === 3 && <ProjectCard />}
       {currentStage === 4 && (
         <div>
           <p>
