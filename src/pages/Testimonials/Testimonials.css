@@ -22,7 +22,7 @@
   display: flex;
   justify-content: space-between;
   margin-top: 80px;
-  margin-bottom: 60px;
+  margin-bottom: 160px;
   width: 90%;
 }
 
@@ -30,7 +30,6 @@
   width: 627px;
   height: 610px;
   border-radius: 20px;
-  border: 1px solid #73b1ff;
   margin: 20px;
   display: flex;
   align-items: center;
@@ -41,4 +40,22 @@
   max-width: 100%;
   max-height: 100%;
   border-radius: 20px;
+}
+
+.bottom-image-left,
+.bottom-image-right {
+  position: absolute;
+  bottom: 20px;
+  width: 594px;
+  height: 412px;
+  flex-shrink: 0;
+  opacity: 0.44999998807907104;
+}
+
+.bottom-image-left {
+  left: 20px;
+}
+
+.bottom-image-right {
+  right: 20px;
 }
