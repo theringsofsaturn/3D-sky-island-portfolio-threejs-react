@@ -1,0 +1,11 @@
+.homepage-container {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  background-image: url("https://cdn3d.iconscout.com/3d/premium/thumb/cloud-3100509-2589436.png"),
+    linear-gradient(to bottom, rgb(134, 180, 241) 0%, rgb(157, 193, 255) 100%);
+  background-repeat: repeat-x;
+  animation: moveClouds 55s linear infinite;
+  overflow: hidden;
+}

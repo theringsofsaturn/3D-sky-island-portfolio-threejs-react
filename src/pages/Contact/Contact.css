@@ -1,0 +1,158 @@
+.contact-container {
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(149, 193, 255, 0.8) 0%,
+    rgba(202, 223, 255, 0.8) 100%
+  );
+  backdrop-filter: blur(35px);
+  overflow: auto;
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 60px;
+}
+
+.contact-title {
+  color: #1d2235;
+  font-size: 48px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.96px;
+  margin-bottom: 40px;
+}
+
+.contact-content {
+  display: flex;
+  gap: 125px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  width: 530px;
+  gap: 20px;
+}
+
+.input-label {
+  color: #1d2235;
+  font-size: 18px;
+  font-family: Manrope;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -0.18px;
+}
+
+.input-field-message {
+  display: flex;
+  width: 530px;
+  height: 220px;
+  padding: 20px 18px;
+  align-items: flex-start;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-200, #d5dae1);
+  background: #e5efff;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  border: 1px solid var(--gray-200, #d5dae1);
+  background: #e5efff;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+}
+
+.send-button {
+  display: flex;
+  width: 530px;
+  height: 54px;
+  padding: 12px 18px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 6px;
+  background: #406aff !important;
+  box-shadow: 0px 1px 2px 0px rgba(105, 81, 255, 0.05);
+  cursor: pointer;
+  color: var(--primary-050, #f0fdf4);
+  font-size: 16px;
+  font-family: Manrope;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 24px;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  padding-top: 20px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 10px;
+  width: 37px;
+  height: 36px;
+}
+
+.social-icons img {
+  width: 36.923px;
+  height: 36px;
+}
+
+.or-contact-via {
+  color: var(--gray-800, #333f51);
+  font-size: 22.382px;
+  font-family: Manrope;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 29.843px;
+  letter-spacing: -0.224px;
+}
+
+.email-info,
+.phone-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #1d2235;
+  font-size: 29.843px;
+  font-family: Manrope;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 41.034px;
+  letter-spacing: -0.298px;
+}
+
+.email-info img,
+.phone-info img {
+  width: 32.33px;
+  height: 34.816px;
+}
+
+.email-info p,
+.phone-info p {
+  color: #1d2235;
+  font-size: 29.843px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.298px;
+}
+
+.airplane-image {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+}

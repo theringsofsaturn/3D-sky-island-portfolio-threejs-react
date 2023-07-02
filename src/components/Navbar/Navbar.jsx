@@ -23,6 +23,11 @@ const Navbar = () => {
           </div>
           <ul>
             <li>
+              <Link to="/" onClick={toggleSidebar}>
+                3D Scene
+              </Link>
+            </li>
+            <li>
               <Link to="/about" onClick={toggleSidebar}>
                 About Me
               </Link>
