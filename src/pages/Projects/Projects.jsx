@@ -8,7 +8,7 @@ import "./Projects.css";
 const Projects = () => {
   return (
     <div className="my-projects">
-      <h1 className="title">My Favorite Projects</h1>
+      <h1 className="favorite-projects-title">My Favorite Projects</h1>
       <div className="cards-container">
         <div className="card">
           <img src={card1} alt="Project 1" />
