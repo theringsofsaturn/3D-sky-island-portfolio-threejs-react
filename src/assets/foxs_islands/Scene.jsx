@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useSpring, a } from "@react-spring/three";
 import scenePath from "./scene-transformed.glb";
+import useGUI from "../../useGUI";
 
 export function Island({
   setIsPlaneAnimating,
@@ -22,6 +23,24 @@ export function Island({
   const [isDragging, setIsDragging] = useState(false); // Track if currently dragging
   const [lastX, setLastX] = useState(0); // Store the last mouse x position
   const { gl } = useThree(); // Get the WebGL rendering context from React Three Fiber
+
+  // GUI (uncomment if you want to debug the scene)
+  // useGUI((gui) => {
+  //   const folder = gui.addFolder("Island Scene");
+  //   folder.add(islandGroup.current.position, "x", -10, 10).name("Position X");
+  //   folder.add(islandGroup.current.position, "y", -10, 10).name("Position Y");
+  //   folder.add(islandGroup.current.position, "z", -10, 10).name("Position Z");
+  //   folder
+  //     .add(islandGroup.current.rotation, "x", -Math.PI, Math.PI)
+  //     .name("Rotation X");
+  //   folder
+  //     .add(islandGroup.current.rotation, "y", -Math.PI, Math.PI)
+  //     .name("Rotation Y");
+  //   folder
+  //     .add(islandGroup.current.rotation, "z", -Math.PI, Math.PI)
+  //     .name("Rotation Z");
+  //   folder.open();
+  // });
 
   // Handle mouse drag start
   const handlePointerDown = (event) => {
@@ -114,7 +133,15 @@ export function Island({
     }
   });
 
-  const sectionThresholds = [Math.PI / 2, Math.PI, (3 * Math.PI) / 2]; // Thresholds for each section of the island
+  // 6 sections, each section should span 360/6 = 60 degrees. Convert this to radians by multiplying by π/180.
+  const sectionThresholds = [
+    Math.PI / 3,
+    (2 * Math.PI) / 3,
+    Math.PI,
+    (4 * Math.PI) / 3,
+    (5 * Math.PI) / 3,
+    2 * Math.PI,
+  ]; // Thresholds for each section
 
   useEffect(() => {
     const normalizedRotation =
@@ -127,6 +154,9 @@ export function Island({
     ) {
       sectionIndex++;
     }
+
+    console.log("Normalized Rotation: ", normalizedRotation); // Log normalizedRotation
+    console.log("Setting Current Stage to: ", sectionIndex + 1); // Log currentStage
 
     props.setCurrentStage(sectionIndex + 1);
   }, [rotation]);

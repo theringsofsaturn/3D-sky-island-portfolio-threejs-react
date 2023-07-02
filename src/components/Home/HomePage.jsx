@@ -1,9 +1,7 @@
 import React, { useState, useRef, useEffect, Suspense } from "react";
-import * as THREE from "three";
 import { Canvas } from "@react-three/fiber";
 import { Island } from "../../assets/foxs_islands/Scene";
 import { Biplane } from "../../assets/aircarft_biplane/Scene";
-import Navbar from "../Navbar/Navbar";
 import Loader from "../Loader/Loader";
 import InfoBox from "../InfoBox/InfoBox";
 import PlayButton from "../PlayButton/PlayButton";
@@ -54,7 +52,7 @@ const HomePage = () => {
           <pointLight position={[50, 50, 20]} />
           <Island
             position={[0, -5.7, -40.4]}
-            rotation={[0.1, 0.59, 0]}
+            rotation={[0.1, 0.67, 0]}
             scale={[1, 1, 1]}
             setCurrentStage={setCurrentStage}
             setIsPlaneAnimating={setIsPlaneAnimating}

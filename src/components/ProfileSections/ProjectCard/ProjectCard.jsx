@@ -1,9 +1,9 @@
 import React from "react";
-import carIcon from "../../../public/car.svg";
-import arrowIcon from "../../../public/arrow_next.svg";
-import "./SchoolCard.css";
+import carIcon from "../../../../public/car.svg";
+import arrowIcon from "../../../../public/arrow_next.svg";
+import "./ProjectCard.css";
 
-const SchoolCard = () => {
+const ProjectCard = () => {
   return (
     <div className="wrapper">
       <div className="upper">
@@ -11,18 +11,18 @@ const SchoolCard = () => {
           <img src={carIcon} alt="Car icon" />
         </div>
         <div className="title-description">
-          <div className="title">Master Final Year</div>
+          <div className="title">Car Showcase Web App</div>
           <div className="description">
             A comprehensive car project by using different APIs in the market
           </div>
         </div>
       </div>
       <div className="show-projects">
-        <button>Final Year Thesis</button>
+        <button>Show Projects</button>
         <img src={arrowIcon} alt="Arrow icon" />
       </div>
     </div>
   );
 };
 
-export default SchoolCard;
+export default ProjectCard;

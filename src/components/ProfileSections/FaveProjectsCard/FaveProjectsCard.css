@@ -1,0 +1,41 @@
+.fave-projects-card {
+  display: flex;
+  flex-direction: column;
+  padding: 31px 36px 31px 37px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  border: 1px solid #73b1ff;
+  background: linear-gradient(
+    180deg,
+    rgba(149, 193, 255, 0.6) 0%,
+    rgba(202, 223, 255, 0.6) 100%
+  );
+  backdrop-filter: blur(35px);
+}
+
+.fave-projects-text {
+  color: #1d2235;
+  font-size: 26px;
+  font-family: Manrope;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.fave-projects-btn {
+  display: flex;
+  padding: 16px 20px;
+  margin-top: 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 12px;
+  background: #406aff;
+  color: #fff;
+  font-size: 14px;
+  font-family: Manrope;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
