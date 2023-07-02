@@ -8,13 +8,13 @@
   );
   backdrop-filter: blur(35px);
   overflow: auto;
+  padding: 126px 150px 115px 150px;
 }
 
 .contact {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 60px;
 }
 
 .contact-title {

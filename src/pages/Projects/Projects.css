@@ -16,8 +16,10 @@
 .favorite-projects-title {
   color: #1d2235;
   font-size: 48px;
-  font-family: "Manrope", sans-serif;
+  font-family: Manrope;
+  font-style: normal;
   font-weight: 800;
+  line-height: normal;
   letter-spacing: -0.96px;
   margin-left: 150px;
   margin-top: 126px;
