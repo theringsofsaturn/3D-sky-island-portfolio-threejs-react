@@ -60,3 +60,8 @@
 .bottom-image-right {
   right: 20px;
 }
+
+.canvas {
+  width: 400px;
+  height: 400px;
+}

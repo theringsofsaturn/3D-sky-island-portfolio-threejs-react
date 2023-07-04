@@ -153,6 +153,6 @@
 
 .airplane-image {
   position: absolute;
-  right: 20px;
-  bottom: 20px;
+  right: 0px;
+  bottom: 0px;
 }

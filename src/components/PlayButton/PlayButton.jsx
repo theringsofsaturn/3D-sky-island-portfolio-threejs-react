@@ -1,5 +1,6 @@
 import React from "react";
 import { mediaConstants } from "../../configs/mediaConstants";
+import "./PlayButton.css";
 
 const PlayButton = ({ isPlaying, setIsPlaying }) => {
   return (

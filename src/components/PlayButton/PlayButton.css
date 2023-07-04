@@ -1,0 +1,26 @@
+.play-btn {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e59671;
+  width: 72px;
+  height: 72px;
+  border: none;
+  border-radius: 72px;
+  text-align: center;
+  line-height: 72px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.play-btn img {
+  width: 24px;
+  height: 24px;
+}
+
+.play-btn:hover {
+  background-color: rgb(11, 120, 153);
+}

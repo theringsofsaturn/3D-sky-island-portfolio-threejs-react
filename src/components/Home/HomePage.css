@@ -5,7 +5,93 @@
   padding: 0;
   background-image: url("https://cdn3d.iconscout.com/3d/premium/thumb/cloud-3100509-2589436.png"),
     linear-gradient(to bottom, rgb(134, 180, 241) 0%, rgb(157, 193, 255) 100%);
-  background-repeat: repeat-x;
-  animation: moveClouds 55s linear infinite;
+  background-repeat: repeat;
+  animation: moveClouds 155s linear infinite;
   overflow: hidden;
+}
+
+.hand-icon-outer-container {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  animation: swipeAnimation 2s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+  z-index: 10;
+}
+
+.hand-icon-container {
+  position: relative;
+  left: -50%;
+}
+
+.hand-icon {
+  height: 40px;
+  width: auto;
+}
+
+.circle {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  animation: circleAnimation 1s ease-in-out infinite;
+}
+
+.hint-text {
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  border-radius: 20px;
+  background-color: #ffffff;
+  color: #000000;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  animation: bounce 2s infinite;
+}
+
+@keyframes swipeAnimation {
+  0%,
+  100% {
+    transform: translateX(-70%);
+  }
+  50% {
+    transform: translateX(-30%);
+  }
+}
+
+@keyframes circleAnimation {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.5);
+    opacity: 0.5;
+  }
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-5px);
+  }
 }

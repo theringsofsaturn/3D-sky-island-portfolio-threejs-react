@@ -7,6 +7,7 @@ import InfoBox from "../InfoBox/InfoBox";
 import PlayButton from "../PlayButton/PlayButton";
 import soundPath from "../../../public/engine_loop.wav";
 import { mediaConstants } from "../../configs/mediaConstants";
+import dragHandIcon from "../../../public/drag.png";
 import "./HomePage.css";
 
 const HomePage = () => {
@@ -37,11 +38,23 @@ const HomePage = () => {
           <img src={mediaConstants.logo} alt="Emilian Kasemi" />
         </div>
 
-        {showHint && (
-          <div className="hint-button">Click and Drag to Explore</div>
-        )}
-
         <PlayButton isPlaying={isPlaying} setIsPlaying={setIsPlaying} />
+
+        {showHint && (
+          <>
+            <div className="hint-text">Click and Drag to Explore</div>
+            <div className="hand-icon-outer-container">
+              <div className="hand-icon-container">
+                <img
+                  src={dragHandIcon}
+                  alt="Drag to explore"
+                  className="hand-icon"
+                />
+                <div className="circle"></div>
+              </div>
+            </div>
+          </>
+        )}
 
         <Canvas camera={{ near: 0.1, far: 1000 }}>
           <Biplane

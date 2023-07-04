@@ -1,0 +1,11 @@
+Model Information:
+* title:	Simple_Bird
+* source:	https://sketchfab.com/3d-models/simple-bird-0257796e6a114739ab20339beb8ce537
+* author:	Nagovandera (https://sketchfab.com/Nagovandera)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Simple_Bird" (https://sketchfab.com/3d-models/simple-bird-0257796e6a114739ab20339beb8ce537) by Nagovandera (https://sketchfab.com/Nagovandera) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

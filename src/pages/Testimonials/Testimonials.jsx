@@ -1,4 +1,7 @@
 import React from "react";
+import { Canvas } from "@react-three/fiber";
+import { Fox } from "../../assets/foxy_in_winterland/Scene";
+import { OrbitControls } from "@react-three/drei";
 import testimonial1 from "../../../public/testimonial1.png";
 import testimonial2 from "../../../public/testimonial2.png";
 import testimonial3 from "../../../public/testimonial3.png";
@@ -31,6 +34,21 @@ const Testimonials = () => {
         src={imageRight}
         alt="Decorative Right"
       />
+
+      <Canvas
+        camera={{ near: 0.1, far: 1000 }}
+        style={{ position: "relative", width: "300px", height: "300px" }}
+      >
+        <OrbitControls />
+        <ambientLight intensity={1} />
+        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+        <pointLight position={[50, 50, 20]} />
+        <Fox
+          position={[0, 0, 5]}
+          rotation={[0, 0, 0]}
+          scale={[0.3, 0.3, 0.3]}
+        />
+      </Canvas>
     </div>
   );
 };

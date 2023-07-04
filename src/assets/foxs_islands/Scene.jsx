@@ -24,24 +24,6 @@ export function Island({
   const [lastX, setLastX] = useState(0); // Store the last mouse x position
   const { gl } = useThree(); // Get the WebGL rendering context from React Three Fiber
 
-  // GUI (uncomment if you want to debug the scene)
-  // useGUI((gui) => {
-  //   const folder = gui.addFolder("Island Scene");
-  //   folder.add(islandGroup.current.position, "x", -10, 10).name("Position X");
-  //   folder.add(islandGroup.current.position, "y", -10, 10).name("Position Y");
-  //   folder.add(islandGroup.current.position, "z", -10, 10).name("Position Z");
-  //   folder
-  //     .add(islandGroup.current.rotation, "x", -Math.PI, Math.PI)
-  //     .name("Rotation X");
-  //   folder
-  //     .add(islandGroup.current.rotation, "y", -Math.PI, Math.PI)
-  //     .name("Rotation Y");
-  //   folder
-  //     .add(islandGroup.current.rotation, "z", -Math.PI, Math.PI)
-  //     .name("Rotation Z");
-  //   folder.open();
-  // });
-
   // Handle mouse drag start
   const handlePointerDown = (event) => {
     event.stopPropagation();

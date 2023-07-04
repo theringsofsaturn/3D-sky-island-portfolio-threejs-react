@@ -1,0 +1,11 @@
+Model Information:
+* title:	The cartoon plane
+* source:	https://sketchfab.com/3d-models/the-cartoon-plane-e3a28088b5cb498cb0e30b344f3d0f04
+* author:	haraldina (https://sketchfab.com/haraldina)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "The cartoon plane" (https://sketchfab.com/3d-models/the-cartoon-plane-e3a28088b5cb498cb0e30b344f3d0f04) by haraldina (https://sketchfab.com/haraldina) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

@@ -18,7 +18,13 @@ const ThesisCard = () => {
         </div>
       </div>
       <div className="show-projects">
-        <button>Final Year Thesis</button>
+        <a
+          href="https://github.com/theringsofsaturn"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <button>Final Year Thesis</button>
+        </a>
         <img src={arrowIcon} alt="Arrow icon" />
       </div>
     </div>

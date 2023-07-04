@@ -5,6 +5,7 @@ import ThesisCard from "../ProfileSections/ThesisCard/ThesisCard";
 import StudiesCard from "../ProfileSections/StudiesCard/StudiesCard";
 import CurrentJob from "../ProfileSections/CurrentJob/CurrentJob";
 import FaveProjectsCard from "../ProfileSections/FaveProjectsCard/FaveProjectsCard";
+import "./InfoBox.css";
 
 const InfoBox = ({ currentStage }) => {
   console.log("InfoBox received currentStage:", currentStage);
