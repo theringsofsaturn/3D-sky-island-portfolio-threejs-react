@@ -12,13 +12,16 @@ import "./HomePage.css";
 
 const HomePage = () => {
   const audioRef = useRef(new Audio(soundPath));
+  audioRef.current.volume = 0.15;
+
   const [isPlaneAnimating, setIsPlaneAnimating] = useState(false);
   const [currentStage, setCurrentStage] = useState(1);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const [showHint, setShowHint] = useState(true);
 
   useEffect(() => {
     const audio = new Audio(mediaConstants.musicPath);
+    audio.volume = 0.8;
     audio.loop = true;
     if (isPlaying) {
       audio.play();
@@ -75,6 +78,7 @@ const HomePage = () => {
               setIsPlaneAnimating={setIsPlaneAnimating}
               audioRef={audioRef}
               setShowHint={setShowHint}
+              isPlaying={isPlaying}
             />
           </Suspense>
         </Canvas>

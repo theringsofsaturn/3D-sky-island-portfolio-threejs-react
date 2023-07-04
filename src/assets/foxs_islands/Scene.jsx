@@ -12,6 +12,7 @@ export function Island({
   onCameraMoveEnd,
   audioRef,
   setShowHint,
+  isPlaying,
   ...props
 }) {
   const { nodes, materials } = useGLTF(scenePath);
@@ -30,10 +31,13 @@ export function Island({
     event.preventDefault();
     setIsDragging(true);
     setIsPlaneAnimating(true);
-    audioRef.current.play();
     setLastX(event.clientX);
 
     setShowHint(false);
+
+    if (isPlaying) {
+      audioRef.current.play();
+    }
 
     // Log camera position and rotation
     // console.log("Camera Position:", camera.position);
@@ -46,7 +50,10 @@ export function Island({
     event.preventDefault();
     setIsDragging(false);
     setIsPlaneAnimating(false);
-    audioRef.current.pause();
+
+    if (isPlaying) {
+      audioRef.current.pause();
+    }
   };
 
   // Handle mouse drag
@@ -125,6 +132,7 @@ export function Island({
     2 * Math.PI,
   ]; // Thresholds for each section
 
+  // Update current stage when rotation changes
   useEffect(() => {
     const normalizedRotation =
       ((rotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI); // Normalize rotation to be between 0 and 2 * Math.PI
@@ -142,6 +150,15 @@ export function Island({
 
     props.setCurrentStage(sectionIndex + 1);
   }, [rotation]);
+
+  // Play or pause audio when isPlaying changes
+  useEffect(() => {
+    if (props.isPlaying) {
+      audioRef.current.play();
+    } else {
+      audioRef.current.pause();
+    }
+  }, [isPlaying]);
 
   return (
     // {Island 3D model from: https://sketchfab.com/3d-models/foxs-islands-163b68e09fcc47618450150be7785907}
