@@ -7,10 +7,10 @@ import "./About.css";
 
 function About({ onNext }) {
   return (
-    <div className="about-me-card">
+    <div className="about-me-cardgit">
       <div className="about-me-group">
         <h1 className="about-me-title">About Me</h1>
-        <div className="about-me-profile-section">
+        <div className="about-me-profile-section">   
           <img
             className="about-me-profile-picture"
             src={profilePic}

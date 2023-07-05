@@ -12,6 +12,10 @@ import skillIcon11 from "../../public/icons/github.svg";
 import skillIcon12 from "../../public/icons/nodejs.svg";
 import skillIcon13 from "../../public/icons/ex.svg";
 import skillIcon14 from "../../public/icons/mongodb.svg";
+import skillIcon15 from "../../public/icons/react.svg";
+import skillIcon16 from "../../public/icons/redux.svg";
+import skillIcon17 from "../../public/icons/next.svg";
+import skillIcon18 from "../../public/icons/ts.svg";
 
 export const skillIcons = [
   skillIcon1,
@@ -28,4 +32,8 @@ export const skillIcons = [
   skillIcon12,
   skillIcon13,
   skillIcon14,
+  skillIcon15,
+  skillIcon16,
+  skillIcon17,
+  skillIcon18,
 ];
