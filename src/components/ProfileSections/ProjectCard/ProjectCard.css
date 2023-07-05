@@ -15,11 +15,17 @@
   display: flex;
   width: 100px;
   height: 100px;
-  padding: 23px;
   justify-content: center;
   align-items: center;
   border-radius: 20px;
   background: #fff;
+  overflow: hidden;
+}
+
+.image-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .title-description {
@@ -66,4 +72,5 @@
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  cursor: pointer;
 }

@@ -4,9 +4,14 @@
   margin: 0;
   padding: 0;
   background-image: url("https://cdn3d.iconscout.com/3d/premium/thumb/cloud-3100509-2589436.png"),
+    linear-gradient(
+      to bottom,
+      rgba(134, 180, 241, 0.5),
+      rgba(157, 193, 255, 0.5)
+    ),
     linear-gradient(to bottom, rgb(134, 180, 241) 0%, rgb(157, 193, 255) 100%);
   background-repeat: repeat;
-  animation: moveClouds 155s linear infinite;
+  animation: moveClouds 100s linear infinite;
   overflow: hidden;
 }
 
@@ -93,5 +98,14 @@
   }
   60% {
     transform: translateX(-50%) translateY(-5px);
+  }
+}
+
+@keyframes moveClouds {
+  0% {
+    background-position: 0px 0px, 0px 0px;
+  }
+  100% {
+    background-position: 500px 0px, 0px 0px;
   }
 }

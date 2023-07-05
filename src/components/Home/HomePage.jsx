@@ -12,16 +12,17 @@ import "./HomePage.css";
 
 const HomePage = () => {
   const audioRef = useRef(new Audio(soundPath));
-  audioRef.current.volume = 0.15;
+  audioRef.current.volume = 0.1;
 
   const [isPlaneAnimating, setIsPlaneAnimating] = useState(false);
   const [currentStage, setCurrentStage] = useState(1);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [showHint, setShowHint] = useState(true);
 
+  // For the sounds
   useEffect(() => {
     const audio = new Audio(mediaConstants.musicPath);
-    audio.volume = 0.8;
+    audio.volume = 0.4;
     audio.loop = true;
     if (isPlaying) {
       audio.play();
@@ -31,6 +32,19 @@ const HomePage = () => {
       audio.pause();
     };
   }, [isPlaying]);
+
+  // For the clouds
+  useEffect(() => {
+    const container = document.querySelector(".homepage-container");
+    for (let i = 0; i < 10; i++) {
+      const cloud = document.createElement("div");
+      cloud.className = "cloud";
+      cloud.style.top = Math.random() * 100 + "vh";
+      cloud.style.left = Math.random() * 100 + "vw";
+      cloud.style.animationDuration = Math.random() * 100 + 50 + "s";
+      container.appendChild(cloud);
+    }
+  }, []);
 
   return (
     <>
