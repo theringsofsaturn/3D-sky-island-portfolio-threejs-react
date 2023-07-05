@@ -1,5 +1,5 @@
 import React from "react";
-import carIcon from "../../../../public/play_store.png";
+import playStoreIcon from "../../../../public/play_store.png";
 import arrowIcon from "../../../../public/arrow_next.svg";
 import "./AppsCard.css";
 
@@ -8,7 +8,7 @@ const AppsCard = () => {
     <div className="wrapper">
       <div className="upper">
         <div className="image-placeholder">
-          <img src={carIcon} alt="Car icon" />
+          <img src={playStoreIcon} alt="Car icon" />
         </div>
         <div className="title-description">
           <div className="title">Google Play Apps</div>
