@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Island } from "../../assets/foxs_islands/Scene";
 import { Biplane } from "../../assets/aircarft_biplane/Scene";
+import { Bird } from "../../assets/simple_bird/Scene";
 import Loader from "../Loader/Loader";
 import InfoBox from "../InfoBox/InfoBox";
 import PlayButton from "../PlayButton/PlayButton";
@@ -79,6 +80,11 @@ const HomePage = () => {
             rotation={[0, 0, 0]}
             scale={[1.5, 1.5, 1.5]}
             isAnimating={isPlaneAnimating}
+          />
+          <Bird
+            position={[0, 0, 0]}
+            rotation={[0, 1, 0]}
+            scale={[0.5, 0.5, 0.5]}
           />
           <Suspense fallback={<Loader />}>
             <ambientLight intensity={0.5} />
