@@ -62,7 +62,7 @@ export function Island({
     event.preventDefault();
     if (isDragging) {
       const delta = (event.clientX - lastX) / viewport.width; // Calculate change in x position
-      const newRotation = rotation + delta * 0.01 * Math.PI; // Calculate new rotation based on change in x position
+      const newRotation = rotation + delta * 0.002 * Math.PI; // Calculate new rotation based on change in x position
       setRotation(newRotation); // Update rotation
       setLastX(event.clientX); // Update last x position
     }
