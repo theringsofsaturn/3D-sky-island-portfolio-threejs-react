@@ -1,56 +1,36 @@
 import React, { useRef, useEffect } from "react";
-import { useFrame, useLoader } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import scenePath from "./scene-transformed.glb";
 import { useGLTF, useAnimations } from "@react-three/drei";
-import { act } from "@react-three/fiber";
+import { Vector3 } from "three";
 
-export function Bird({ position, rotation, scale, ...props }) {
+export function Bird(props) {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF(scenePath);
   console.log(animations);
 
-  const { ref, mixer } = useAnimations(animations);
+  const { actions, mixer } = useAnimations(animations, group);
 
-  const direction = Math.random() < 0.5 ? -1 : 1; // Randomly choose the direction of movement (left or right)
-  const speed = 0.01 + Math.random() * 0.02; // Randomly choose a speed between 0.01 and 0.03
-
+  // This effect will run when the component mounts, and it will start the "Flying" animation
   useEffect(() => {
-    mixer.timeScale = 0.5 + Math.random(); // Randomly choose animation speed between 0.5x and 1.5x
-  }, [mixer]);
+    actions.Flying.play();
+  }, [actions]);
 
-  useEffect(() => {
-    // Play the "Flying" animation
-    const action = mixer.clipAction(
-      animations.find((clip) => clip.name === "Flying")
-    );
-    action.play();
-  }, [mixer, animations]);
+  useFrame((state, delta) => {
+    mixer.update(delta); // this is necessary for the animation to play
 
-  // Move the bird across the screen
-  useEffect(() => {
-    const moveBird = () => {
-      if (ref.current) {
-        ref.current.position.x += direction * speed;
-        // If the bird goes offscreen, reposition it on the other side
-        if (ref.current.position.x > 10) ref.current.position.x = -10;
-        if (ref.current.position.x < -10) ref.current.position.x = 10;
-      }
-      requestAnimationFrame(moveBird);
-    };
-
-    moveBird();
-  }, [ref, direction, speed]);
+    // Logic to move the bird from one side to another
+    if (group.current.position.x > 7) {
+      // boundary 
+      group.current.position.set(-7, 0, 1); // reset position
+    } else {
+      group.current.position.add(new Vector3(0.01, 0, 0)); // velocity 
+    }
+  });
 
   return (
     // 3D Model from: https://sketchfab.com/3d-models/simple-bird-0257796e6a114739ab20339beb8ce537
-    <group
-      ref={ref}
-      position={position}
-      rotation={rotation}
-      scale={scale}
-      {...props}
-      dispose={null}
-    >
+    <group ref={group} {...props} dispose={null}>
       <group name="Sketchfab_Scene">
         <primitive object={nodes.GLTF_created_0_rootJoint} />
         <skinnedMesh
@@ -58,8 +38,8 @@ export function Bird({ position, rotation, scale, ...props }) {
           geometry={nodes.Object_7.geometry}
           material={materials.PaletteMaterial001}
           skeleton={nodes.Object_7.skeleton}
-          position={[0, 0.205, 0]}
-          rotation={[1.485, 0, 0]}
+          position={[0, 0, 0]}
+          rotation={[0, 0, 0]}
           scale={0.313}
         />
         <skinnedMesh
@@ -67,8 +47,8 @@ export function Bird({ position, rotation, scale, ...props }) {
           geometry={nodes.Object_8.geometry}
           material={materials.PaletteMaterial001}
           skeleton={nodes.Object_8.skeleton}
-          position={[0, 0.205, 0]}
-          rotation={[1.485, 0, 0]}
+          position={[0, 0, 0]}
+          rotation={[0, 0, 0]}
           scale={0.313}
         />
         <skinnedMesh
@@ -76,8 +56,8 @@ export function Bird({ position, rotation, scale, ...props }) {
           geometry={nodes.Object_9.geometry}
           material={materials.PaletteMaterial001}
           skeleton={nodes.Object_9.skeleton}
-          position={[0, 0.205, 0]}
-          rotation={[1.485, 0, 0]}
+          position={[0, 0, 0]}
+          rotation={[0, 0, 0]}
           scale={0.313}
         />
         <skinnedMesh
@@ -85,8 +65,8 @@ export function Bird({ position, rotation, scale, ...props }) {
           geometry={nodes.Object_10.geometry}
           material={materials.PaletteMaterial001}
           skeleton={nodes.Object_10.skeleton}
-          position={[0, 0.205, 0]}
-          rotation={[1.485, 0, 0]}
+          position={[0, 0, 0]}
+          rotation={[0, 0, 0]}
           scale={0.313}
         />
       </group>
