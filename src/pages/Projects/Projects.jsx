@@ -2,45 +2,46 @@ import React from "react";
 import playStoreIcon from "../../../public/play_store.png";
 import githubIcon from "../../../public/github.svg";
 import carIcon from "../../../public/car.png";
+import carCard from "../../../public/car_card.png";
 import ecommerceIcon from "../../../public/ecommerce.png";
+import ecommerceCard from "../../../public/ecommerce_card.png";
 import "./Projects.css";
 
 const Projects = () => {
   const projectData = [
     {
-      imgSrc: "../../../public/car_card.png",
-      thumbSrc: "../../../public/car.png",
+      imgSrc: carCard,
+      thumbSrc: carIcon,
       title: "Car Showcase App",
-      status: "1 hour ago",
       tech: ["React", "Node", "Express", "MongoDB"],
     },
     {
-      imgSrc: "../../../public/ecommerce_card.png",
-      thumbSrc: "./../../public/ecommerce.png",
+      imgSrc: ecommerceCard,
+      thumbSrc: ecommerceIcon,
       title: "E-Commerce App",
       tech: ["React", "Node", "Express", "MongoDB"],
     },
     {
-      imgSrc: "../../../public/ecommerce_card.png",
-      thumbSrc: "./../../public/ecommerce.png",
+      imgSrc: ecommerceCard,
+      thumbSrc: ecommerceIcon,
       title: "E-Commerce App",
       tech: ["React", "Node", "Express", "MongoDB"],
     },
     {
-      imgSrc: "../../../public/ecommerce_card.png",
-      thumbSrc: "./../../public/ecommerce.png",
+      imgSrc: ecommerceCard,
+      thumbSrc: ecommerceIcon,
       title: "E-Commerce App",
       tech: ["React", "Node", "Express", "MongoDB"],
     },
     {
-      imgSrc: "../../../public/ecommerce_card.png",
-      thumbSrc: "./../../public/ecommerce.png",
+      imgSrc: ecommerceCard,
+      thumbSrc: ecommerceIcon,
       title: "E-Commerce App",
       tech: ["React", "Node", "Express", "MongoDB"],
     },
     {
-      imgSrc: "../../../public/ecommerce_card.png",
-      thumbSrc: "./../../public/ecommerce.png",
+      imgSrc: ecommerceCard,
+      thumbSrc: ecommerceIcon,
       title: "E-Commerce App",
       tech: ["React", "Node", "Express", "MongoDB"],
     },
