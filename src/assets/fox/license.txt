@@ -1,0 +1,11 @@
+Model Information:
+* title:	Fox
+* source:	https://sketchfab.com/3d-models/fox-f372c04de44640fbb6a4f9e4e5845c78
+* author:	victory_mirosya (https://sketchfab.com/victory_mirosya)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Fox" (https://sketchfab.com/3d-models/fox-f372c04de44640fbb6a4f9e4e5845c78) by victory_mirosya (https://sketchfab.com/victory_mirosya) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
