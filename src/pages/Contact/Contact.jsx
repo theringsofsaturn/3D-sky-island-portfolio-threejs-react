@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, Suspense } from "react";
+import React, { useRef, useState, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import Loader from "../../components/Loader/Loader";
 import { Fox } from "../../assets/fox/Scene";
@@ -14,6 +14,15 @@ import "./Contact.css";
 
 const Contact = () => {
   const form = useRef();
+  const [currentAnimation, setCurrentAnimation] = useState("idle");
+
+  const handleFocus = () => {
+    setCurrentAnimation("walk");
+  };
+
+  const handleBlur = () => {
+    setCurrentAnimation("idle");
+  };
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -28,9 +37,11 @@ const Contact = () => {
       .then(
         (result) => {
           alert("Message sent successfully");
+          setCurrentAnimation("idle");
         },
         (error) => {
           alert("Failed to send message");
+          setCurrentAnimation("idle");
         }
       );
   };
@@ -49,6 +60,8 @@ const Contact = () => {
                 type="text"
                 name="name"
                 placeholder="Name"
+                onFocus={handleFocus}
+                onBlur={handleBlur}
               />
 
               <label className="input-label">Email</label>
@@ -57,6 +70,8 @@ const Contact = () => {
                 type="email"
                 name="email"
                 placeholder="Email"
+                onFocus={handleFocus}
+                onBlur={handleBlur}
               />
 
               <label className="input-label">Message</label>
@@ -64,9 +79,16 @@ const Contact = () => {
                 className="input-field-message"
                 name="message"
                 placeholder="Message"
+                onFocus={handleFocus}
+                onBlur={handleBlur}
               ></textarea>
 
-              <button type="submit" className="send-button">
+              <button
+                type="submit"
+                className="send-button"
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+              >
                 Send
               </button>
             </form>
@@ -112,6 +134,7 @@ const Contact = () => {
 
             <Suspense fallback={<Loader />}>
               <Fox
+                currentAnimation={currentAnimation}
                 position={[17, -11, -35.2]}
                 rotation={[12.629, 10.7, 0]}
                 scale={[2, 2, 2]}

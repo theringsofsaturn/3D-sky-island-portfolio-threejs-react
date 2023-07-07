@@ -2,16 +2,19 @@ import React, { useRef, useEffect } from "react";
 import scenePath from "./scene-transformed.glb";
 import { useGLTF, useAnimations } from "@react-three/drei";
 
-export function Fox(props) {
+export function Fox({ currentAnimation, ...props }) {
   // 3D Model from: https://sketchfab.com/3d-models/fox-f372c04de44640fbb6a4f9e4e5845c78
   const group = useRef();
   const { nodes, materials, animations } = useGLTF(scenePath);
   const { actions } = useAnimations(animations, group);
 
-  // This effect will run when the component mounts, and it will start the Fox animation
+  // This effect will run whenever the currentAnimation prop changes
   useEffect(() => {
-    actions.hit.play();
-  }, [actions]);
+    Object.values(actions).forEach((action) => action.stop());
+    if (actions[currentAnimation]) {
+      actions[currentAnimation].play();
+    }
+  }, [actions, currentAnimation]);
 
   return (
     <group ref={group} {...props} dispose={null}>
