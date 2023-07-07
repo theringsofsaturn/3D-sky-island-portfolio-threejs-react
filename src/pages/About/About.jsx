@@ -1,11 +1,14 @@
-import React from "react";
+import React, { Suspense } from "react";
+import { Canvas } from "@react-three/fiber";
+import { CartoonPlane } from "../../assets/the_cartoon_plane/Scene";
+import Loader from "../../components/Loader/Loader";
 import profilePic from "../../../public/profile_pic.png";
 import vectorImg from "../../../public/vector.svg";
 import white_circle from "../../../public/circle.svg";
 import { skillIcons } from "../../configs/skillIcons";
 import "./About.css";
 
-function About({ onNext }) {
+function About() {
   return (
     <div className="about-me-card">
       <div className="about-me-group">
@@ -59,6 +62,29 @@ function About({ onNext }) {
             ))}
           </div>
         </div>
+      </div>
+      <div className="canvas-container">
+        <Canvas
+          className="react-three-canvas"
+          camera={{
+            position: [0, 0, 5],
+            fov: 75,
+            near: 0.1,
+            far: 1000,
+          }}
+        >
+          <ambientLight intensity={0.5} />
+          <pointLight position={[10, 10, 10]} />
+          <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+
+          <Suspense fallback={<Loader />}>
+            <CartoonPlane
+              position={[0, 0, 0]}
+              rotation={[0, 0, 0]}
+              scale={[1000, 1000, 100]}
+            />
+          </Suspense>
+        </Canvas>
       </div>
     </div>
   );

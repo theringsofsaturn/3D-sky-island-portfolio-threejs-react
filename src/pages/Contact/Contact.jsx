@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Loader } from "@react-three/drei";
+import Loader from "../../components/Loader/Loader";
 import { Fox } from "../../assets/fox/Scene";
 import airplaneImage from "../../../public/airplane.png";
 import emailIcon from "../../../public/email.svg";
@@ -10,7 +10,6 @@ import twitter from "../../../public/twitter.svg";
 import linkedin from "../../../public/linkedin.svg";
 import instagram from "../../../public/instagram.svg";
 import emailjs from "emailjs-com";
-import useGUI from "../../useGUI";
 import "./Contact.css";
 
 const Contact = () => {
@@ -112,11 +111,6 @@ const Contact = () => {
             <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
 
             <Suspense fallback={<Loader />}>
-              <Fox
-                position={[9, -8.2, -35.2]}
-                rotation={[0, 11, 0]}
-                scale={[1, 1, 1]}
-              />
               <Fox
                 position={[17, -11, -35.2]}
                 rotation={[12.629, 10.7, 0]}

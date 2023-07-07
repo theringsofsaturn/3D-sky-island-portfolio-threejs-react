@@ -1,7 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import scenePath from "./scene-transformed.glb";
 import { useGLTF, useAnimations } from "@react-three/drei";
-import useGUI from "../../useGUI";
 
 export function Fox(props) {
   // 3D Model from: https://sketchfab.com/3d-models/fox-f372c04de44640fbb6a4f9e4e5845c78
@@ -9,7 +8,7 @@ export function Fox(props) {
   const { nodes, materials, animations } = useGLTF(scenePath);
   const { actions } = useAnimations(animations, group);
 
-  // This effect will run when the component mounts, and it will start the "Flying" animation
+  // This effect will run when the component mounts, and it will start the Fox animation
   useEffect(() => {
     actions.hit.play();
   }, [actions]);
