@@ -79,9 +79,9 @@ function About() {
 
           <Suspense fallback={<Loader />}>
             <CartoonPlane
-              position={[0, 0, 0]}
-              rotation={[0, 0, 0]}
-              scale={[1000, 1000, 100]}
+              position={[1.84, -58.7, -8]} // or X axis 1.84 , Y axis -58.7 
+              rotation={[0.02, 2.947, 0]} // or Y axis 2.576
+              scale={[5, 5, 5]}
             />
           </Suspense>
         </Canvas>

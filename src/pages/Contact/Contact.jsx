@@ -103,16 +103,9 @@ const Contact = () => {
                 <a
                   href="https://github.com/theringsofsaturn"
                   target="_blank"
-                  rel="noopener noreferrer" 
-                >
-                  <img src={github} alt="GitHub" />
-                </a>
-                <a
-                  href="https://twitter.com/EmilianKasemi"
-                  target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <img src={twitter} alt="Twitter" />
+                  <img src={github} alt="GitHub" />
                 </a>
                 <a
                   href="https://www.linkedin.com/in/emilian-kasemi/"
@@ -122,18 +115,25 @@ const Contact = () => {
                   <img src={linkedin} alt="LinkedIn" />
                 </a>
                 <a
-                  href="https://www.instagram.com/the_rings_of_saturn/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img src={instagram} alt="Instagram" />
-                </a>
-                <a
                   href="https://www.youtube.com/c/EmilianKasemi"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <img src={youtube} alt="YouTube" />
+                </a>
+                <a
+                  href="https://twitter.com/EmilianKasemi"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img src={twitter} alt="Twitter" />
+                </a>
+                <a
+                  href="https://www.instagram.com/the_rings_of_saturn/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img src={instagram} alt="Instagram" />
                 </a>
               </div>
 
@@ -163,6 +163,8 @@ const Contact = () => {
           <Canvas
             className="react-three-canvas"
             camera={{
+              position: [0, 0, 5],
+              fov: 75,
               near: 0.1,
               far: 1000,
             }}

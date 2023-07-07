@@ -12,10 +12,23 @@ export function CartoonPlane(props) {
   console.log("CartoonPlane: nodes", nodes);
   console.log("Animations", animations);
 
+  // useGUI((gui) => {
+  //   const folder = gui.addFolder("Road Plane");
+  //   folder.add(group.current.position, "x", -100, 100);
+  //   folder.add(group.current.position, "y", -100, 100);
+  //   folder.add(group.current.position, "z", -100, 100);
+  //   folder.add(group.current.rotation, "x", 0, Math.PI * 20);
+  //   folder.add(group.current.rotation, "y", 0, Math.PI * 20);
+  //   folder.add(group.current.rotation, "z", 0, Math.PI * 20);
+  //   folder.add(group.current.scale, "x", 0.1, 5);
+  //   folder.add(group.current.scale, "y", 0.1, 5);
+  //   folder.add(group.current.scale, "z", 0.1, 5);
+  // });
+
   // This effect will run when the component mounts, and it will start the plane animation
-  // useEffect(() => {
-  //   actions.Animation.play();
-  // }, [actions]);
+  useEffect(() => {
+    actions.Animation.play();
+  }, [actions]);
 
   return (
     <group ref={group} {...props} dispose={null}>
