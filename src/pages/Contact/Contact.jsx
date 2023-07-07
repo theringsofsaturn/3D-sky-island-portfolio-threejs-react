@@ -9,6 +9,7 @@ import github from "../../../public/github.svg";
 import twitter from "../../../public/twitter.svg";
 import linkedin from "../../../public/linkedin.svg";
 import instagram from "../../../public/instagram.svg";
+import youtube from "../../../public/youtube.svg";
 import emailjs from "emailjs-com";
 import "./Contact.css";
 
@@ -99,10 +100,41 @@ const Contact = () => {
 
             <div className="contact-info">
               <div className="social-icons">
-                <img src={github} alt="GitHub" />
-                <img src={twitter} alt="Twitter" />
-                <img src={linkedin} alt="LinkedIn" />
-                <img src={instagram} alt="Instagram" />
+                <a
+                  href="https://github.com/theringsofsaturn"
+                  target="_blank"
+                  rel="noopener noreferrer" 
+                >
+                  <img src={github} alt="GitHub" />
+                </a>
+                <a
+                  href="https://twitter.com/EmilianKasemi"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img src={twitter} alt="Twitter" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/emilian-kasemi/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img src={linkedin} alt="LinkedIn" />
+                </a>
+                <a
+                  href="https://www.instagram.com/the_rings_of_saturn/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img src={instagram} alt="Instagram" />
+                </a>
+                <a
+                  href="https://www.youtube.com/c/EmilianKasemi"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img src={youtube} alt="YouTube" />
+                </a>
               </div>
 
               <p className="or-contact-via">Or Contact via:</p>
@@ -110,12 +142,12 @@ const Contact = () => {
               <div className="contact-via">
                 <div className="email-info">
                   <img src={emailIcon} alt="Email Icon" />
-                  <p>example@email.com</p>
+                  <p>emiliankasemi@email.com</p>
                 </div>
 
                 <div className="phone-info">
                   <img src={phoneIcon} alt="Phone Icon" />
-                  <p>+123 456 7890</p>
+                  <p>+355 68 809 7086</p>
                 </div>
               </div>
             </div>

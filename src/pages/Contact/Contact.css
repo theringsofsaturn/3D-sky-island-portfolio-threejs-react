@@ -164,6 +164,11 @@
   border-radius: 10px;
 }
 
+.social-icons img {
+  width: 36px;
+  height: 36px;
+}
+
 /* Media queries for mobile responsiveness */
 @media screen and (max-width: 768px) {
   .contact-container {
