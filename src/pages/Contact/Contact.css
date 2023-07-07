@@ -146,5 +146,13 @@
   bottom: 5%;
   max-width: 45%;
 }
-canvas {
+
+.notification {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
 }

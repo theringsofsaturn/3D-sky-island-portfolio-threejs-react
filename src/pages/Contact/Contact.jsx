@@ -15,6 +15,7 @@ import "./Contact.css";
 const Contact = () => {
   const form = useRef();
   const [currentAnimation, setCurrentAnimation] = useState("idle");
+  const [notificationMessage, setNotificationMessage] = useState(null);
 
   const handleFocus = () => {
     setCurrentAnimation("walk");
@@ -36,12 +37,15 @@ const Contact = () => {
       )
       .then(
         (result) => {
-          alert("Message sent successfully");
-          setCurrentAnimation("idle");
+          setNotificationMessage("Message sent successfully");
+          setCurrentAnimation("hit"); // play hit animation
+          // Hide notification after 3 seconds
+          setTimeout(() => setNotificationMessage(null), 3000);
         },
         (error) => {
-          alert("Failed to send message");
-          setCurrentAnimation("idle");
+          setNotificationMessage("Failed to send message");
+          // Hide notification after 3 seconds
+          setTimeout(() => setNotificationMessage(null), 3000);
         }
       );
   };
@@ -114,6 +118,10 @@ const Contact = () => {
               </div>
             </div>
           </div>
+
+          {notificationMessage && (
+            <div className="notification">{notificationMessage}</div>
+          )}
 
           {/* <img className="airplane-image" src={airplaneImage} alt="Airplane" /> */}
         </div>
