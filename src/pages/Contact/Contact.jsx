@@ -107,14 +107,16 @@ const Contact = () => {
 
               <p className="or-contact-via">Or Contact via:</p>
 
-              <div className="email-info">
-                <img src={emailIcon} alt="Email Icon" />
-                <p>example@email.com</p>
-              </div>
+              <div className="contact-via">
+                <div className="email-info">
+                  <img src={emailIcon} alt="Email Icon" />
+                  <p>example@email.com</p>
+                </div>
 
-              <div className="phone-info">
-                <img src={phoneIcon} alt="Phone Icon" />
-                <p>+123 456 7890</p>
+                <div className="phone-info">
+                  <img src={phoneIcon} alt="Phone Icon" />
+                  <p>+123 456 7890</p>
+                </div>
               </div>
             </div>
           </div>
@@ -129,9 +131,6 @@ const Contact = () => {
           <Canvas
             className="react-three-canvas"
             camera={{
-              position: [-0.8, -10.6, -30.2],
-              rotation: [0, 11.8, 0],
-              scale: [1, 1, 1],
               near: 0.1,
               far: 1000,
             }}
@@ -143,8 +142,8 @@ const Contact = () => {
             <Suspense fallback={<Loader />}>
               <Fox
                 currentAnimation={currentAnimation}
-                position={[17, -11, -35.2]}
-                rotation={[12.629, 10.7, 0]}
+                position={[10, 0, -10.6]}
+                rotation={[12.629, 5.254, 0]}
                 scale={[2, 2, 2]}
               />
             </Suspense>

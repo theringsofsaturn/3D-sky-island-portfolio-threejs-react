@@ -35,21 +35,21 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  max-width: 1200px;
   margin: 0 auto;
 }
 
 .contact-title {
   color: #1d2235;
   font-size: 36px;
-  font-family: "Manrope", sans-serif;
+  font-family: "Manrope", Arial, sans-serif;
   font-weight: 800;
   margin-bottom: 30px;
 }
 
 .contact-content {
   display: flex;
-  gap: 80px;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .contact-form {
@@ -61,63 +61,83 @@
 
 .input-label {
   color: #1d2235;
-  font-size: 16px;
   font-family: Manrope;
+  font-size: 18px;
+  font-style: normal;
   font-weight: 600;
-  line-height: 22px;
+  line-height: 24px;
+  letter-spacing: -0.18px;
 }
 
-.input-field-message,
 .input-field {
-  width: 100%;
-  padding: 10px;
+  width: 530px;
+  height: 56px;
+  padding: 15px;
   border-radius: 6px;
   border: 1px solid #ccc;
   background: #e5efff;
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+  font-family: Arial, sans-serif;
+}
+
+.input-field-message {
+  width: 530px;
+  height: 100px;
+  padding: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #e5efff;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+  font-family: Arial, sans-serif;
+}
+
+.input-field::placeholder,
+.input-field-message::placeholder {
+  color: #888;
 }
 
 .send-button {
   display: flex;
-  width: 100%;
-  height: 45px;
-  padding: 10px;
+  width: 530px;
+  height: 54px;
+  padding: 15px;
   justify-content: center;
   align-items: center;
   border-radius: 6px;
   background: #406aff !important;
   box-shadow: 0px 1px 2px 0px rgba(105, 81, 255, 0.05);
   cursor: pointer;
-  color: var(--primary-050, #f0fdf4);
+  color: #f0fdf4;
   font-size: 16px;
-  font-family: Manrope;
+  font-family: "Manrope", Arial, sans-serif;
   font-weight: 800;
   line-height: 22px;
+}
+
+.send-button:hover {
+  background-color: #2f55d4 !important;
 }
 
 .contact-info {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 20px;
+  background: rgba(0, 0, 255, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 530px;
 }
 
 .social-icons {
   display: flex;
-  gap: 10px;
-  width: 37px;
-  height: 36px;
-}
-
-.social-icons img {
-  width: 36px;
-  height: 36px;
+  gap: 15px;
 }
 
 .or-contact-via {
-  color: var(--gray-800, #333f51);
+  color: #333f51;
   font-size: 18px;
-  font-family: Manrope;
+  font-family: "Manrope", Arial, sans-serif;
   font-weight: 500;
   line-height: 22px;
 }
@@ -128,23 +148,10 @@
   align-items: center;
   gap: 10px;
   color: #1d2235;
-  font-size: 20px;
-  font-family: Manrope;
+  font-size: 18px;
+  font-family: "Manrope", Arial, sans-serif;
   font-weight: 700;
   line-height: 28px;
-}
-
-.email-info img,
-.phone-info img {
-  width: 28px;
-  height: 28px;
-}
-
-.airplane-image {
-  position: absolute;
-  right: 10%;
-  bottom: 5%;
-  max-width: 45%;
 }
 
 .notification {
@@ -154,5 +161,45 @@
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 10px;
+}
+
+/* Media queries for mobile responsiveness */
+@media screen and (max-width: 768px) {
+  .contact-container {
+    padding: 5%;
+  }
+
+  .contact-title {
+    font-size: 28px;
+  }
+
+  .contact-content {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 40px;
+  }
+
+  .input-label {
+    font-size: 14px;
+  }
+
+  .send-button {
+    font-size: 14px;
+  }
+
+  .or-contact-via {
+    font-size: 16px;
+  }
+
+  .email-info,
+  .phone-info {
+    font-size: 16px;
+  }
+
+  .input-field,
+  .input-field-message,
+  .send-button {
+    width: 100%;
+  }
 }

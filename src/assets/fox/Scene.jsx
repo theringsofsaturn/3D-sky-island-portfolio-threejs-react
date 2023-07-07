@@ -1,12 +1,26 @@
 import React, { useRef, useEffect } from "react";
 import scenePath from "./scene-transformed.glb";
 import { useGLTF, useAnimations } from "@react-three/drei";
+// import useGUI from "../../useGUI";
 
 export function Fox({ currentAnimation, ...props }) {
   // 3D Model from: https://sketchfab.com/3d-models/fox-f372c04de44640fbb6a4f9e4e5845c78
   const group = useRef();
   const { nodes, materials, animations } = useGLTF(scenePath);
   const { actions } = useAnimations(animations, group);
+
+  // useGUI((gui) => {
+  //   const folder = gui.addFolder("Road Plane");
+  //   folder.add(group.current.position, "x", -100, 100);
+  //   folder.add(group.current.position, "y", -100, 100);
+  //   folder.add(group.current.position, "z", -100, 100);
+  //   folder.add(group.current.rotation, "x", 0, Math.PI * 20);
+  //   folder.add(group.current.rotation, "y", 0, Math.PI * 20);
+  //   folder.add(group.current.rotation, "z", 0, Math.PI * 20);
+  //   folder.add(group.current.scale, "x", 0.1, 5);
+  //   folder.add(group.current.scale, "y", 0.1, 5);
+  //   folder.add(group.current.scale, "z", 0.1, 5);
+  // });
 
   // This effect will run whenever the currentAnimation prop changes
   useEffect(() => {
