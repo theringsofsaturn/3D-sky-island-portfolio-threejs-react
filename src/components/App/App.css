@@ -8,7 +8,6 @@ canvas {
 
 canvas:hover {
   cursor: pointer;
-  /* cursor: url("path-to-magic-wand-cursor.png"), auto; */
 }
 
 .logo-container {

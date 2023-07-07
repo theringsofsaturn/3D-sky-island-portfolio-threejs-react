@@ -75,18 +75,18 @@ const HomePage = () => {
         )}
 
         <Canvas camera={{ near: 0.1, far: 1000 }}>
-          <Biplane
-            position={[0, -4, -4]}
-            rotation={[0, 0, 0]}
-            scale={[1.5, 1.5, 1.5]}
-            isAnimating={isPlaneAnimating}
-          />
-          <Bird
-            position={[0, 0, 0]}
-            rotation={[0, 1, 0]}
-            scale={[0.5, 0.5, 0.5]}
-          />
           <Suspense fallback={<Loader />}>
+            <Biplane
+              position={[0, -4, -4]}
+              rotation={[0, 0, 0]}
+              scale={[1.5, 1.5, 1.5]}
+              isAnimating={isPlaneAnimating}
+            />
+            <Bird
+              position={[0, 0, 0]}
+              rotation={[0, 1, 0]}
+              scale={[0.3, 0.3, 0.3]}
+            />
             <ambientLight intensity={0.5} />
             <spotLight position={[10, 50, 10]} angle={0.15} penumbra={1} />
             <pointLight position={[50, 50, 20]} />

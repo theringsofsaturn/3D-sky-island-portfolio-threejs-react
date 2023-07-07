@@ -1,5 +1,7 @@
-import React from "react";
-import { useRef } from "react";
+import React, { useRef, useEffect, Suspense } from "react";
+import { Canvas } from "@react-three/fiber";
+import { Loader } from "@react-three/drei";
+import { Fox } from "../../assets/fox/Scene";
 import airplaneImage from "../../../public/airplane.png";
 import emailIcon from "../../../public/email.svg";
 import phoneIcon from "../../../public/phone.svg";
@@ -8,6 +10,7 @@ import twitter from "../../../public/twitter.svg";
 import linkedin from "../../../public/linkedin.svg";
 import instagram from "../../../public/instagram.svg";
 import emailjs from "emailjs-com";
+import useGUI from "../../useGUI";
 import "./Contact.css";
 
 const Contact = () => {
@@ -25,15 +28,14 @@ const Contact = () => {
       )
       .then(
         (result) => {
-          console.log(result.text);
           alert("Message sent successfully");
         },
         (error) => {
-          console.log(error.text);
           alert("Failed to send message");
         }
       );
   };
+
   return (
     <>
       <div className="contact-container">
@@ -92,7 +94,36 @@ const Contact = () => {
             </div>
           </div>
 
-          <img className="airplane-image" src={airplaneImage} alt="Airplane" />
+          {/* <img className="airplane-image" src={airplaneImage} alt="Airplane" /> */}
+        </div>
+        <div className="canvas-container">
+          <Canvas
+            className="react-three-canvas"
+            camera={{
+              position: [-0.8, -10.6, -30.2],
+              rotation: [0, 11.8, 0],
+              scale: [1, 1, 1],
+              near: 0.1,
+              far: 1000,
+            }}
+          >
+            <ambientLight intensity={0.5} />
+            <pointLight position={[10, 10, 10]} />
+            <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+
+            <Suspense fallback={<Loader />}>
+              <Fox
+                position={[9, -8.2, -35.2]}
+                rotation={[0, 11, 0]}
+                scale={[1, 1, 1]}
+              />
+              <Fox
+                position={[17, -11, -35.2]}
+                rotation={[12.629, 10.7, 0]}
+                scale={[2, 2, 2]}
+              />
+            </Suspense>
+          </Canvas>
         </div>
       </div>
     </>

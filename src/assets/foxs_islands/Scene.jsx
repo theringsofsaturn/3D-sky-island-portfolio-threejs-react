@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useSpring, a } from "@react-spring/three";
 import scenePath from "./scene-transformed.glb";
-import useGUI from "../../useGUI";
 
 export function Island({
   setIsPlaneAnimating,
@@ -145,8 +144,8 @@ export function Island({
       sectionIndex++;
     }
 
-    console.log("Normalized Rotation: ", normalizedRotation); // Log normalizedRotation
-    console.log("Setting Current Stage to: ", sectionIndex + 1); // Log currentStage
+    // console.log("Normalized Rotation: ", normalizedRotation); // Log normalizedRotation
+    // console.log("Setting Current Stage to: ", sectionIndex + 1); // Log currentStage
 
     props.setCurrentStage(sectionIndex + 1);
   }, [rotation]);

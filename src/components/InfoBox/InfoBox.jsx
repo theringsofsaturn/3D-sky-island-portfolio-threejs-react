@@ -8,7 +8,7 @@ import FaveProjectsCard from "../ProfileSections/FaveProjectsCard/FaveProjectsCa
 import "./InfoBox.css";
 
 const InfoBox = ({ currentStage }) => {
-  console.log("InfoBox received currentStage:", currentStage);
+  // console.log("InfoBox received currentStage:", currentStage);
 
   return (
     <div className={`info-box ${currentStage > 0 ? "visible" : ""}`}>

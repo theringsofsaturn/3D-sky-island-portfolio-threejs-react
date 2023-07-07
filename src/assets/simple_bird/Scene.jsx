@@ -7,7 +7,6 @@ import { Vector3 } from "three";
 export function Bird(props) {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF(scenePath);
-  console.log(animations);
 
   const { actions, mixer } = useAnimations(animations, group);
 
@@ -24,7 +23,7 @@ export function Bird(props) {
       // boundary 
       group.current.position.set(-7, 0, 1); // reset position
     } else {
-      group.current.position.add(new Vector3(0.01, 0, 0)); // velocity 
+      group.current.position.add(new Vector3(0.005, 0, 0)); // velocity 
     }
   });
 
