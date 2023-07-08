@@ -50,20 +50,27 @@ const Projects = () => {
   return (
     <div className="project-card-container">
       <h1 className="page-title">My Favorite Projects</h1>
-      <ul class="cards">
+      <ul className="cards">
         {projectData.map((project, index) => (
           <>
             <li>
-              <a href="" class="card">
-                <img src={project.imgSrc} class="card__image" alt="" />
-                <div class="card__overlay">
-                  <div class="card__header">
-                    <svg class="card__arc" xmlns="http://www.w3.org/2000/svg">
+              <div className="card">
+                <img src={project.imgSrc} className="card__image" alt="" />
+                <div className="card__overlay">
+                  <div className="card__header">
+                    <svg
+                      className="card__arc"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
                       <path />
                     </svg>
-                    <img class="card__thumb" src={project.thumbSrc} alt="" />
-                    <div class="card__header-text">
-                      <h3 class="card__title">{project.title}</h3>
+                    <img
+                      className="card__thumb"
+                      src={project.thumbSrc}
+                      alt=""
+                    />
+                    <div className="card__header-text">
+                      <h3 className="card__title">{project.title}</h3>
                       <div className="tech-used">
                         {project.tech.map((tech, index) => (
                           <span className="tech" key={index}>
@@ -84,7 +91,7 @@ const Projects = () => {
                     </a>
                   </div>
                 </div>
-              </a>
+              </div>
             </li>
           </>
         ))}

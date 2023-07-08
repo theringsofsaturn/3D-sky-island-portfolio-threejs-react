@@ -117,8 +117,8 @@ body {
 .card__title {
   font-size: 1em;
   margin: 0 0 0.3em;
-  color: #1d2235; 
-  font-family: "Roboto", sans-serif; 
+  color: #1d2235;
+  font-family: "Roboto", sans-serif;
 }
 
 .card__tagline {
@@ -145,24 +145,23 @@ body {
   overflow: hidden;
 }
 
-
 .tech-used {
   display: inline-flex;
   align-items: flex-start;
   gap: 5px;
+  padding-right: 20px;
+  overflow: hidden;
 }
 
 .tech {
-  background: #6a5f5f;
   display: flex;
-  padding: 7px 16px;
+  padding: 7px;
   justify-content: center;
   align-items: center;
   gap: 10px;
   background: #4a90e2;
   color: #ffffff;
-
-  color: white;
+  border-radius: 5px;
   font-size: 12px;
   font-family: Manrope;
   font-style: normal;
@@ -184,8 +183,8 @@ body {
   gap: 5px;
   padding: 10px;
   border: none;
-  background-color: #2c5aa3; 
-  color: #ffffff; 
+  background-color: #2c5aa3;
+  color: #ffffff;
   border-radius: 5px;
   text-decoration: none;
   font-size: 16px;
@@ -199,4 +198,70 @@ body {
   width: 20px;
   height: 20px;
   margin-right: 0.5em;
+}
+
+/* For tablet devices */
+@media (max-width: 768px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  .page-title {
+    font-size: 24px;
+  }
+
+  .button {
+    font-size: 14px;
+  }
+
+  .button img {
+    width: 15px;
+    height: 15px;
+  }
+
+  .tech {
+    font-size: 10px;
+    padding: 5px 10px;
+  }
+
+  .project-card-container {
+    padding: 5% 5%;
+  }
+}
+
+/* For mobile devices */
+@media (max-width: 480px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  .page-title {
+    font-size: 20px;
+  }
+
+  .button {
+    font-size: 12px;
+  }
+
+  .button img {
+    width: 10px;
+    height: 10px;
+  }
+
+  .tech {
+    font-size: 8px;
+    padding: 5px 8px;
+  }
+
+  .project-card-container {
+    padding: 5% 5%;
+  }
 }
