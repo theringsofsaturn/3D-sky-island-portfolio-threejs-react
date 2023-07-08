@@ -1,6 +1,6 @@
 .contact-container {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
   width: 100%;
   background: linear-gradient(
     180deg,
@@ -12,22 +12,13 @@
   padding: 5% 10%;
 }
 
-.canvas-container {
+.contact-canvas-container {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
-  pointer-events: none;
   z-index: -1;
-}
-
-.react-three-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
 }
 
 .contact {
@@ -169,42 +160,108 @@
   height: 36px;
 }
 
-/* Media queries for mobile responsiveness */
+/* Media queries for tablet responsiveness */
 @media screen and (max-width: 768px) {
   .contact-container {
-    padding: 5%;
+    flex-direction: column;
+    padding: 5% 5%;
   }
 
   .contact-title {
     font-size: 28px;
   }
 
-  .contact-content {
+  .contact-form {
+    width: 100%;
+  }
+
+  .input-field,
+  .input-field-message {
+    width: 100%;
+  }
+
+  .send-button {
+    width: 100%;
+  }
+
+  .contact-info {
+    max-width: 100%;
+  }
+}
+
+/* Media queries for mobile responsiveness */
+@media screen and (max-width: 480px) {
+  .contact-container {
+    display: flex;
     flex-direction: column;
-    align-items: stretch;
-    gap: 40px;
+    overflow: auto;
+    padding: 5% 5%;
+  }
+
+  .contact {
+    flex: 1;
+    max-height: 70vh;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0 auto;
+    padding-bottom: 15px;
+  }
+
+  .contact-canvas-container {
+    position: static;
+    width: 100%;
+    height: 30vh;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .contact-title {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+
+  .contact-form {
+    gap: 0px;
   }
 
   .input-label {
     font-size: 14px;
   }
 
+  .input-field {
+    width: 330px;
+    height: 46px;
+  }
+
+  .input-field-message {
+    height: 60px;
+  }
+
   .send-button {
+    height: 46px;
     font-size: 14px;
+    margin-top: 10px;
+  }
+
+  .contact-info {
+    gap: 0px;
+    padding: 10px;
+  }
+
+  .social-icons img {
+    width: 24px;
+    height: 24px;
   }
 
   .or-contact-via {
-    font-size: 16px;
+    font-size: 14px;
+    margin-top: 10px;
   }
 
   .email-info,
   .phone-info {
-    font-size: 16px;
-  }
-
-  .input-field,
-  .input-field-message,
-  .send-button {
-    width: 100%;
+    font-size: 12px;
   }
 }

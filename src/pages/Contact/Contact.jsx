@@ -1,4 +1,4 @@
-import React, { useRef, useState, Suspense } from "react";
+import React, { useRef, useState, useEffect, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import Loader from "../../components/Loader/Loader";
 import { Fox } from "../../assets/fox/Scene";
@@ -17,6 +17,26 @@ const Contact = () => {
   const form = useRef();
   const [currentAnimation, setCurrentAnimation] = useState("idle");
   const [notificationMessage, setNotificationMessage] = useState(null);
+  const [foxPosition, setFoxPosition] = useState([10, 0, -10.6]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 480) {
+        setFoxPosition([2, 1, -7.6]); // set the position of the fox for mobile screens
+      } else {
+        setFoxPosition([10, 0, -10.6]); // set the default position for larger screens
+      }
+    };
+
+    // Call handler right away so state gets updated with initial window size
+    handleResize();
+
+    // Bind the event listener
+    window.addEventListener("resize", handleResize);
+
+    // Unbind the event listener on cleanup
+    return () => window.removeEventListener("resize", handleResize);
+  }, []); // Empty array to ensure that effect is only run on mount and unmount
 
   const handleFocus = () => {
     setCurrentAnimation("walk");
@@ -159,9 +179,8 @@ const Contact = () => {
 
           {/* <img className="airplane-image" src={airplaneImage} alt="Airplane" /> */}
         </div>
-        <div className="canvas-container">
+        <div className="contact-canvas-container">
           <Canvas
-            className="react-three-canvas"
             camera={{
               position: [0, 0, 5],
               fov: 75,
@@ -176,7 +195,7 @@ const Contact = () => {
             <Suspense fallback={<Loader />}>
               <Fox
                 currentAnimation={currentAnimation}
-                position={[10, 0, -10.6]}
+                position={foxPosition} 
                 rotation={[12.629, 5.254, 0]}
                 scale={[2, 2, 2]}
               />

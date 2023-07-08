@@ -63,7 +63,7 @@ function About() {
           </div>
         </div>
       </div>
-      <div className="canvas-container">
+      <div className="about-canvas-container">
         <Canvas
           className="react-three-canvas"
           camera={{
