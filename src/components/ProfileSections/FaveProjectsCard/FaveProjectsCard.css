@@ -43,6 +43,9 @@
 @media only screen and (max-width: 600px) {
   .fave-projects-card {
     padding: 20px 20px 20px 20px;
+    background: none;
+    backdrop-filter: none;
+    border: none;
   }
 
   .fave-projects-text {
@@ -53,5 +56,6 @@
     width: 100px;
     font-size: 12px;
     padding: 10px 10px;
+    margin-top: 5px;
   }
 }

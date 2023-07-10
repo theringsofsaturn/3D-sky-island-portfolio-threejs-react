@@ -20,6 +20,39 @@ const HomePage = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [showHint, setShowHint] = useState(true);
 
+  const adjustBiplaneForScreenSize = () => {
+    let screenScale, screenPosition;
+
+    // If screen width is less than 768px, adjust the scale and position
+    if (window.innerWidth < 768) {
+      screenScale = [0.4, 0.4, 0.4];
+      screenPosition = [0, -1, 0];
+    } else {
+      screenScale = [1.5, 1.5, 1.5];
+      screenPosition = [0, -4, -4];
+    }
+
+    return [screenScale, screenPosition];
+  };
+
+  const adjustIslandForScreenSize = () => {
+    let screenScale, screenPosition;
+
+    if (window.innerWidth < 768) {
+      screenScale = [0.5, 0.5, 0.5];
+      screenPosition = [0, 0, -43.4];
+    } else {
+      screenScale = [1, 1, 1];
+      screenPosition = [0, -5.7, -43.4];
+    }
+
+    return [screenScale, screenPosition];
+  };
+
+  // Get the scale and position values based on screen size
+  const [biplaneScale, biplanePosition] = adjustBiplaneForScreenSize();
+  const [islandScale, islandPosition] = adjustIslandForScreenSize();
+
   // For the sounds
   useEffect(() => {
     const audio = new Audio(mediaConstants.musicPath);
@@ -64,9 +97,9 @@ const HomePage = () => {
         <Canvas className="homepage-canvas" camera={{ near: 0.1, far: 1000 }}>
           <Suspense fallback={<Loader />}>
             <Biplane
-              position={[0, -4, -4]}
+              position={biplanePosition}
               rotation={[0, 0, 0]}
-              scale={[1.5, 1.5, 1.5]}
+              scale={biplaneScale}
               isAnimating={isPlaneAnimating}
             />
             <Bird
@@ -78,9 +111,9 @@ const HomePage = () => {
             <spotLight position={[10, 50, 10]} angle={0.15} penumbra={1} />
             <pointLight position={[50, 50, 20]} />
             <Island
-              position={[0, -5.7, -43.4]}
+              position={islandPosition}
               rotation={[0.1, 0.67, 0]}
-              scale={[1, 1, 1]}
+              scale={islandScale}
               setCurrentStage={setCurrentStage}
               setIsPlaneAnimating={setIsPlaneAnimating}
               audioRef={audioRef}

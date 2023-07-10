@@ -22,4 +22,13 @@
   }
 }
 
-
+@media only screen and (max-width: 600px) {
+  .info-box {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    width: 75%;
+  }
+}
