@@ -39,3 +39,19 @@
   font-weight: 700;
   line-height: normal;
 }
+
+@media only screen and (max-width: 600px) {
+  .fave-projects-card {
+    padding: 20px 20px 20px 20px;
+  }
+
+  .fave-projects-text {
+    font-size: 14px;
+  }
+
+  .fave-projects-btn {
+    width: 100px;
+    font-size: 12px;
+    padding: 10px 10px;
+  }
+}

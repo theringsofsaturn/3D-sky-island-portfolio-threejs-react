@@ -1,7 +1,7 @@
 import React from "react";
 import IntroCard from "../ProfileSections/IntroCard/IntroCard";
 import ProjectCard from "../ProfileSections/ProjectCard/ProjectCard";
-import ThesisCard from "../ProfileSections/AppsCard/AppsCard";
+import AppsCard from "../ProfileSections/AppsCard/AppsCard";
 import StudiesCard from "../ProfileSections/GeneralInfoCard/GeneralInfoCard";
 import CurrentJob from "../ProfileSections/CurrentJob/CurrentJob";
 import FaveProjectsCard from "../ProfileSections/FaveProjectsCard/FaveProjectsCard";
@@ -14,7 +14,7 @@ const InfoBox = ({ currentStage }) => {
     <div className={`info-box ${currentStage > 0 ? "visible" : ""}`}>
       {currentStage === 1 && <IntroCard />}
       {currentStage === 2 && <FaveProjectsCard />}
-      {currentStage === 3 && <ThesisCard />}
+      {currentStage === 3 && <AppsCard />}
       {currentStage === 4 && <ProjectCard />}
       {currentStage === 5 && <StudiesCard />}
       {currentStage === 6 && <CurrentJob />}

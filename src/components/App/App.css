@@ -22,3 +22,32 @@ canvas:hover {
   height: 63.506px;
   flex-shrink: 0;
 }
+
+@media only screen and (max-width: 600px) {
+  .logo-container {
+    position: absolute;
+    top: 20px;
+    left: 12%;
+    transform: translateX(-50%);
+    z-index: 10;
+  }
+
+  .logo-container img {
+    width: 60px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+}
+
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+  .logo-container {
+    top: 30px;
+    left: 30px;
+  }
+
+  .logo-container img {
+    width: 100px;
+    height: 40px;
+    flex-shrink: 0;
+  }
+}

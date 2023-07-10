@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import scenePath from "./scene-transformed.glb";
 import { useGLTF, useAnimations } from "@react-three/drei";
-// import useGUI from "../../useGUI";
+import useGUI from "../../useGUI";
 
 export function Fox({ currentAnimation, ...props }) {
   // 3D Model from: https://sketchfab.com/3d-models/fox-f372c04de44640fbb6a4f9e4e5845c78

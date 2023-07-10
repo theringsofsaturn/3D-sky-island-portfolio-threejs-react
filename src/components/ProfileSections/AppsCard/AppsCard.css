@@ -1,4 +1,4 @@
-.wrapper {
+.apps-card-wrapper {
   display: flex;
   flex-direction: column;
   gap: 13px;
@@ -6,12 +6,12 @@
   border-radius: 20px;
 }
 
-.upper {
+.apps-card-upper {
   display: flex;
   gap: 9px;
 }
 
-.image-placeholder {
+.apps-card-image-placeholder {
   display: flex;
   width: 100px;
   height: 100px;
@@ -22,13 +22,13 @@
   overflow: hidden;
 }
 
-.image-placeholder img {
+.apps-card-image-placeholder img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.title-description {
+.apps-card-title-description {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -36,7 +36,7 @@
   gap: 6px;
 }
 
-.title {
+.apps-card-title {
   color: #1d2235;
   font-size: 26px;
   font-family: Manrope;
@@ -45,7 +45,7 @@
   line-height: normal;
 }
 
-.description {
+.apps-card-description {
   display: flex;
   flex-direction: column;
   color: #45517d;
@@ -56,7 +56,7 @@
   line-height: 130%;
 }
 
-.show-projects {
+.apps-card-show-projects {
   display: flex;
   width: 457px;
   padding: 16px 20px;
@@ -72,4 +72,33 @@
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+}
+
+@media only screen and (max-width: 600px) {
+  .apps-card-image-placeholder {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+  }
+
+  .apps-card-title-description {
+    width: 150px;
+  }
+
+  .apps-card-title {
+    font-size: 18px;
+  }
+
+  .apps-card-description {
+    font-size: 14px;
+  }
+
+  .apps-card-show-projects {
+    width: 200px;
+    padding: 10px 20px;
+    font-size: 12px;
+  }
+}
+
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
 }

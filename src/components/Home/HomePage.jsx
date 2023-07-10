@@ -34,19 +34,6 @@ const HomePage = () => {
     };
   }, [isPlaying]);
 
-  // For the clouds
-  useEffect(() => {
-    const container = document.querySelector(".homepage-container");
-    for (let i = 0; i < 10; i++) {
-      const cloud = document.createElement("div");
-      cloud.className = "cloud";
-      cloud.style.top = Math.random() * 100 + "vh";
-      cloud.style.left = Math.random() * 100 + "vw";
-      cloud.style.animationDuration = Math.random() * 100 + 50 + "s";
-      container.appendChild(cloud);
-    }
-  }, []);
-
   return (
     <>
       <div className="homepage-container">
@@ -74,7 +61,7 @@ const HomePage = () => {
           </>
         )}
 
-        <Canvas camera={{ near: 0.1, far: 1000 }}>
+        <Canvas className="homepage-canvas" camera={{ near: 0.1, far: 1000 }}>
           <Suspense fallback={<Loader />}>
             <Biplane
               position={[0, -4, -4]}

@@ -5,8 +5,7 @@ const CurrentJob = () => {
   return (
     <div>
       <p className="current-job-text">
-        Now I moved to Netherlands working as a <br /> Frontend Engineer at a
-        company called OMRT.
+        Now I work as a Frontend Engineer <br /> at a company called OMRT.
       </p>
     </div>
   );
