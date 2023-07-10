@@ -24,26 +24,24 @@ export function Island({
   const [lastX, setLastX] = useState(0); // Store the last mouse x position
   const { gl } = useThree(); // Get the WebGL rendering context from React Three Fiber
 
-  // Handle mouse drag start
+  // Handle pointer (mouse/touch) drag start
   const handlePointerDown = (event) => {
     event.stopPropagation();
     event.preventDefault();
     setIsDragging(true);
     setIsPlaneAnimating(true);
-    setLastX(event.clientX);
+    // If touch event, use the first touch point
+    const clientX = event.touches ? event.touches[0].clientX : event.clientX;
+    setLastX(clientX);
 
     setShowHint(false);
 
     if (isPlaying) {
       audioRef.current.play();
     }
-
-    // Log camera position and rotation
-    // console.log("Camera Position:", camera.position);
-    // console.log("Camera Rotation:", camera.rotation);
   };
 
-  // Handle mouse drag end
+  // Handle pointer (mouse/touch) drag end
   const handlePointerUp = (event) => {
     event.stopPropagation();
     event.preventDefault();
@@ -55,15 +53,17 @@ export function Island({
     }
   };
 
-  // Handle mouse drag
+  // Handle pointer (mouse/touch) drag
   const handlePointerMove = (event) => {
     event.stopPropagation();
     event.preventDefault();
     if (isDragging) {
-      const delta = (event.clientX - lastX) / viewport.width; // Calculate change in x position
-      const newRotation = rotation + delta * 0.002 * Math.PI; // Calculate new rotation based on change in x position
-      setRotation(newRotation); // Update rotation
-      setLastX(event.clientX); // Update last x position
+      // If touch event, use the first touch point
+      const clientX = event.touches ? event.touches[0].clientX : event.clientX;
+      const delta = (clientX - lastX) / viewport.width;
+      const newRotation = rotation + delta * 0.002 * Math.PI;
+      setRotation(newRotation);
+      setLastX(clientX);
     }
   };
 
